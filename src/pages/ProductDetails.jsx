@@ -47,7 +47,7 @@ export default function ProductDetails() {
                                 </span>
                             </div>
                             <div className={style.img}>
-                                <img src={`${backEndUrl}/image/${product.image[indexImage].path}`} alt="" />
+                                <img src={product.image[indexImage].path} alt="" />
                             </div>
                             <div className={style.description}>
                                 <div className={style.sectionPrice}>
@@ -77,7 +77,7 @@ export default function ProductDetails() {
                             <div className={style.relatedProduct}>
                                 {relatedProducts.map((product, index) => (
                                     <div key={index}>
-                                        <img src={`${backEndUrl}/image/${product.image}`} alt={product.name} />
+                                        <img src={product.image} alt={product.name} />
                                         <div>
                                             <h2>{product.name}</h2>
                                             <h3>{product.price}€</h3>

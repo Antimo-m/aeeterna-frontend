@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import styles from "../styles/Header.module.css";
 import React, { useState, useEffect } from 'react';
 
@@ -48,10 +49,8 @@ export default function Header() {
 
           {/* Navigation Desktop */}
           <nav className={styles.desktopNav}>
-            <a href="#home" className={styles.navLink}>Home</a>
-            <a href="#prodotti" className={styles.navLink}>Prodotti</a>
-            <a href="#novita" className={styles.navLink}>Novità</a>
-            <a href="#contatti" className={styles.navLink}>Contatti</a>
+            <NavLink to={"/"} className={styles.navLink}>Home</NavLink>
+            <NavLink to={"/search"} className={styles.navLink}>Prodotti</NavLink>
           </nav>
 
           {/* Right section Desktop */}
@@ -67,12 +66,12 @@ export default function Header() {
             </div>
 
             {/* Icons */}
-            <button className={styles.iconButton} aria-label="Wishlist">
+            <NavLink to={"/wishlist"} className={styles.iconButton} aria-label="Wishlist">
               <i className="bi bi-heart"></i>
-            </button>
-            <button className={styles.iconButton} aria-label="Carrello">
+            </NavLink>
+            <NavLink to={"/cart"} className={styles.iconButton} aria-label="Carrello">
               <i className="bi bi-cart"></i>
-            </button>
+            </NavLink>
           </div>
 
           {/* Mobile Actions */}
