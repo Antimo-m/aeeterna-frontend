@@ -151,6 +151,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+}
+
+.iconButton i{
+}
+
+.iconButton span {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 11px;
+  background-color: #c9a063;
+  padding: 2px 5px;
+  border-radius: 50%;
+  color: white;
 }
 
 .iconButton:hover {
@@ -274,6 +289,7 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -291,15 +307,15 @@
   .desktopNav {
     display: none;
   }
-  
+
   .desktopActions {
     display: none;
   }
-  
+
   .mobileActions {
     display: flex;
   }
-  
+
   .headerContainer {
     padding: 0 20px;
   }
@@ -311,29 +327,29 @@
     font-size: 18px;
     letter-spacing: 2px;
   }
-  
+
   .bannerContent {
     font-size: 12px;
   }
-  
+
   .bannerContent span {
     font-size: 11px;
   }
-  
+
   .mobileMenuContent {
     padding: 20px;
   }
-  
+
   .mobileNavLink {
     font-size: 24px;
     padding: 18px 0;
   }
-  
+
   .mobileMenuOverlay {
     top: 95px;
     height: calc(100vh - 95px);
   }
-  
+
   .backdrop {
     top: 95px;
     height: calc(100vh - 95px);

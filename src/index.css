@@ -7,3 +7,29 @@ img{
 body{
     font-family: "Montserrat", sans-serif;
 }
+
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+.btnWish {
+  background-color: #ffff;
+  color: #c8a85a;
+  border: none;
+  padding: 10px 12px;
+  border-radius: 16px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 6px rgba(0, 0, 0, 0.2);
+}
+
+.btnWish:hover {
+  background-color: #c8a85a;
+  color: white;
+}
+
+.addCartHover:hover{
+    background-color: #725200;
+}

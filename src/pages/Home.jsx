@@ -6,6 +6,7 @@ import MainStyle from "../styles/Main.module.css";
 // Import Immagini locali
 import missionImg from "../assets/images/mission.png";
 import ingredientsImg from "../assets/images/ingredienti.png";
+import { Link } from "react-router-dom";
 
 
 
@@ -56,17 +57,17 @@ export default function Home() {
                 <div className={MainStyle.productGrid}>
 
                     {products.length > 0 && products.map((product) => (
-                        <div key={product.id} className={MainStyle.productCard}>
-                            <div className={MainStyle.imageContainer}>
+                        <div className={MainStyle.productCard}>
+                            <Link to={`/productdetails/${product.slug}`} className={MainStyle.imageContainer}>
 
                                 <img src={product.image} alt={product.name} />
-                            </div>
+                            </Link>
 
-                            <p className={MainStyle.productName}>{product.name}</p>
+                            <Link to={`/productdetails/${product.slug}`}  className={MainStyle.productName}>{product.name}</Link>
                             <span className={MainStyle.price}>{product.price} €</span>
 
                             <div className={MainStyle.buttonGroup}>
-                                <button className={MainStyle.button}>AGGIUNGI AL CARRELLO</button>
+                                <button className={`addCartHover ${MainStyle.button}`}>AGGIUNGI AL CARRELLO</button>
                                 <button className={MainStyle.btnWish}>
                                     <i className="bi bi-heart"></i>
                                 </button>
@@ -103,29 +104,29 @@ export default function Home() {
                 <div className={MainStyle.productGrid}>
                     {newProducts.length > 0 &&
                         newProducts.map((product) => (
-                            <div key={product.id} className={MainStyle.productCard}>
-                                <div className={MainStyle.imageContainer}>
+                            <div  key={product.id} className={MainStyle.productCard}>
+                                <Link to={`/productdetails/${product.slug}`} className={MainStyle.imageContainer}>
                                     <span className={MainStyle.badge}>NOVITÀ</span>
                                     <img src={product.image} alt={product.name} />
-                                </div>
+                                </Link>
 
-                                <p className={MainStyle.productName}>{product.name}</p>
+                                <Link to={`/productdetails/${product.slug}`}p className={MainStyle.productName}>{product.name}</Link>
                                 <span className={MainStyle.price}>{product.price} €</span>
 
                                 <div className={MainStyle.buttonGroup}>
-                                <button className={MainStyle.button}>AGGIUNGI AL CARRELLO</button>
-                                <button className={MainStyle.btnWish}>
-                                    <i className="bi bi-heart"></i>
-                                </button>
-                            </div>
+                                    <button className={`addCartHover ${MainStyle.button}`}>AGGIUNGI AL CARRELLO</button>
+                                    <button className={MainStyle.btnWish}>
+                                        <i className="bi bi-heart"></i>
+                                    </button>
+                                </div>
                             </div>
                         ))}
                 </div>
-            </section>
+            </section >
 
 
             {/* INGREDIENTI  */}
-            <section className={MainStyle.ingredients}>
+            < section className={MainStyle.ingredients} >
                 <div className={MainStyle.ingredientsImage}>
                     <img src={ingredientsImg} />
                 </div>
@@ -141,7 +142,7 @@ export default function Home() {
                         per risultati reali e duraturi.
                     </p>
                 </div>
-            </section>
+            </section >
         </>
     )
 }

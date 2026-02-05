@@ -7,7 +7,7 @@ export default function PreFooter(){
                 <h3>SPEDIZIONE GRATUITA DA 45€</h3>
             </div>
             <div className={style.card}>
-                <i class="bi bi-leaf-fill"></i>
+                <i className="bi bi-leaf-fill"></i>
                 <h3>INGREDIENTI 100% NATURALI</h3>
             </div>
             <div className={style.card}>
