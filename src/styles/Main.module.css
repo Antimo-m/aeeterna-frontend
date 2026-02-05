@@ -1,0 +1,257 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background-color: #fff;
+  color: #111;
+}
+
+.section {
+  padding: 60px 80px;
+}
+
+.sectionTitle {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 40px;
+}
+
+.imageContainer {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8f8f8;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.imageContainer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* PRODUCTS - CAROUSEL */
+.productGrid {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  gap: 30px;
+  padding-bottom: 20px;
+
+  /* Nasconde scrollbar ma mantiene funzionalità */
+  scrollbar-width: thin;
+  scrollbar-color: #c8a85a #f0f0f0;
+}
+
+.productGrid::-webkit-scrollbar {
+  height: 8px;
+}
+
+.productGrid::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border-radius: 10px;
+}
+
+.productGrid::-webkit-scrollbar-thumb {
+  background: #c8a85a;
+  border-radius: 10px;
+}
+
+.productGrid::-webkit-scrollbar-thumb:hover {
+  background: #b89748;
+}
+
+.productCard {
+  text-align: center;
+  position: relative;
+  min-width: 280px;
+  flex-shrink: 0;
+}
+
+.productCard img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.productName {
+  margin: 15px 0;
+  font-size: 14px;
+}
+
+.price {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.button {
+  background-color: #c8a85a;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.btnWish {
+  background-color: #ffff;
+  color: #c8a85a;
+  border: none;
+  padding: 10px 12px;
+  border-radius: 16px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 6px rgba(0, 0, 0, 0.2);
+}
+
+.btnWish:hover {
+  background-color: #c8a85a;
+  color: white;
+}
+
+/* BADGE */
+.badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: #8aa38b;
+  color: white;
+  padding: 5px 12px;
+  border-radius: 12px;
+  font-size: 10px;
+  z-index: 1;
+}
+
+/* MISSION */
+.mission {
+  display: flex;
+  gap: 40px;
+  padding: 80px;
+  align-items: center;
+}
+
+.missionText {
+  flex: 1;
+}
+
+.missionText h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.missionImage {
+  flex: 1;
+}
+
+.missionImage img {
+  width: 100%;
+  border-radius: 20px;
+}
+
+/* INGREDIENTS */
+.ingredients {
+  display: flex;
+  gap: 40px;
+  padding: 80px;
+  align-items: center;
+}
+
+.ingredientsImage {
+  flex: 1;
+}
+
+.ingredientsImage img {
+  width: 100%;
+  border-radius: 20px;
+}
+
+.ingredientsText {
+  flex: 1;
+}
+
+.ingredientsText h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .section {
+    padding: 40px 40px;
+  }
+
+  .productCard {
+    min-width: 220px;
+  }
+
+  .mission,
+  .ingredients {
+    flex-direction: column;
+    padding: 60px 40px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 30px 20px;
+  }
+
+  .sectionTitle {
+    font-size: 24px;
+    margin-bottom: 30px;
+  }
+
+  .productCard {
+    min-width: 200px;
+  }
+
+  .productGrid {
+    gap: 20px;
+  }
+
+  .mission,
+  .ingredients {
+    padding: 40px 20px;
+  }
+
+  .missionText h2,
+  .ingredientsText h2 {
+    font-size: 28px;
+  }
+}
+
+@media (max-width: 480px) {
+  .productCard {
+    min-width: 160px;
+  }
+
+  .productName {
+    font-size: 12px;
+  }
+
+  .button {
+    padding: 8px 14px;
+    font-size: 11px;
+  }
+
+  .btnWish {
+    padding: 8px 10px;
+  }
+}
