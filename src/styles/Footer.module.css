@@ -1,0 +1,335 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* FONT */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+.submitButton {
+    width: 94px;
+    height: 32px;
+    padding: 0;
+    font-family: "Montserrat", sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #fff;
+    background-color: #C4A962;
+    border: 2px solid #C4A962;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 20px;
+}
+
+.submitButton:hover {
+    background-color: #000;
+    border-color: #000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.submitButton:active {
+    transform: translateY(0);
+}
+
+.footer {
+    font-family: "Montserrat", sans-serif;
+    margin-top: 10px;
+    background-color: #ffff;
+    padding-top: 60px;
+    box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1);
+    overflow-x: hidden;
+}
+
+.footerContent {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    gap: 60px;
+    margin-bottom: 60px;
+    align-items: flex-start;
+}
+
+/* Newsletter Section */
+.newsletterSection {
+    flex: 0 0 45%;
+    min-width: 0;
+}
+
+.newsletterTitle {
+    font-weight: 700;
+    font-size: 2.5rem;
+    color: #000;
+    margin: 0 0 15px 0;
+    line-height: 1.2;
+}
+
+.newsletterSubtitle {
+    font-size: 1.2rem;
+    margin: 0 0 30px 0;
+    line-height: 1.4;
+}
+
+.gold {
+    color: #C4A962;
+    font-weight: 400;
+}
+
+.black {
+    color: #000;
+    font-weight: 700;
+}
+
+.emailInput {
+    width: 100%;
+    max-width: 100%;
+    padding: 15px 25px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 0.9rem;
+    color: #C4A962;
+    background-color: transparent;
+    border: 2px solid #C4A962;
+    border-radius: 50px;
+    outline: none;
+    margin-bottom: 20px;
+}
+
+.emailInput::placeholder {
+    color: #C4A962;
+    opacity: 0.7;
+}
+
+.checkboxContainer {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.checkbox {
+    min-width: 20px;
+    width: 20px;
+    height: 20px;
+    margin-top: 3px;
+    cursor: pointer;
+    accent-color: #C4A962;
+    flex-shrink: 0;
+}
+
+.checkboxLabel {
+    font-size: 0.75rem;
+    color: #C4A962;
+    line-height: 1.5;
+    cursor: pointer;
+    word-break: break-word;
+}
+
+.privacyLink {
+    color: #C4A962;
+    text-decoration: underline;
+}
+
+/* Columns Section */
+.columnsSection {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    flex: 0 0 45%;
+    min-width: 0;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.columnTitle {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: #000;
+    margin: 0 0 15px 0;
+    letter-spacing: 0.5px;
+}
+
+.columnList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.columnList li {
+    margin-bottom: 8px;
+}
+
+.columnList a {
+    color: #666;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.3s ease;
+    word-break: break-word;
+}
+
+.columnList a:hover {
+    color: #000;
+}
+
+/* Social Section */
+.socialSection {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.socialTitle {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: #000;
+    margin: 0;
+}
+
+.socialIcons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.socialIcons a {
+    color: #000;
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+.socialIcons a:hover {
+    color: #C4A962;
+}
+
+/* Bottom Bar */
+.footBottom {
+    background-color: #9FAD96;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50px;
+    padding: 15px 20px;
+}
+
+.footBottom p {
+    color: white;
+    font-weight: 600;
+    font-size: 0.8rem;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+}
+
+.footBottom i {
+    margin: 0 5px;
+    color: #e74c3c;
+}
+
+/* RESPONSIVE */
+
+/* Tablet */
+@media (max-width: 1024px) {
+    .footerContent {
+        flex-direction: column;
+        gap: 50px;
+    }
+
+    .newsletterSection {
+        width: 100%;
+        min-width: 0;
+    }
+
+    .columnsSection {
+        gap: 30px;
+        width: 100%;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .footer {
+        padding-top: 40px;
+    }
+
+    .footerContent {
+        gap: 40px;
+        margin-bottom: 40px;
+        padding: 0 15px;
+    }
+
+    .newsletterTitle {
+        font-size: 2rem;
+    }
+
+    .newsletterSubtitle {
+        font-size: 1rem;
+    }
+
+    .emailInput {
+        padding: 12px 20px;
+        font-size: 0.85rem;
+    }
+
+    .columnsSection {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .socialSection {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        padding: 40px 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .footerContent {
+        padding: 0 10px;
+    }
+
+    .newsletterTitle {
+        font-size: 1.5rem;
+    }
+
+    .newsletterSubtitle {
+        font-size: 0.9rem;
+    }
+
+    .emailInput {
+        font-size: 0.85rem;
+        padding: 12px 15px;
+    }
+
+    .submitButton {
+        width: 80px;
+        height: 28px;
+        font-size: 0.65rem;
+    }
+
+    .checkboxLabel {
+        font-size: 0.7rem;
+    }
+
+    .footBottom p {
+        font-size: 0.7rem;
+    }
+
+    .socialSection {
+        padding: 30px 10px;
+    }
+}
