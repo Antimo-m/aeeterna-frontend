@@ -77,6 +77,9 @@ export default function Header() {
             </Link>
             <Link to={"/cart"} className={styles.iconButton} aria-label="Carrello">
               <i className="bi bi-cart"></i>
+              {cartList.length > 0 && 
+              <span>{totalProduct}</span>
+              }
             </Link>
           </div>
 

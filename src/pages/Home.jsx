@@ -8,6 +8,7 @@ import styles from "../styles/HeroBunner.module.css";
 import missionImg from "../assets/images/mission.png";
 import ingredientsImg from "../assets/images/ingredienti.png";
 import { Link } from "react-router-dom";
+import { useCart } from "../contexts/CartContext";
 
 
 
@@ -15,6 +16,7 @@ export default function Home() {
     const backEndUrl = import.meta.env.VITE_BACKEND_URL;
     const [products, setProducts] = useState([]);
     const [newProducts, setNewProducts] = useState([]);
+    const {addCart} = useCart();
 
 
     useEffect(() => {
@@ -72,7 +74,7 @@ export default function Home() {
                             <span className={MainStyle.price}>{product.price} €</span>
 
                             <div className={MainStyle.buttonGroup}>
-                                <button className={`addCartHover ${MainStyle.button}`}>AGGIUNGI AL CARRELLO</button>
+                                <button onClick={() => addCart(product)} className={`addCartHover ${MainStyle.button}`}>AGGIUNGI AL CARRELLO</button>
                                 <button className={MainStyle.btnWish}>
                                     <i className="bi bi-heart"></i>
                                 </button>
@@ -119,7 +121,7 @@ export default function Home() {
                                 <span className={MainStyle.price}>{product.price} €</span>
 
                                 <div className={MainStyle.buttonGroup}>
-                                    <button className={`addCartHover ${MainStyle.button}`}>AGGIUNGI AL CARRELLO</button>
+                                    <button onClick={() => addCart(product)} className={`addCartHover ${MainStyle.button}`}>AGGIUNGI AL CARRELLO</button>
                                     <button className={MainStyle.btnWish}>
                                         <i className="bi bi-heart"></i>
                                     </button>
