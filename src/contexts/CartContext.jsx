@@ -1,42 +1,42 @@
-import { createContext } from "react";
+import { createContext, useContext, useState } from "react";
 
 
-const cartContext = createContext();
+const CartContext = createContext();
 
-function cartContextProvider({children}){
+function CartContextProvider({children}){
     const [cartList, setCartList] = useState([]);
 
-    function addOrdine(item){            
-        if(cartList.find((elem) => elem.id === item.id) === undefined){
+    function addOrdine(newProduct){            
+        if(cartList.find((product) => product.slug === newProduct.slug) === undefined){
             let newOrder = {
-                id_product: item.id,
-                quantity: 1,
+                ...newProduct,
+                quantity: 1
             };
             
             setCartList([...cartList, newOrder]);
         }else{
-            const copyArray = cartList.map((elem) => {
-                if(elem.nome === item.nome){
-                    const nuovaQuantita =elem.quantita + 1;
+            const copyArray = cartList.map((product) => {
+                if(product.slug === newProduct.slug){
+                    const newQuantity = product.quantity + 1;
                     return {
-                        ...elem,
-                        quantita: nuovaQuantita,
+                        ...product,
+                        quantity: newQuantity,
                     }
                 }else{
-                    return elem;
+                    return product;
                 }
             })            
             setCartList(copyArray)
         }
     }
 
-    function removeOrdine(item, indexDelete){
+    function removeOrdine(newProduct, indexDelete){
         const copyArray = [...cartList];
-        if(copyArray[indexDelete].quantita === 1){
+        if(copyArray[indexDelete].quantity === 1){
             const newArray = cartList.toSpliced(indexDelete, 1)
             setCartList(newArray);
         }else{
-            copyArray[indexDelete].quantita = copyArray[indexDelete].quantita - 1;
+            copyArray[indexDelete].quantity = copyArray[indexDelete].quantity - 1;
             setCartList(copyArray)
         }
     };
@@ -45,26 +45,29 @@ function cartContextProvider({children}){
         setCartList([]);
     }
     
-    let totale = 0;
-    cartList.forEach(({ quantita, prezzo }) => {
-        totale += (quantita * prezzo);
+    let total = 0;
+    cartList.forEach(({ quantity, price }) => {
+        total += (quantity * price);
     })
 
-    const valueCarrelloContex = {
+    const cartValue = {
         cartList, 
         addOrdine,
         removeOrdine,
-        totale,
+        total,
         resetCarrello,
     }
 
-    const cartValue = {
-
-    }
-
     return (
-        <cartContext value={cartValue}>
+        <CartContext value={cartValue}>
             {children}
-        </cartContext>
+        </CartContext>
     )
 }
+
+function useCart(){
+    const value = useContext(CartContext);
+    return value
+}
+
+export {useCart, CartContextProvider}

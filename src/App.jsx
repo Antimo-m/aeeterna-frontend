@@ -5,25 +5,29 @@ import ProductDetails from "./pages/ProductDetails"
 import Search from "./pages/Search"
 import WishList from "./pages/WishList"
 import CartPage from "./pages/CartPage"
+import { CartContextProvider } from "./contexts/CartContext"
 
 
 
 
 function App() {
- 
+
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route element={<DefaultLayout />}>
-            <Route path="/" element={<Home /> }/>
-            <Route path="/productdetails/:slug" element={<ProductDetails /> }/>
-            <Route path="/search" element={<Search /> }/>
-            <Route path="/wishlist" element={<WishList /> }/>
-            <Route path="/cart" element={<CartPage /> }/>
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <CartContextProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route element={<DefaultLayout />}>
+              <Route path="/" element={<Home />} />
+              <Route path="/productdetails/:slug" element={<ProductDetails />} />
+              <Route path="/search" element={<Search />} />
+              <Route path="/wishlist" element={<WishList />} />
+              <Route path="/cart" element={<CartPage />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </CartContextProvider>
+
     </>
   )
 }
