@@ -6,6 +6,7 @@ import Search from "./pages/Search"
 import WishList from "./pages/WishList"
 import CartPage from "./pages/CartPage"
 import { CartContextProvider } from "./contexts/CartContext"
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 
 
