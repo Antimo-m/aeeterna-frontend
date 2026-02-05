@@ -52,7 +52,7 @@ export default function ProductDetails() {
                                     <h3>{product.price}€</h3>
                                     <div>
                                         <button>Aggiungi al carrelo</button>
-                                        <button>WishList</button>
+                                        <button><i className="bi bi-heart"></i></button>
                                     </div>
                                 </div>
                                 <div className={style.sectionDescription}>
@@ -81,7 +81,7 @@ export default function ProductDetails() {
                                             <h3>{product.price}€</h3>
                                             <div className={style.button}>
                                                 <button className={style.addCart}>Aggiungi al carrello</button>
-                                                <button className={style.addWishList}>wishList</button>
+                                                <button className={style.addWishList}><i className="bi bi-heart"></i></button>
                                             </div>
                                         </div>
                                     </div>
