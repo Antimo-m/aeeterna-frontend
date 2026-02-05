@@ -63,9 +63,8 @@ export default function Home() {
                 <div className={MainStyle.productGrid}>
 
                     {products.length > 0 && products.map((product) => (
-                        <div className={MainStyle.productCard}>
+                        <div className={MainStyle.productCard}> 
                             <Link to={`/productdetails/${product.slug}`} className={MainStyle.imageContainer}>
-
                                 <img src={product.image} alt={product.name} />
                             </Link>
 
