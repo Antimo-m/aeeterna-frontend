@@ -5,6 +5,7 @@ import ProductDetails from "./pages/ProductDetails"
 import Search from "./pages/Search"
 import WishList from "./pages/WishList"
 import CartPage from "./pages/CartPage"
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
 
 

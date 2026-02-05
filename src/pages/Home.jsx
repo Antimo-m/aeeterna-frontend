@@ -112,9 +112,12 @@ export default function Home() {
                                 <p className={MainStyle.productName}>{product.name}</p>
                                 <span className={MainStyle.price}>{product.price} €</span>
 
-                                <button className={MainStyle.button}>
-                                    AGGIUNGI AL CARRELLO
+                                <div className={MainStyle.buttonGroup}>
+                                <button className={MainStyle.button}>AGGIUNGI AL CARRELLO</button>
+                                <button className={MainStyle.btnWish}>
+                                    <i className="bi bi-heart"></i>
                                 </button>
+                            </div>
                             </div>
                         ))}
                 </div>
