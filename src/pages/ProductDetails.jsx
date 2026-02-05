@@ -53,8 +53,8 @@ export default function ProductDetails() {
                                 <div className={style.sectionPrice}>
                                     <h3>{product.price}€</h3>
                                     <div>
-                                        <button onClick={() => addCart(product)}>Aggiungi al carrelo</button>
-                                        <button><i className="bi bi-heart"></i></button>
+                                        <button className="addCartHover" onClick={() => addCart(product)}>Aggiungi al carrelo</button>
+                                        <button className="btnWish"><i className="bi bi-heart"></i></button>
                                     </div>
                                 </div>
                                 <div className={style.sectionDescription}>
@@ -82,8 +82,8 @@ export default function ProductDetails() {
                                             <h2>{product.name}</h2>
                                             <h3>{product.price}€</h3>
                                             <div className={style.button}>
-                                                <button onClick={() => addCart(product)} className={style.addCart}>Aggiungi al carrello</button>
-                                                <button className={style.addWishList}><i className="bi bi-heart"></i></button>
+                                                <button onClick={() => addCart(product)} className={`addCartHover ${style.addCart}`}>Aggiungi al carrello</button>
+                                                <button className="btnWish"><i className="bi bi-heart"></i></button>
                                             </div>
                                         </div>
                                     </div>

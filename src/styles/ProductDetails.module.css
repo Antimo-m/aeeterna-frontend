@@ -3,6 +3,7 @@
     flex-direction: column;
     gap: 30px;
     align-items: center;
+    margin-top: 80px;
 }
 
 .sectionProduct {
@@ -98,19 +99,10 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
-
 .sectionPrice button:first-child:hover {
-    background: #b0904f;
+    background-color: #725200;
 }
 
-.sectionPrice button:last-child {
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
-    background: #f3f3f3;
-    border: none;
-    cursor: pointer;
-}
 
 .sectionDescription {
     background: #ffffff;
@@ -159,11 +151,9 @@
     scroll-behavior: smooth;
     padding: 20px 10px 40px;
     max-width: 100%;
-}
-
-
-.relatedProduct::-webkit-scrollbar {
-    display: none;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #c8a85a #f0f0f0;
 }
 
 
@@ -219,9 +209,6 @@
     text-transform: uppercase;
 }
 
-.addCart:hover {
-    background-color: #b0904f;
-}
 
 .addWishList {
     width: 44px;

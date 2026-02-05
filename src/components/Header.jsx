@@ -1,10 +1,16 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import styles from "../styles/Header.module.css";
 import React, { useState, useEffect } from 'react';
+import { useCart } from "../contexts/CartContext"
 
 
 export default function Header() {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { cartList } = useCart();
+  let totalProduct = 0;
+  cartList.forEach((product) => {
+    totalProduct += 1 * product.quantity;
+  })
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -22,7 +28,7 @@ export default function Header() {
       document.body.classList.remove(styles.menuOpen);
       document.body.style.overflow = 'unset';
     }
-    
+
     return () => {
       document.body.classList.remove(styles.menuOpen);
       document.body.style.overflow = 'unset';
@@ -58,31 +64,34 @@ export default function Header() {
             {/* Search */}
             <div className={styles.searchBox}>
               <i className={`bi bi-search ${styles.searchIcon}`}></i>
-              <input 
-                type="text" 
-                placeholder="Cerca..." 
+              <input
+                type="text"
+                placeholder="Cerca..."
                 className={styles.searchInput}
               />
             </div>
 
             {/* Icons */}
-            <NavLink to={"/wishlist"} className={styles.iconButton} aria-label="Wishlist">
+            <Link to={"/wishlist"} className={styles.iconButton} aria-label="Wishlist">
               <i className="bi bi-heart"></i>
-            </NavLink>
-            <NavLink to={"/cart"} className={styles.iconButton} aria-label="Carrello">
+            </Link>
+            <Link to={"/cart"} className={styles.iconButton} aria-label="Carrello">
               <i className="bi bi-cart"></i>
-            </NavLink>
+            </Link>
           </div>
 
           {/* Mobile Actions */}
           <div className={styles.mobileActions}>
-            <button className={styles.iconButton} aria-label="Wishlist">
+            <Link to={"/wishlist"} className={styles.iconButton} aria-label="Wishlist">
               <i className="bi bi-heart"></i>
-            </button>
-            <button className={styles.iconButton} aria-label="Carrello">
+            </Link>
+            <Link to={"/cart"} className={styles.iconButton} aria-label="Carrello">
               <i className="bi bi-cart"></i>
-            </button>
-            <button 
+              {cartList.length > 0 && 
+              <span>{totalProduct}</span>
+              }
+            </Link>
+            <button
               className={`${styles.hamburger} ${isMenuOpen ? styles.active : ''}`}
               onClick={toggleMenu}
               aria-label="Menu"
@@ -101,27 +110,17 @@ export default function Header() {
           {/* Search in mobile menu */}
           <div className={styles.mobileSearchBox}>
             <i className={`bi bi-search ${styles.searchIcon}`}></i>
-            <input 
-              type="text" 
-              placeholder="Cerca..." 
+            <input
+              type="text"
+              placeholder="Cerca..."
               className={styles.searchInput}
             />
           </div>
 
           {/* Navigation links */}
           <nav className={styles.mobileNav}>
-            <a href="#home" className={styles.mobileNavLink} onClick={closeMenu}>
-              Home
-            </a>
-            <a href="#prodotti" className={styles.mobileNavLink} onClick={closeMenu}>
-              Prodotti
-            </a>
-            <a href="#novita" className={styles.mobileNavLink} onClick={closeMenu}>
-              Novità
-            </a>
-            <a href="#contatti" className={styles.mobileNavLink} onClick={closeMenu}>
-              Contatti
-            </a>
+            <NavLink onClick={closeMenu} to={"/"} className={styles.navLink}>Home</NavLink>
+            <NavLink onClick={closeMenu} to={"/search"} className={styles.navLink}>Prodotti</NavLink>
           </nav>
         </div>
       </div>
