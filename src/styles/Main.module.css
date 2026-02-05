@@ -1,0 +1,152 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background-color: #fff;
+  color: #111;
+}
+
+.section {
+  padding: 60px 80px;
+}
+
+.sectionTitle {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 40px;
+}
+
+
+
+.imageContainer {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* Forza l'immagine a essere quadrata come nel mockup */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f8f8; /* Un fondo grigio leggero se l'immagine manca */
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.imageContainer img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Taglia l'immagine per riempire il quadrato senza deformarsi */
+}
+/* PRODUCTS */
+
+
+.productGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+}
+
+.productCard {
+  text-align: center;
+  position: relative;
+}
+
+.productCard img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.productName {
+  margin: 15px 0;
+  font-size: 14px;
+}
+
+.price {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.button {
+  background-color: #c8a85a;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+/* BADGE */
+.badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background-color: #8aa38b;
+  color: white;
+  padding: 5px 12px;
+  border-radius: 12px;
+  font-size: 10px;
+}
+
+/* MISSION */
+.mission {
+  display: flex;
+  gap: 40px;
+  padding: 80px;
+  align-items: center;
+}
+
+.missionText {
+  flex: 1;
+}
+
+.missionText h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.missionImage {
+ flex:1;
+}
+
+.missionImage img {
+  width: 100%;
+  border-radius: 20px;
+}
+
+/* INGREDIENTS */
+.ingredients {
+  display: flex;
+  gap: 40px;
+  padding: 80px;
+  align-items: center;
+}
+
+.ingredientsImage img {
+  width: 100%;
+  border-radius: 20px;
+}
+
+.ingredientsText h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .productGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .mission,
+  .ingredients {
+    flex-direction: column;
+  }
+}
+
+
+
+
