@@ -18,18 +18,21 @@ export default function ProductDetails() {
         axios.get(`${backEndUrl}/api/product/${slug}`).then((resp) => {
             setProduct(resp.data)
             console.log(resp.data);
+            console.log(resp.data.id_skin_type);
+            
 
-            axios.get(`${backEndUrl}/api/product?category=0&skinType=${resp.data.id_skin_type}&limit=10&offset=0&minPrice=0&maxPrice=9999`).then((respRelated) => {
-                setrelatedProducts(respRelated.data.result)
-                console.log(respRelated.data.result);
+            axios.get(`${backEndUrl}/api/product?category=0&skinType=${resp.data.id_skin_type}&limit=80&offset=0&minPrice=0&maxPrice=9999`).then((respRelated) => {
+                setrelatedProducts(respRelated.data)
+                console.log(respRelated.data);
                 
             }).catch((err) => {
-
+                console.log(err);
+                
             })
 
             setLoad(true)
         }).catch((err) => {
-
+            console.log(err);
         })
     }, [])
 
@@ -47,7 +50,7 @@ export default function ProductDetails() {
                                 </span>
                             </div>
                             <div className={style.img}>
-                                <img src={product.image[indexImage].path} alt="" />
+                                <img src={product.images[indexImage].path} alt="" />
                             </div>
                             <div className={style.description}>
                                 <div className={style.sectionPrice}>
