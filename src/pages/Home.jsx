@@ -11,13 +11,14 @@ import ingredientsImg from "../assets/images/ingredienti.png";
 
 
 export default function Home() {
+    const backEndUrl = import.meta.env.VITE_BACKEND_URL;
     const [products, setProducts] = useState([]);
     const [newProducts, setNewProducts] = useState([]);
 
 
     useEffect(() => {
         axios
-            .get(`http://localhost:3000/api/product/bestseller`)
+            .get(`${backEndUrl}/api/product/bestseller`)
             .then((resp) => {
                 console.log(resp)
                 setProducts(resp.data);
@@ -28,7 +29,7 @@ export default function Home() {
 
         // NUOVI PRODOTTI
         axios
-            .get(`http://localhost:3000/api/product/newarrivals`)
+            .get(`${backEndUrl}/api/product/newarrivals`)
             .then((resp) => {
                 setNewProducts(resp.data);
             })
@@ -60,8 +61,8 @@ export default function Home() {
                 <h2 className={MainStyle.sectionTitle}>Popolare e di Tendenza</h2>
                 <div className={MainStyle.productGrid}>
 
-                    {products.length > 0 && products.map((product) => (
-                        <div key={product.id} className={MainStyle.productCard}>
+                    {products.length > 0 && products.map((product, index) => (
+                        <div key={index} className={MainStyle.productCard}>
                             <div className={MainStyle.imageContainer}>
 
                                 <img src={product.image} alt={product.name} />
@@ -107,8 +108,8 @@ export default function Home() {
 
                 <div className={MainStyle.productGrid}>
                     {newProducts.length > 0 &&
-                        newProducts.map((product) => (
-                            <div key={product.id} className={MainStyle.productCard}>
+                        newProducts.map((product, index) => (
+                            <div key={index} className={MainStyle.productCard}>
                                 <div className={MainStyle.imageContainer}>
                                     <span className={MainStyle.badge}>NOVITÀ</span>
                                     <img src={product.image} alt={product.name} />

@@ -22,21 +22,22 @@ body {
 
 .imageContainer {
   width: 100%;
-  aspect-ratio: 1 / 1;
+  height: 300px;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background-color: #f8f8f8;
-  border-radius: 8px;
+  border-radius: 10px;
   margin-bottom: 15px;
 }
+
+
 
 .imageContainer img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  display: block;
 }
+
 
 /* PRODUCTS - CAROUSEL */
 .productGrid {
@@ -72,13 +73,12 @@ body {
 .productCard {
   text-align: center;
   position: relative;
-  min-width: 280px;
+  min-width: 200px;
   flex-shrink: 0;
-}
-
-.productCard img {
-  width: 100%;
-  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
 }
 
 .productName {
@@ -107,6 +107,8 @@ body {
   gap: 10px;
   justify-content: center;
   align-items: center;
+  margin-top: auto;
+  padding-top: 15px;
 }
 
 .btnWish {
@@ -238,8 +240,10 @@ body {
 }
 
 @media (max-width: 480px) {
+
+
   .productCard {
-    min-width: 160px;
+    min-width: 140px;
   }
 
   .productName {
@@ -254,4 +258,5 @@ body {
   .btnWish {
     padding: 8px 10px;
   }
+
 }
