@@ -1,9 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom"
+import { NavLink, useParams } from "react-router-dom"
 import style from "../styles/ProductDetails.module.css"
+import { useCart } from "../contexts/CartContext";
 
 export default function ProductDetails() {
+    const {addCart} = useCart();
     const { slug } = useParams();
     const backEndUrl = import.meta.env.VITE_BACKEND_URL;
     const [product, setProduct] = useState({})
@@ -51,7 +53,7 @@ export default function ProductDetails() {
                                 <div className={style.sectionPrice}>
                                     <h3>{product.price}€</h3>
                                     <div>
-                                        <button>Aggiungi al carrelo</button>
+                                        <button onClick={() => addCart(product)}>Aggiungi al carrelo</button>
                                         <button><i className="bi bi-heart"></i></button>
                                     </div>
                                 </div>
@@ -80,7 +82,7 @@ export default function ProductDetails() {
                                             <h2>{product.name}</h2>
                                             <h3>{product.price}€</h3>
                                             <div className={style.button}>
-                                                <button className={style.addCart}>Aggiungi al carrello</button>
+                                                <button onClick={() => addCart(product)} className={style.addCart}>Aggiungi al carrello</button>
                                                 <button className={style.addWishList}><i className="bi bi-heart"></i></button>
                                             </div>
                                         </div>
