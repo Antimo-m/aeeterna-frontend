@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import MainStyle from "../styles/Main.module.css";
+import styles from "../styles/HeroBunner.module.css";
 
 
 // Import Immagini locali
@@ -36,20 +37,24 @@ export default function Home() {
             });
     }, []);
 
-    // Configurazione Swiper per coerenza tra le sezioni
-    const swiperOptions = {
-        modules: [Navigation],
-        navigation: true,
-        spaceBetween: 25,
-        slidesPerView: 1,
-        breakpoints: {
-            640: { slidesPerView: 2 },
-            1024: { slidesPerView: 4 }
-        }
-    };
+
 
     return (
         <>
+        {/*  Section HeroBunner */}
+            <section className={styles.heroContainer}>
+  <div className={styles.heroContent}>
+    <h1 className={styles.title}>Bellezza senza tempo</h1>
+    <p className={styles.subtitle}>
+      Cura la tua pelle oggi per la bellezza del domani.
+    </p>
+    <button className={styles.button}>
+      SCOPRI DI PIÙ
+    </button>
+  </div>
+</section>
+
+            
             {/*  Section Popolare e di tendenza */}
             <section className={MainStyle.section}>
                 <h2 className={MainStyle.sectionTitle}>Popolare e di Tendenza</h2>
@@ -113,11 +118,11 @@ export default function Home() {
                                 <span className={MainStyle.price}>{product.price} €</span>
 
                                 <div className={MainStyle.buttonGroup}>
-                                <button className={MainStyle.button}>AGGIUNGI AL CARRELLO</button>
-                                <button className={MainStyle.btnWish}>
-                                    <i className="bi bi-heart"></i>
-                                </button>
-                            </div>
+                                    <button className={MainStyle.button}>AGGIUNGI AL CARRELLO</button>
+                                    <button className={MainStyle.btnWish}>
+                                        <i className="bi bi-heart"></i>
+                                    </button>
+                                </div>
                             </div>
                         ))}
                 </div>
