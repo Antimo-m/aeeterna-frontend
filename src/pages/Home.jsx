@@ -10,13 +10,11 @@ import ingredientsImg from "../assets/images/ingredienti.png";
 import { Link } from "react-router-dom";
 import { useCart } from "../contexts/CartContext";
 
-
-
 export default function Home() {
     const backEndUrl = import.meta.env.VITE_BACKEND_URL;
     const [products, setProducts] = useState([]);
     const [newProducts, setNewProducts] = useState([]);
-    const {addCart} = useCart();
+    const { addCart } = useCart();
 
 
     useEffect(() => {
@@ -41,36 +39,32 @@ export default function Home() {
             });
     }, []);
 
-
-
     return (
         <>
-        {/*  Section HeroBunner */}
+            {/*  Section HeroBunner */}
             <section className={styles.heroContainer}>
-  <div className={styles.heroContent}>
-    <h1 className={styles.title}>Bellezza senza tempo</h1>
-    <p className={styles.subtitle}>
-      Cura la tua pelle oggi per la bellezza del domani.
-    </p>
-    <button className={styles.button}>
-      SCOPRI DI PIÙ
-    </button>
-  </div>
-</section>
-
-            
+                <div className={styles.heroContent}>
+                    <h1 className={styles.title}>Bellezza senza tempo</h1>
+                    <p className={styles.subtitle}>
+                        Cura la tua pelle oggi per la bellezza del domani.
+                    </p>
+                    <button className={styles.button}>
+                        SCOPRI DI PIÙ
+                    </button>
+                </div>
+            </section>
             {/*  Section Popolare e di tendenza */}
             <section className={MainStyle.section}>
                 <h2 className={MainStyle.sectionTitle}>Popolare e di Tendenza</h2>
                 <div className={MainStyle.productGrid}>
 
                     {products.length > 0 && products.map((product) => (
-                        <div className={MainStyle.productCard}> 
+                        <div className={MainStyle.productCard}>
                             <Link to={`/productdetails/${product.slug}`} className={MainStyle.imageContainer}>
                                 <img src={product.image} alt={product.name} />
                             </Link>
 
-                            <Link to={`/productdetails/${product.slug}`}  className={MainStyle.productName}>{product.name}</Link>
+                            <Link to={`/productdetails/${product.slug}`} className={MainStyle.productName}>{product.name}</Link>
                             <span className={MainStyle.price}>{product.price} €</span>
 
                             <div className={MainStyle.buttonGroup}>
@@ -111,13 +105,13 @@ export default function Home() {
                 <div className={MainStyle.productGrid}>
                     {newProducts.length > 0 &&
                         newProducts.map((product) => (
-                            <div  key={product.id} className={MainStyle.productCard}>
+                            <div key={product.id} className={MainStyle.productCard}>
                                 <Link to={`/productdetails/${product.slug}`} className={MainStyle.imageContainer}>
                                     <span className={MainStyle.badge}>NOVITÀ</span>
                                     <img src={product.image} alt={product.name} />
                                 </Link>
 
-                                <Link to={`/productdetails/${product.slug}`}p className={MainStyle.productName}>{product.name}</Link>
+                                <Link to={`/productdetails/${product.slug}`} p className={MainStyle.productName}>{product.name}</Link>
                                 <span className={MainStyle.price}>{product.price} €</span>
 
                                 <div className={MainStyle.buttonGroup}>
