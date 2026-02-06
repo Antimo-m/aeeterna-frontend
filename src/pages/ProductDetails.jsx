@@ -54,7 +54,7 @@ export default function ProductDetails() {
                             </div>
                             <div className={style.description}>
                                 <div className={style.sectionPrice}>
-                                    <h3>{product.price}€</h3>
+                                    <h3>{parseFloat(product.price).toFixed(2)}€</h3>
                                     <div>
                                         <button className="addCartHover" onClick={() => addCart(product)}>Aggiungi al carrelo</button>
                                         <button className="btnWish"><i className="bi bi-heart"></i></button>
@@ -83,7 +83,7 @@ export default function ProductDetails() {
                                         <img src={product.image} alt={product.name} />
                                         <div>
                                             <h2>{product.name}</h2>
-                                            <h3>{product.price}€</h3>
+                                            <h3>{parseFloat(product.price).toFixed(2)}€</h3>
                                             <div className={style.button}>
                                                 <button onClick={() => addCart(product)} className={`addCartHover ${style.addCart}`}>Aggiungi al carrello</button>
                                                 <button className="btnWish"><i className="bi bi-heart"></i></button>
