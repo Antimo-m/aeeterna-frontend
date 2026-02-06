@@ -130,7 +130,7 @@ export default function Home() {
                                     <img src={product.image} alt={product.name} />
                                 </Link>
 
-                                <Link to={`/productdetails/${product.slug}`} p className={MainStyle.productName}>{product.name}</Link>
+                                <Link to={`/productdetails/${product.slug}`} className={MainStyle.productName}>{product.name}</Link>
                                 <span className={MainStyle.price}>{parseFloat(product.price).toFixed(2)}€</span>
 
                                 <div className={MainStyle.buttonGroup}>
