@@ -2,13 +2,15 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import MainStyle from "../styles/Main.module.css";
 import styles from "../styles/HeroBunner.module.css";
-
+import { Link } from "react-router-dom";
+import { useCart } from "../contexts/CartContext";
+import { useLoad } from "../contexts/LoadContext";
+import { useWishList } from "../contexts/WishListContext"
 
 // Import Immagini locali
 import missionImg from "../assets/images/mission.png";
 import ingredientsImg from "../assets/images/ingredienti.png";
-import { Link } from "react-router-dom";
-import { useCart } from "../contexts/CartContext";
+
 
 
 
@@ -16,66 +18,61 @@ export default function Home() {
     const backEndUrl = import.meta.env.VITE_BACKEND_URL;
     const [products, setProducts] = useState([]);
     const [newProducts, setNewProducts] = useState([]);
-    const {addCart} = useCart();
-
+    const { addCart } = useCart();
+    const { setLoad } = useLoad();
+    const { wishList, addWishList, inWishList, removeWishList } = useWishList();
 
     useEffect(() => {
-        axios
-            .get(`${backEndUrl}/api/product/bestseller`)
-            .then((resp) => {
-                console.log(resp)
-                setProducts(resp.data);
-            })
-            .catch((err) => {
-                console.error(err);
-            });
+        Promise.all([
+            axios.get(`${backEndUrl}/api/product/bestseller`),
+            axios.get(`${backEndUrl}/api/product/newarrivals`)
+        ]).then(([respBestseller, respNewArrivals]) => {
+            console.log(respBestseller.data);
 
-        // NUOVI PRODOTTI
-        axios
-            .get(`${backEndUrl}/api/product/newarrivals`)
-            .then((resp) => {
-                setNewProducts(resp.data);
-            })
-            .catch((err) => {
-                console.error(err);
-            });
-    }, []);
+            setProducts(respBestseller.data);
+            setNewProducts(respNewArrivals.data);
+        }).catch((err) => {
+            console.error(err);
+        }).finally(() => {
+            setLoad(false)
+        });
+    }, [backEndUrl]);
 
 
 
     return (
         <>
-        {/*  Section HeroBunner */}
+            {/*  Section HeroBunner */}
             <section className={styles.heroContainer}>
-  <div className={styles.heroContent}>
-    <h1 className={styles.title}>Bellezza senza tempo</h1>
-    <p className={styles.subtitle}>
-      Cura la tua pelle oggi per la bellezza del domani.
-    </p>
-    <button className={styles.button}>
-      SCOPRI DI PIÙ
-    </button>
-  </div>
-</section>
+                <div className={styles.heroContent}>
+                    <h1 className={styles.title}>Bellezza senza tempo</h1>
+                    <p className={styles.subtitle}>
+                        Cura la tua pelle oggi per la bellezza del domani.
+                    </p>
+                    <button className={styles.button}>
+                        SCOPRI DI PIÙ
+                    </button>
+                </div>
+            </section>
 
-            
+
             {/*  Section Popolare e di tendenza */}
             <section className={MainStyle.section}>
                 <h2 className={MainStyle.sectionTitle}>Popolare e di Tendenza</h2>
                 <div className={MainStyle.productGrid}>
 
                     {products.length > 0 && products.map((product) => (
-                        <div className={MainStyle.productCard}> 
+                        <div key={product.id} className={MainStyle.productCard}>
                             <Link to={`/productdetails/${product.slug}`} className={MainStyle.imageContainer}>
                                 <img src={product.image} alt={product.name} />
                             </Link>
 
-                            <Link to={`/productdetails/${product.slug}`}  className={MainStyle.productName}>{product.name}</Link>
+                            <Link to={`/productdetails/${product.slug}`} className={MainStyle.productName}>{product.name}</Link>
                             <span className={MainStyle.price}>{product.price} €</span>
 
                             <div className={MainStyle.buttonGroup}>
                                 <button onClick={() => addCart(product)} className={`addCartHover ${MainStyle.button}`}>AGGIUNGI AL CARRELLO</button>
-                                <button className={MainStyle.btnWish}>
+                                <button className={inWishList(product) ? "btninWish" : "btnWish"} onClick={() => { inWishList(product) ? removeWishList(product) : addWishList(product) }}>
                                     <i className="bi bi-heart"></i>
                                 </button>
                             </div>
@@ -111,18 +108,18 @@ export default function Home() {
                 <div className={MainStyle.productGrid}>
                     {newProducts.length > 0 &&
                         newProducts.map((product) => (
-                            <div  key={product.id} className={MainStyle.productCard}>
+                            <div key={product.id} className={MainStyle.productCard}>
                                 <Link to={`/productdetails/${product.slug}`} className={MainStyle.imageContainer}>
                                     <span className={MainStyle.badge}>NOVITÀ</span>
                                     <img src={product.image} alt={product.name} />
                                 </Link>
 
-                                <Link to={`/productdetails/${product.slug}`}p className={MainStyle.productName}>{product.name}</Link>
+                                <Link to={`/productdetails/${product.slug}`} className={MainStyle.productName}>{product.name}</Link>
                                 <span className={MainStyle.price}>{product.price} €</span>
 
                                 <div className={MainStyle.buttonGroup}>
                                     <button onClick={() => addCart(product)} className={`addCartHover ${MainStyle.button}`}>AGGIUNGI AL CARRELLO</button>
-                                    <button className={MainStyle.btnWish}>
+                                    <button className={inWishList(product) ? "btninWish" : "btnWish"} onClick={() => { inWishList(product) ? removeWishList(product) : addWishList(product) }}>
                                         <i className="bi bi-heart"></i>
                                     </button>
                                 </div>

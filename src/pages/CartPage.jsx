@@ -1,10 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link,} from "react-router-dom";
 import { useCart } from "../contexts/CartContext";
 import style from "../styles/CartPage.module.css"
+import { useLoad } from "../contexts/LoadContext";
 
 export default function Home() {
     const { cartList, removeProduct, calcTotal } = useCart();
-    console.log(cartList);
+    const { load } = useLoad();
+    setLoad(false)
 
     return (
         <>
@@ -18,16 +20,16 @@ export default function Home() {
                     <section className={style.sectionCart}>
                         <div className={style.sectionProduct}>
                             {cartList.map((product, index) => (
-                                <div className={style.card}>
+                                <div key={product.slug} className={style.card}>
                                     <img src={product.image} alt="" />
                                     <div className={style.bodyCard}>
-                                        <div className={style.description}>
+                                        <Link to={`/product/${product.slug}`} className={style.description}>
                                             <h2>{product.name}</h2>
                                             <span>
                                                 <h3>Quantità: {product.quantity}</h3>
                                                 <h3>Price: {product.price}</h3>
                                             </span>
-                                        </div>
+                                        </Link>
                                         <a onClick={() => removeProduct(index)}>RIMUOVI</a>
                                     </div>
                                 </div>

@@ -29,6 +29,18 @@ a {
     box-shadow: 0 5px 6px rgba(0, 0, 0, 0.2);
 }
 
+.btninWish{
+    background-color: #c8a85a;
+    color: white;
+    border: none;
+    padding: 10px 12px;
+    border-radius: 16px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 6px rgba(0, 0, 0, 0.2);
+}
+
 .btnWish:hover {
     background-color: #c8a85a;
     color: white;

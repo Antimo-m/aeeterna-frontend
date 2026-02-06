@@ -3,43 +3,45 @@ import { useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom"
 import style from "../styles/ProductDetails.module.css"
 import { useCart } from "../contexts/CartContext";
+import { useLoad } from "../contexts/LoadContext";
+import { useWishList } from "../contexts/WishListContext";
 
 export default function ProductDetails() {
-    const {addCart} = useCart();
+    const { addCart } = useCart();
     const { slug } = useParams();
     const backEndUrl = import.meta.env.VITE_BACKEND_URL;
     const [product, setProduct] = useState({})
     const [relatedProducts, setrelatedProducts] = useState([])
-    const [load, setLoad] = useState(false)
     const [indexImage, setIndexImage] = useState(0)
+    const { load, setLoad } = useLoad();
+    const { wishList, inWishList, addWishList, removeWishList } = useWishList();
 
     useEffect(() => {
-        setLoad(false)
+        setLoad(true)
         axios.get(`${backEndUrl}/api/product/${slug}`).then((resp) => {
             setProduct(resp.data)
             console.log(resp.data);
-            console.log(resp.data.id_skin_type);
-            
 
             axios.get(`${backEndUrl}/api/product?category=0&skinType=${resp.data.id_skin_type}&limit=80&offset=0&minPrice=0&maxPrice=9999`).then((respRelated) => {
                 setrelatedProducts(respRelated.data)
                 console.log(respRelated.data);
-                
+                setLoad(false)
+
             }).catch((err) => {
                 console.log(err);
-                
+            }).finally(() => {
             })
 
-            setLoad(true)
         }).catch((err) => {
             console.log(err);
+            setLoad(false)
         })
     }, [])
 
     return (
         <>
             <main className={style.main}>
-                {load &&
+                {!load &&
                     <>
                         <section className={style.sectionProduct}>
                             <div className={style.name}>
@@ -57,7 +59,9 @@ export default function ProductDetails() {
                                     <h3>{product.price}€</h3>
                                     <div>
                                         <button className="addCartHover" onClick={() => addCart(product)}>Aggiungi al carrelo</button>
-                                        <button className="btnWish"><i className="bi bi-heart"></i></button>
+                                        <button className={inWishList(product) ? "btninWish" : "btnWish"} onClick={() => { inWishList(product) ? removeWishList(product) : addWishList(product) }}>
+                                            <i className="bi bi-heart"></i>
+                                        </button>
                                     </div>
                                 </div>
                                 <div className={style.sectionDescription}>
@@ -86,7 +90,9 @@ export default function ProductDetails() {
                                             <h3>{product.price}€</h3>
                                             <div className={style.button}>
                                                 <button onClick={() => addCart(product)} className={`addCartHover ${style.addCart}`}>Aggiungi al carrello</button>
-                                                <button className="btnWish"><i className="bi bi-heart"></i></button>
+                                                <button className={inWishList(product) ? "btninWish" : "btnWish"} onClick={() => { inWishList(product) ? removeWishList(product) : addWishList(product) }}>
+                                                    <i className="bi bi-heart"></i>
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -94,7 +100,6 @@ export default function ProductDetails() {
                             </div>
                         </section>
 
-                        <section></section>
                     </>
                 }
             </main>
