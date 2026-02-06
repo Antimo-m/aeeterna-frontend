@@ -21,10 +21,14 @@ export default function Home() {
 
     useEffect(() => {
         axios
-            .get(`${backEndUrl}/api/product/bestseller`)
+            .get(`${backEndUrl}/api/product/bestseller`/* , {
+                headers: {
+                    Accept: 'application/json',
+                },
+            } */)
             .then((resp) => {
                 console.log(resp)
-                setProducts(resp.data);
+                setProducts(resp.data.data ?? resp.data );
             })
             .catch((err) => {
                 console.error(err);
@@ -32,9 +36,13 @@ export default function Home() {
 
         // NUOVI PRODOTTI
         axios
-            .get(`${backEndUrl}/api/product/newarrivals`)
+             .get(`${backEndUrl}/api/product/newarrivals`/* ,{
+                    headers: {
+                        Accept: 'application/json',
+                     },
+              } */)
             .then((resp) => {
-                setNewProducts(resp.data);
+                setNewProducts(resp.data ?? resp.data.data);
             })
             .catch((err) => {
                 console.error(err);
@@ -71,7 +79,9 @@ export default function Home() {
                             </Link>
 
                             <Link to={`/productdetails/${product.slug}`}  className={MainStyle.productName}>{product.name}</Link>
-                            <span className={MainStyle.price}>{product.price} €</span>
+                            <span className={MainStyle.price}>
+                                {parseFloat(product.price).toFixed(2)}€
+                                </span>
 
                             <div className={MainStyle.buttonGroup}>
                                 <button onClick={() => addCart(product)} className={`addCartHover ${MainStyle.button}`}>AGGIUNGI AL CARRELLO</button>
