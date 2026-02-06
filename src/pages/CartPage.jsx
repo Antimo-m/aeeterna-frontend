@@ -2,15 +2,16 @@ import { Link, } from "react-router-dom";
 import { useCart } from "../contexts/CartContext";
 import style from "../styles/CartPage.module.css"
 import { useLoad } from "../contexts/LoadContext";
+import { useEffect } from "react";
 
 
 export default function Home() {
     useEffect(() => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        }, [])
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }, [])
     const { cartList, removeProduct, calcTotal } = useCart();
     const { setLoad } = useLoad();
     setLoad(false)
