@@ -9,12 +9,20 @@ import missionImg from "../assets/images/mission.png";
 import ingredientsImg from "../assets/images/ingredienti.png";
 import { Link } from "react-router-dom";
 import { useCart } from "../contexts/CartContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Home() {
     const backEndUrl = import.meta.env.VITE_BACKEND_URL;
     const [products, setProducts] = useState([]);
     const [newProducts, setNewProducts] = useState([]);
     const { addCart } = useCart();
+
+
+    const navigate = useNavigate()
+    /* Funzione per il click nel bottone scopri di più */
+    const handleButtonClick = () => {
+        navigate('/prodotti'); 
+    };
 
 
     useEffect(() => {
@@ -56,7 +64,7 @@ export default function Home() {
                     <p className={styles.subtitle}>
                         Cura la tua pelle oggi per la bellezza del domani.
                     </p>
-                    <button className={styles.button}>
+                    <button className={styles.button} onClick={handleButtonClick}> 
                         SCOPRI DI PIÙ
                     </button>
                 </div>
