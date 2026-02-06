@@ -12,7 +12,9 @@ export default function Home() {
             behavior: 'smooth'
         });
     }, [])
-    const { cartList, removeProduct, calcTotal } = useCart();
+    const { cartList, addProduct, updateQuantity, removeProduct, calcTotal} = useCart();
+
+
     const { setLoad } = useLoad();
     setLoad(false)
 
@@ -22,7 +24,7 @@ export default function Home() {
                 {cartList.length === 0 ?
                     <div className={style.emptyCart}>
                         <h1>IL TUO CARRELLO È VUOTO</h1>
-                        <Link to={"/search"} className={style.checkOut}>VAI ALLO SHOPPING</Link>
+                        <Link to={"/prodotti"} className={style.checkOut}>VAI ALLO SHOPPING</Link>
                     </div>
                     :
                     <section className={style.sectionCart}>
@@ -33,12 +35,49 @@ export default function Home() {
                                     <div className={style.bodyCard}>
                                         <Link to={`/productdetails/${product.slug}`} className={style.description}>
                                             <h2>{product.name}</h2>
-                                            <span>
-                                                <h3>Quantità: {product.quantity}</h3>
-                                                <h3>Price: {parseFloat(product.price).toFixed(2)}€</h3>
-                                            </span>
                                         </Link>
-                                        <a onClick={() => removeProduct(index)}>RIMUOVI</a>
+                                           {/*  <span className={style.quantityPrice}>
+                                                <div className={style.quantityContainer}>
+                                                <span>quantita</span>
+                                                    <button onClick={() =>  updateQuantity(index, product.quantity - 1)}>-</button>
+                                                    
+                                                    <input
+                                                        type="number"
+                                                        value={product.quantity}
+                                                        min={1}
+                                                        onChange={(e) => {
+                                                            const value = parseInt(e.target.value);
+                                                            if (!isNaN(value)) updateQuantity(index, value);
+                                                        }}
+                                                        onClick={(e) => e.stopPropagation}
+                                                    />
+                                                    <button onClick={() => updateQuantity(index, product.quantity + 1)}>+</button>
+                                                </div>
+                                                <h3>Price: {(product.price * product.quantity).toFixed(2)}€</h3>
+                                            </span>
+                                        
+                                        <a onClick={() => removeProduct(index)}>RIMUOVI</a> */}
+
+                                        <div className={style.productDetails}>
+                                            <div className={style.quantityContainer}>
+                                                <span>Quantità:</span>
+                                                <button onClick={() => updateQuantity(index, product.quantity - 1)}>-</button>
+                                                <input
+                                                    type="number"
+                                                    value={product.quantity}
+                                                    min={1}
+                                                    onChange={(e) => {
+                                                        const value = parseInt(e.target.value);
+                                                        if (!isNaN(value)) updateQuantity(index, value);
+                                                    }}
+                                                    onClick={(e) => e.stopPropagation()}
+                                                />
+                                                <button onClick={() => updateQuantity(index, product.quantity + 1)}>+</button>
+                                            </div>
+
+                                            <h3 className={style.price}>Price: {(product.price * product.quantity).toFixed(2)}€</h3>
+                                            <button className={style.removeButton} onClick={() => removeProduct(index)}>RIMUOVI</button>
+                                        </div>
                                     </div>
                                 </div>
                             ))}

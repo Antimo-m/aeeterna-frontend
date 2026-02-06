@@ -59,7 +59,7 @@ export default function Header({ searchTerm,  onSearch }) {
         <div className={styles.headerContainer}>
           {/* Logo */}
           <div className={styles.logo}>
-            <span className={styles.logoText}>AETERNA SKIN</span>
+            <Link to={"/"} className={styles.logoText}>AETERNA SKIN</Link>
           </div>
 
           {/* Navigation Desktop */}
