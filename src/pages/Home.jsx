@@ -75,8 +75,8 @@ export default function Home() {
                 <h2 className={MainStyle.sectionTitle}>Popolare e di Tendenza</h2>
                 <div className={MainStyle.productGrid}>
 
-                    {products.length > 0 && products.map((product) => (
-                        <div key={product.id} className={MainStyle.productCard}>
+                    {products.length > 0 && products.map((product, index) => (
+                        <div key={index} className={MainStyle.productCard}>
                             <Link to={`/productdetails/${product.slug}`} className={MainStyle.imageContainer}>
                                 <img src={product.image} alt={product.name} />
                             </Link>
@@ -123,8 +123,8 @@ export default function Home() {
 
                 <div className={MainStyle.productGrid}>
                     {newProducts.length > 0 &&
-                        newProducts.map((product) => (
-                            <div key={product.id} className={MainStyle.productCard}>
+                        newProducts.map((product, index) => (
+                            <div key={index} className={MainStyle.productCard}>
                                 <Link to={`/productdetails/${product.slug}`} className={MainStyle.imageContainer}>
                                     <span className={MainStyle.badge}>NOVITÀ</span>
                                     <img src={product.image} alt={product.name} />
