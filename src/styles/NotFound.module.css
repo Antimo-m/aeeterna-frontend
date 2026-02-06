@@ -1,0 +1,27 @@
+.notFoundContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding-top: 200px; 
+  padding-bottom: 150px;
+  min-height: 70vh; 
+  font-family: "Montserrat", sans-serif;
+  box-sizing: border-box;
+}
+
+.notFoundTitle {
+  font-size: 100px; 
+  font-weight: 300; 
+  color: #9FAD96; 
+  margin-bottom: 10px;
+  letter-spacing: 5px;
+}
+
+.notFoundText {
+  font-size: 18px;
+  color: #7a7a7a;
+  max-width: 600px; 
+  line-height: 1.6;
+}
