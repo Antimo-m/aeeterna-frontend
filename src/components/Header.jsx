@@ -133,7 +133,7 @@ export default function Header() {
           {/* Navigation links */}
           <nav className={styles.mobileNav}>
             <NavLink onClick={closeMenu} to={"/"} className={styles.navLink}>Home</NavLink>
-            <NavLink onClick={closeMenu} to={"/search"} className={styles.navLink}>Prodotti</NavLink>
+            <NavLink onClick={closeMenu} to={"/prodotti"} className={styles.navLink}>Prodotti</NavLink>
           </nav>
         </div>
       </div>

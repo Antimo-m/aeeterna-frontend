@@ -77,7 +77,7 @@ export default function Home() {
                                         :
                                         <>
                                             <h3>Totale</h3>
-                                            <h3>{calcTotal(cartList).toFixed(2)}€</h3>
+                                            <h3>{parseFloat(calcTotal(cartList)).toFixed(2)}€</h3>
                                         </>
                                     }
                                 </div>

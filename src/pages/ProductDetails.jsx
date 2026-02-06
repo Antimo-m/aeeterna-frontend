@@ -5,22 +5,23 @@ import style from "../styles/ProductDetails.module.css"
 import { useCart } from "../contexts/CartContext";
 import { useLoad } from "../contexts/LoadContext";
 import { useWishList } from "../contexts/WishListContext";
+import CardProduct from "../components/CardProducts";
 
 
 export default function ProductDetails() {
     useEffect(() => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        }, [])
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }, [])
     const { addCart } = useCart();
     const { slug } = useParams();
     const backEndUrl = import.meta.env.VITE_BACKEND_URL;
     const [product, setProduct] = useState({})
     const [relatedProducts, setrelatedProducts] = useState([])
     const [indexImage, setIndexImage] = useState(0)
-    const [ pageLoad, setPageLoad ] = useState(false);
+    const [pageLoad, setPageLoad] = useState(false);
     const { Load, setLoad } = useLoad();
     setLoad(false)
 
@@ -93,19 +94,8 @@ export default function ProductDetails() {
                             <h2>Potrebbero piacerti</h2>
                             <div className={style.relatedProduct}>
                                 {relatedProducts.map((product, index) => (
-                                    <div key={index}>
-                                        <img src={product.image} alt={product.name} />
-                                        <div>
-                                            <h2>{product.name}</h2>
-                                            <h3>{parseFloat(product.price).toFixed(2)}€</h3>
-                                            <div className={style.button}>
-                                                <button onClick={() => addCart(product)} className={`addCartHover ${style.addCart}`}>Aggiungi al carrello</button>
-                                                <button className={inWishList(product) ? "btninWish" : "btnWish"} onClick={() => { inWishList(product) ? removeWishList(product) : addWishList(product) }}>
-                                                    <i className="bi bi-heart"></i>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <CardProduct key={index}
+                                        product={product} />
                                 ))}
                             </div>
                         </section>
