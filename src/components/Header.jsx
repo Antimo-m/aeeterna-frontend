@@ -1,16 +1,20 @@
 import { Link, NavLink } from "react-router-dom";
 import styles from "../styles/Header.module.css";
-import React, { useState, useEffect } from 'react';
+import {useState, useEffect } from 'react';
 import { useCart } from "../contexts/CartContext"
+import {useWishList} from "../contexts/WishListContext"
 
 
-export default function Header() {
+export default function Header({ searchTerm,  onSearch }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { cartList } = useCart();
-  let totalProduct = 0;
+  const {wishList} = useWishList();
+  let totalProductCart = 0;
   cartList.forEach((product) => {
-    totalProduct += 1 * product.quantity;
+    totalProductCart += 1 * product.quantity;
   })
+
+  
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -19,6 +23,11 @@ export default function Header() {
   const closeMenu = () => {
     setIsMenuOpen(false);
   };
+
+  const handleSearchChange = (e) => {
+    console.log(e.target.value)
+    onSearch(e.target.value);
+  }
 
   useEffect(() => {
     if (isMenuOpen) {
@@ -68,17 +77,23 @@ export default function Header() {
                 type="text"
                 placeholder="Cerca..."
                 className={styles.searchInput}
+                value={searchTerm}
+                onChange={handleSearchChange}
               />
+              
             </div>
-
+             
             {/* Icons */}
             <Link to={"/wishlist"} className={styles.iconButton} aria-label="Wishlist">
               <i className="bi bi-heart"></i>
+              {wishList.length > 0 &&
+                <span>{wishList.length}</span>
+              }
             </Link>
             <Link to={"/cart"} className={styles.iconButton} aria-label="Carrello">
               <i className="bi bi-cart"></i>
-              {cartList.length > 0 && 
-              <span>{totalProduct}</span>
+              {cartList.length > 0 &&
+                <span>{totalProductCart}</span>
               }
             </Link>
           </div>
@@ -87,11 +102,14 @@ export default function Header() {
           <div className={styles.mobileActions}>
             <Link to={"/wishlist"} className={styles.iconButton} aria-label="Wishlist">
               <i className="bi bi-heart"></i>
+              {wishList.length > 0 &&
+                <span>{wishList.length}</span>
+              }
             </Link>
             <Link to={"/cart"} className={styles.iconButton} aria-label="Carrello">
               <i className="bi bi-cart"></i>
-              {cartList.length > 0 && 
-              <span>{totalProduct}</span>
+              {cartList.length > 0 &&
+                <span>{totalProductCart}</span>
               }
             </Link>
             <button
@@ -117,13 +135,15 @@ export default function Header() {
               type="text"
               placeholder="Cerca..."
               className={styles.searchInput}
+              value={searchTerm}
+              onChange={handleSearchChange}
             />
           </div>
 
           {/* Navigation links */}
           <nav className={styles.mobileNav}>
             <NavLink onClick={closeMenu} to={"/"} className={styles.navLink}>Home</NavLink>
-            <NavLink onClick={closeMenu} to={"/search"} className={styles.navLink}>Prodotti</NavLink>
+            <NavLink onClick={closeMenu} to={"/prodotti"} className={styles.navLink}>Prodotti</NavLink>
           </nav>
         </div>
       </div>

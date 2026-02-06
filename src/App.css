@@ -1,0 +1,22 @@
+.wrapper{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+    background-color: rgba(155, 155, 155, 0.5);
+}
+
+@keyframes load {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
+}
+
+#load{
+    animation: load 2s infinite;
+    font-size: 5vw;
+}

@@ -70,9 +70,9 @@ function CartContextProvider({ children }) {
     }
 
     return (
-        <CartContext value={cartValue}>
+        <CartContext.Provider value={cartValue}>
             {children}
-        </CartContext>
+        </CartContext.Provider>
     )
 }
 
