@@ -6,6 +6,7 @@ import Search from "./pages/Search"
 import WishList from "./pages/WishList"
 import CartPage from "./pages/CartPage"
 import { CartContextProvider } from "./contexts/CartContext"
+import WelcomePopup from "./components/WelcomePopup"
 import 'bootstrap-icons/font/bootstrap-icons.css';
 
 
@@ -17,6 +18,7 @@ function App() {
     <>
       <CartContextProvider>
         <BrowserRouter>
+          <WelcomePopup />
           <Routes>
             <Route element={<DefaultLayout />}>
               <Route path="/" element={<Home />} />
