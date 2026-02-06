@@ -8,6 +8,8 @@ import CartPage from "./pages/CartPage"
 import { CartContextProvider } from "./contexts/CartContext"
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import NotFound from "./pages/NotFound"
+import { LoadContextProvider } from "./contexts/LoadContext"
+import { WishListContextProvider } from "./contexts/WishListContext"
 
 
 
@@ -17,20 +19,23 @@ function App() {
   return (
     <>
       <CartContextProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route element={<DefaultLayout />}>
-              <Route path="/" element={<Home />} />
-              <Route path="/productdetails/:slug" element={<ProductDetails />} />
-              <Route path="/Prodotti" element={<Prodotti/>} />
-              <Route path="/wishlist" element={<WishList />} />
-              <Route path="/cart" element={<CartPage />} />
-              <Route path="*" element={<NotFound />} />
-            </Route>
-          </Routes>
-        </BrowserRouter>
+        <WishListContextProvider>
+          <LoadContextProvider>
+            <BrowserRouter>
+              <Routes>
+                <Route element={<DefaultLayout />}>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/productdetails/:slug" element={<ProductDetails />} />
+                  <Route path="/search" element={<Search />} />
+                  <Route path="/wishlist" element={<WishList />} />
+                  <Route path="/cart" element={<CartPage />} />
+                  <Route path="*" element={<NotFound />} />
+                </Route>
+              </Routes>
+            </BrowserRouter>
+          </LoadContextProvider>
+        </WishListContextProvider>
       </CartContextProvider>
-
     </>
   )
 }

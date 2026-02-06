@@ -2,7 +2,10 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import MainStyle from "../styles/Main.module.css";
 import styles from "../styles/HeroBunner.module.css";
-
+import { Link } from "react-router-dom";
+import { useCart } from "../contexts/CartContext";
+import { useLoad } from "../contexts/LoadContext";
+import { useWishList } from "../contexts/WishListContext"
 
 // Import Immagini locali
 import missionImg from "../assets/images/mission.png";
@@ -16,6 +19,9 @@ export default function Home() {
     const [products, setProducts] = useState([]);
     const [newProducts, setNewProducts] = useState([]);
     const { addCart } = useCart();
+    const { setLoad } = useLoad();
+    const { wishList, addWishList, inWishList, removeWishList } = useWishList();
+
 
 
     const navigate = useNavigate()
@@ -25,35 +31,23 @@ export default function Home() {
     };
 
 
-    useEffect(() => {
-        axios
-            .get(`${backEndUrl}/api/product/bestseller`/* , {
-                headers: {
-                    Accept: 'application/json',
-                },
-            } */)
-            .then((resp) => {
-                console.log(resp)
-                setProducts(resp.data.data ?? resp.data );
-            })
-            .catch((err) => {
-                console.error(err);
-            });
 
-        // NUOVI PRODOTTI
-        axios
-             .get(`${backEndUrl}/api/product/newarrivals`/* ,{
-                    headers: {
-                        Accept: 'application/json',
-                     },
-              } */)
-            .then((resp) => {
-                setNewProducts(resp.data ?? resp.data.data);
-            })
-            .catch((err) => {
-                console.error(err);
-            });
-    }, []);
+
+    useEffect(() => {
+        Promise.all([
+            axios.get(`${backEndUrl}/api/product/bestseller`),
+            axios.get(`${backEndUrl}/api/product/newarrivals`)
+        ]).then(([respBestseller, respNewArrivals]) => {
+            console.log(respBestseller.data);
+
+            setProducts(respBestseller.data);
+            setNewProducts(respNewArrivals.data);
+        }).catch((err) => {
+            console.error(err);
+        }).finally(() => {
+            setLoad(false)
+        });
+    }, [backEndUrl]);
 
     return (
         <>
@@ -69,13 +63,15 @@ export default function Home() {
                     </button>
                 </div>
             </section>
+
+
             {/*  Section Popolare e di tendenza */}
             <section className={MainStyle.section}>
                 <h2 className={MainStyle.sectionTitle}>Popolare e di Tendenza</h2>
                 <div className={MainStyle.productGrid}>
 
                     {products.length > 0 && products.map((product) => (
-                        <div className={MainStyle.productCard}>
+                        <div key={product.id} className={MainStyle.productCard}>
                             <Link to={`/productdetails/${product.slug}`} className={MainStyle.imageContainer}>
                                 <img src={product.image} alt={product.name} />
                             </Link>
@@ -87,7 +83,7 @@ export default function Home() {
 
                             <div className={MainStyle.buttonGroup}>
                                 <button onClick={() => addCart(product)} className={`addCartHover ${MainStyle.button}`}>AGGIUNGI AL CARRELLO</button>
-                                <button className={MainStyle.btnWish}>
+                                <button className={inWishList(product) ? "btninWish" : "btnWish"} onClick={() => { inWishList(product) ? removeWishList(product) : addWishList(product) }}>
                                     <i className="bi bi-heart"></i>
                                 </button>
                             </div>
@@ -134,7 +130,7 @@ export default function Home() {
 
                                 <div className={MainStyle.buttonGroup}>
                                     <button onClick={() => addCart(product)} className={`addCartHover ${MainStyle.button}`}>AGGIUNGI AL CARRELLO</button>
-                                    <button className={MainStyle.btnWish}>
+                                    <button className={inWishList(product) ? "btninWish" : "btnWish"} onClick={() => { inWishList(product) ? removeWishList(product) : addWishList(product) }}>
                                         <i className="bi bi-heart"></i>
                                     </button>
                                 </div>

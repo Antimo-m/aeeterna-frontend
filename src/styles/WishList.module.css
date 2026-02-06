@@ -1,0 +1,149 @@
+/* Layout Principale */
+.main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px;
+    text-align: center;
+    min-height: 60vh;
+}
+
+.main h1 {
+    font-size: 2.2rem;
+    color: #333;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.main h3 {
+    font-size: 1rem;
+    color: #777;
+    margin-bottom: 40px;
+    font-weight: 300;
+}
+
+/* Griglia Prodotti (Max 4 per linea) */
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 30px;
+    justify-items: center;
+}
+
+/* Forziamo il limite di 4 colonne su schermi grandi */
+@media (min-width: 1200px) {
+    .container {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* Card Prodotto */
+.card {
+    background: #ffffff;
+    border: 1px solid #f0f0f0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.card:hover {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.card img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1/1;
+    object-fit: contain;
+    margin-bottom: 15px;
+}
+
+.card h2 {
+    font-size: 0.95rem;
+    color: #222;
+    margin: 10px 0;
+    text-decoration: none;
+    min-height: 40px;
+}
+
+.card h3 {
+    font-size: 1.1rem;
+    color: #b1955b; /* Colore oro dal mockup */
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+/* Bottoni Azione */
+.divButton {
+    display: flex;
+    gap: 10px;
+    margin-top: auto;
+}
+
+.addCart {
+    flex: 1;
+    background-color: #c4a468; /* Colore bottoni mockup [cite: 31, 33] */
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: opacity 0.3s;
+}
+
+.addCart:hover {
+    opacity: 0.8;
+}
+
+.removeWishList {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    color: #999;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.removeWishList:hover {
+    background: #ffeeee;
+    color: #cc0000;
+    border-color: #ffcccc;
+}
+
+/* Wishlist Vuota */
+.emptyWish {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 20px;
+}
+
+.emptyWish h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 25px;
+}
+
+.goShop {
+    background-color: #333;
+    color: white;
+    padding: 15px 40px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    transition: background 0.3s;
+}
+
+.goShop:hover {
+    background-color: #555;
+}
