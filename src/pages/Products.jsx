@@ -42,7 +42,7 @@ export default function Products() {
         }).catch((err) => {
             console.error(err);
         })
-    }, [search])
+    }, [search, page])
 
     function searchFilter() {
         setPage(1)
