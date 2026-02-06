@@ -42,7 +42,7 @@ export default function Products() {
         }).catch((err) => {
             console.error(err);
         })
-    }, [search, page])
+    }, [search, filter.offset])
 
     function searchFilter() {
         setPage(1)
@@ -79,9 +79,6 @@ export default function Products() {
         }));
     }
 
-
-
-
     function handleFilterRange(event) {
         const { name, value } = event.target;
         const numericValue = parseInt(value);
@@ -112,11 +109,6 @@ export default function Products() {
             return prev;
         });
     }
-
-
-
-
-
 
     return (
         <main className={styles.container}>
