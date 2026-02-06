@@ -7,10 +7,12 @@ import style from "../styles/WishList.module.css"
 
 
 export default function WishList() {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
+    useEffect(() => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }, [])
     const { wishList, removeWishList } = useWishList();
     const { addCart } = useCart();
     const { setLoad } = useLoad();

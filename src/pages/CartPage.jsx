@@ -5,10 +5,12 @@ import { useLoad } from "../contexts/LoadContext";
 
 
 export default function Home() {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    }); 
+    useEffect(() => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }, [])
     const { cartList, removeProduct, calcTotal } = useCart();
     const { setLoad } = useLoad();
     setLoad(false)

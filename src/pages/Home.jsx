@@ -16,10 +16,13 @@ import { useNavigate } from "react-router-dom";
 
 
 export default function Home() {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }, [])
+
     const backEndUrl = import.meta.env.VITE_BACKEND_URL;
     const [products, setProducts] = useState([]);
     const [newProducts, setNewProducts] = useState([]);

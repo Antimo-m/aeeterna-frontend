@@ -8,21 +8,26 @@ import { useWishList } from "../contexts/WishListContext";
 
 
 export default function ProductDetails() {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
+    useEffect(() => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }, [])
     const { addCart } = useCart();
     const { slug } = useParams();
     const backEndUrl = import.meta.env.VITE_BACKEND_URL;
     const [product, setProduct] = useState({})
     const [relatedProducts, setrelatedProducts] = useState([])
     const [indexImage, setIndexImage] = useState(0)
-    const { load, setLoad } = useLoad();
+    const [ pageLoad, setPageLoad ] = useState(false);
+    const { Load, setLoad } = useLoad();
+    setLoad(false)
+
     const { wishList, inWishList, addWishList, removeWishList } = useWishList();
 
     useEffect(() => {
-        setLoad(true)
+        setPageLoad(false)
         axios.get(`${backEndUrl}/api/product/${slug}`).then((resp) => {
             setProduct(resp.data)
             console.log(resp.data);
@@ -30,7 +35,7 @@ export default function ProductDetails() {
             axios.get(`${backEndUrl}/api/product?category=0&skinType=${resp.data.id_skin_type}&limit=80&offset=0&minPrice=0&maxPrice=9999`).then((respRelated) => {
                 setrelatedProducts(respRelated.data)
                 console.log(respRelated.data);
-                setLoad(false)
+                setPageLoad(true)
 
             }).catch((err) => {
                 console.log(err);
@@ -39,14 +44,14 @@ export default function ProductDetails() {
 
         }).catch((err) => {
             console.log(err);
-            setLoad(false)
+            setPageLoad(true)
         })
     }, [])
 
     return (
         <>
             <main className={style.main}>
-                {!load &&
+                {pageLoad &&
                     <>
                         <section className={style.sectionProduct}>
                             <div className={style.name}>
@@ -57,7 +62,7 @@ export default function ProductDetails() {
                                 </span>
                             </div>
                             <div className={style.img}>
-                                <img src={product.image[indexImage].path} alt="" />
+                                <img src={product.images[indexImage].path} alt="" />
                             </div>
                             <div className={style.description}>
                                 <div className={style.sectionPrice}>
