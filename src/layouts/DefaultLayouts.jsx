@@ -6,20 +6,17 @@ import { useState } from "react";
 import LoadWrapper from "../components/LoadWrapper";
 import { useLoad } from "../contexts/LoadContext";
 
-export default function DefaultLayout() {
+export default function DefaultLayout({searchTerm, onSearch}) {
 
     const { load } = useLoad();
     return (
         <>
-            <Header />
-            <>
+             <Header searchTerm={searchTerm} onSearch={onSearch}/>
                 <main>
                     <Outlet />
                     <PreFooter />
                 </main>
                 <Footer />
-            </>
             {load && <LoadWrapper />}
-        </>
-    )
-}
+            </>
+)}

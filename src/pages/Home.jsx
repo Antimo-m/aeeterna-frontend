@@ -16,7 +16,7 @@ import CardProduct from "../components/CardProducts";
 
 
 
-export default function Home() {
+export default function Home({searchTerm}) {
     useEffect(() => {
         window.scrollTo({
             top: 0,
@@ -24,6 +24,8 @@ export default function Home() {
         });
     }, [])
 
+
+    console.log(searchTerm)
     const backEndUrl = import.meta.env.VITE_BACKEND_URL;
     const [products, setProducts] = useState([]);
     const [newProducts, setNewProducts] = useState([]);
@@ -40,6 +42,11 @@ export default function Home() {
     };
 
 
+
+   const filteredProducts = products.filter((product) =>
+  product && product.name && typeof product.name === 'string' && product.name.toLowerCase().includes(searchTerm.toLowerCase())
+);
+ 
 
 
     useEffect(() => {
@@ -79,9 +86,24 @@ export default function Home() {
                 <h2 className={MainStyle.sectionTitle}>Popolare e di Tendenza</h2>
                 <div className={MainStyle.productGrid}>
 
-                    {products.length > 0 && products.map((product, index) => (
-                        <CardProduct key={index}
-                        product={product} />
+                    {filteredProducts.length > 0 && filteredProducts.map((product) => (
+                        <div className={MainStyle.productCard}>
+                            <Link to={`/productdetails/${product.slug}`} className={MainStyle.imageContainer}>
+                                <img src={product.image} alt={product.name} />
+                            </Link>
+
+                            <Link to={`/productdetails/${product.slug}`} className={MainStyle.productName}>{product.name}</Link>
+                            <span className={MainStyle.price}>
+                                {parseFloat(product.price).toFixed(2)}€
+                            </span>
+
+                            <div className={MainStyle.buttonGroup}>
+                                <button onClick={() => addCart(product)} className={`addCartHover ${MainStyle.button}`}>AGGIUNGI AL CARRELLO</button>
+                                <button className={MainStyle.btnWish}>
+                                    <i className="bi bi-heart"></i>
+                                </button>
+                            </div>
+                        </div>
                     ))}
                 </div>
             </section>
