@@ -10,23 +10,29 @@ import ingredientsImg from "../assets/images/ingredienti.png";
 import { Link } from "react-router-dom";
 import { useCart } from "../contexts/CartContext";
 
-export default function Home() {
+export default function Home({searchTerm}) {
+    console.log(searchTerm)
     const backEndUrl = import.meta.env.VITE_BACKEND_URL;
     const [products, setProducts] = useState([]);
     const [newProducts, setNewProducts] = useState([]);
     const { addCart } = useCart();
 
+   const filteredProducts = products.filter((product) =>
+  product && product.name && typeof product.name === 'string' && product.name.toLowerCase().includes(searchTerm.toLowerCase())
+);
+ 
+
 
     useEffect(() => {
         axios
-            .get(`${backEndUrl}/api/product/bestseller`/* , {
+            .get(`${backEndUrl}/api/product/bestseller` /*, {
                 headers: {
                     Accept: 'application/json',
                 },
-            } */)
+            }*/ )
             .then((resp) => {
                 console.log(resp)
-                setProducts(resp.data.data ?? resp.data );
+                setProducts(resp.data.data ?? resp.data);
             })
             .catch((err) => {
                 console.error(err);
@@ -34,18 +40,18 @@ export default function Home() {
 
         // NUOVI PRODOTTI
         axios
-             .get(`${backEndUrl}/api/product/newarrivals`/* ,{
+            .get(`${backEndUrl}/api/product/newarrivals`/* ,{
                     headers: {
                         Accept: 'application/json',
                      },
-              } */)
+              } */ )
             .then((resp) => {
                 setNewProducts(resp.data ?? resp.data.data);
             })
             .catch((err) => {
                 console.error(err);
             });
-    }, []);
+    }, [backEndUrl]);
 
     return (
         <>
@@ -66,16 +72,16 @@ export default function Home() {
                 <h2 className={MainStyle.sectionTitle}>Popolare e di Tendenza</h2>
                 <div className={MainStyle.productGrid}>
 
-                    {products.length > 0 && products.map((product) => (
+                    {filteredProducts.length > 0 && filteredProducts.map((product) => (
                         <div className={MainStyle.productCard}>
                             <Link to={`/productdetails/${product.slug}`} className={MainStyle.imageContainer}>
                                 <img src={product.image} alt={product.name} />
                             </Link>
 
-                            <Link to={`/productdetails/${product.slug}`}  className={MainStyle.productName}>{product.name}</Link>
+                            <Link to={`/productdetails/${product.slug}`} className={MainStyle.productName}>{product.name}</Link>
                             <span className={MainStyle.price}>
                                 {parseFloat(product.price).toFixed(2)}€
-                                </span>
+                            </span>
 
                             <div className={MainStyle.buttonGroup}>
                                 <button onClick={() => addCart(product)} className={`addCartHover ${MainStyle.button}`}>AGGIUNGI AL CARRELLO</button>

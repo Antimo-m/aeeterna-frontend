@@ -1,10 +1,10 @@
 import { Link, NavLink } from "react-router-dom";
 import styles from "../styles/Header.module.css";
-import React, { useState, useEffect } from 'react';
+import {useState, useEffect } from 'react';
 import { useCart } from "../contexts/CartContext"
 
 
-export default function Header() {
+export default function Header({ searchTerm,  onSearch }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { cartList } = useCart();
   let totalProduct = 0;
@@ -19,6 +19,11 @@ export default function Header() {
   const closeMenu = () => {
     setIsMenuOpen(false);
   };
+
+  const handleSearchChange = (e) => {
+    console.log(e.target.value)
+    onSearch(e.target.value);
+  }
 
   useEffect(() => {
     if (isMenuOpen) {
@@ -68,9 +73,12 @@ export default function Header() {
                 type="text"
                 placeholder="Cerca..."
                 className={styles.searchInput}
+                value={searchTerm}
+                onChange={handleSearchChange}
               />
+              
             </div>
-
+             
             {/* Icons */}
             <Link to={"/wishlist"} className={styles.iconButton} aria-label="Wishlist">
               <i className="bi bi-heart"></i>
@@ -117,6 +125,8 @@ export default function Header() {
               type="text"
               placeholder="Cerca..."
               className={styles.searchInput}
+              value={searchTerm}
+              onChange={handleSearchChange}
             />
           </div>
 
