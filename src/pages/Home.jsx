@@ -11,6 +11,7 @@ import { useWishList } from "../contexts/WishListContext"
 import missionImg from "../assets/images/mission.png";
 import ingredientsImg from "../assets/images/ingredienti.png";
 import { useNavigate } from "react-router-dom";
+import CardProduct from "../components/CardProducts";
 
 
 
@@ -79,23 +80,8 @@ export default function Home() {
                 <div className={MainStyle.productGrid}>
 
                     {products.length > 0 && products.map((product, index) => (
-                        <div key={index} className={MainStyle.productCard}>
-                            <Link to={`/productdetails/${product.slug}`} className={MainStyle.imageContainer}>
-                                <img src={product.image} alt={product.name} />
-                            </Link>
-
-                            <Link to={`/productdetails/${product.slug}`} className={MainStyle.productName}>{product.name}</Link>
-                            <span className={MainStyle.price}>
-                                {parseFloat(product.price).toFixed(2)}€
-                            </span>
-
-                            <div className={MainStyle.buttonGroup}>
-                                <button onClick={() => addCart(product)} className={`addCartHover ${MainStyle.button}`}>AGGIUNGI AL CARRELLO</button>
-                                <button className={inWishList(product) ? "btninWish" : "btnWish"} onClick={() => { inWishList(product) ? removeWishList(product) : addWishList(product) }}>
-                                    <i className="bi bi-heart"></i>
-                                </button>
-                            </div>
-                        </div>
+                        <CardProduct key={index}
+                        product={product} />
                     ))}
                 </div>
             </section>
@@ -127,22 +113,8 @@ export default function Home() {
                 <div className={MainStyle.productGrid}>
                     {newProducts.length > 0 &&
                         newProducts.map((product, index) => (
-                            <div key={index} className={MainStyle.productCard}>
-                                <Link to={`/productdetails/${product.slug}`} className={MainStyle.imageContainer}>
-                                    <span className={MainStyle.badge}>NOVITÀ</span>
-                                    <img src={product.image} alt={product.name} />
-                                </Link>
-
-                                <Link to={`/productdetails/${product.slug}`} className={MainStyle.productName}>{product.name}</Link>
-                                <span className={MainStyle.price}>{parseFloat(product.price).toFixed(2)}€</span>
-
-                                <div className={MainStyle.buttonGroup}>
-                                    <button onClick={() => addCart(product)} className={`addCartHover ${MainStyle.button}`}>AGGIUNGI AL CARRELLO</button>
-                                    <button className={inWishList(product) ? "btninWish" : "btnWish"} onClick={() => { inWishList(product) ? removeWishList(product) : addWishList(product) }}>
-                                        <i className="bi bi-heart"></i>
-                                    </button>
-                                </div>
-                            </div>
+                            <CardProduct key={index}
+                        product={product} />
                         ))}
                 </div>
             </section >

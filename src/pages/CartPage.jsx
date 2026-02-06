@@ -2,6 +2,8 @@ import { Link, } from "react-router-dom";
 import { useCart } from "../contexts/CartContext";
 import style from "../styles/CartPage.module.css"
 import { useLoad } from "../contexts/LoadContext";
+import { useEffect } from "react"
+
 
 
 export default function Home() {
@@ -76,7 +78,7 @@ export default function Home() {
                                         :
                                         <>
                                             <h3>Totale</h3>
-                                            <h3>{calcTotal(cartList).toFixed(2)}€</h3>
+                                            <h3>{parseFloat(calcTotal(cartList)).toFixed(2)}€</h3>
                                         </>
                                     }
                                 </div>

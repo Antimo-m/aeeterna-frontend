@@ -2,7 +2,7 @@ import { useWishList } from "../contexts/WishListContext"
 import { useCart } from "../contexts/CartContext"
 import { Link } from "react-router-dom"
 import { useLoad } from "../contexts/LoadContext"
-
+import { useEffect } from "react"
 import style from "../styles/WishList.module.css"
 
 

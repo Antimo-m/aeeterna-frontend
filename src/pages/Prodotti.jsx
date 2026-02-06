@@ -1,4 +1,4 @@
-export default function Prodotti(){
+export default function Products(){
     return (
         <>
         
