@@ -32,11 +32,11 @@ export default function WishList() {
                     <div className={style.container}>
                         {wishList.map((product, index) => (
                             <div key={index} className={style.card}>
-                                <Link to={`/product/${product.slug}`}>
+                                <Link to={`/productdetails/${product.slug}`}>
                                     <img src={product.image} alt="" />
 
                                     <h2>{product.name}</h2>
-                                    <h3>{product.price}€</h3>
+                                    <h3>{parseFloat(product.price).toFixed(2)}€</h3>
                                 </Link>
                                 <div className={style.divButton}>
                                     <button onClick={() => addCart(product)} className={`addCartHover ${style.addCart}`}>AGGIUNGI AL CARRELLO</button>

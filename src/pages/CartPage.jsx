@@ -31,7 +31,7 @@ export default function Home() {
                                 <div key={product.slug} className={style.card}>
                                     <img src={product.image} alt="" />
                                     <div className={style.bodyCard}>
-                                        <Link to={`/product/${product.slug}`} className={style.description}>
+                                        <Link to={`/productdetails/${product.slug}`} className={style.description}>
                                             <h2>{product.name}</h2>
                                             <span>
                                                 <h3>Quantità: {product.quantity}</h3>
@@ -71,7 +71,7 @@ export default function Home() {
                                     {calcTotal(cartList) < 45 ?
                                         <>
                                             <h3>Totale</h3>
-                                            <h3>{calcTotal(cartList) + 4.99}</h3>
+                                            <h3>{calcTotal(cartList) + 4.99}€</h3>
                                         </>
 
                                         :
