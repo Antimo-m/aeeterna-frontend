@@ -10,7 +10,7 @@ export default function Home() {
         behavior: 'smooth'
     }); 
     const { cartList, removeProduct, calcTotal } = useCart();
-    const { load } = useLoad();
+    const { setLoad } = useLoad();
     setLoad(false)
 
     return (
