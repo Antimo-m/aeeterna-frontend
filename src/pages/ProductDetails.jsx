@@ -57,7 +57,7 @@ export default function ProductDetails() {
                                 </span>
                             </div>
                             <div className={style.img}>
-                                <img src={product.images[indexImage].path} alt="" />
+                                <img src={product.image[indexImage].path} alt="" />
                             </div>
                             <div className={style.description}>
                                 <div className={style.sectionPrice}>

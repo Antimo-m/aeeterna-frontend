@@ -39,7 +39,7 @@ export default function WishList() {
                                 <div className={style.divButton}>
                                     <button onClick={() => addCart(product)} className={`addCartHover ${style.addCart}`}>AGGIUNGI AL CARRELLO</button>
                                     <button onClick={() => removeWishList(product)} className={style.removeWishList}>
-                                        <i class="bi bi-x-lg"></i>
+                                        <i className="bi bi-x-lg"></i>
                                     </button>
                                 </div>
                             </div>
