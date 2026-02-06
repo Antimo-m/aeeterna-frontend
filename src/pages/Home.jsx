@@ -10,8 +10,6 @@ import { useWishList } from "../contexts/WishListContext"
 // Import Immagini locali
 import missionImg from "../assets/images/mission.png";
 import ingredientsImg from "../assets/images/ingredienti.png";
-import { Link } from "react-router-dom";
-import { useCart } from "../contexts/CartContext";
 import { useNavigate } from "react-router-dom";
 
 export default function Home() {

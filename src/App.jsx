@@ -12,8 +12,6 @@ import { LoadContextProvider } from "./contexts/LoadContext"
 import { WishListContextProvider } from "./contexts/WishListContext"
 
 
-
-
 function App() {
 
   return (
@@ -26,7 +24,7 @@ function App() {
                 <Route element={<DefaultLayout />}>
                   <Route path="/" element={<Home />} />
                   <Route path="/productdetails/:slug" element={<ProductDetails />} />
-                  <Route path="/search" element={<Search />} />
+                  <Route path="/prodotti" element={<Prodotti />} />
                   <Route path="/wishlist" element={<WishList />} />
                   <Route path="/cart" element={<CartPage />} />
                   <Route path="*" element={<NotFound />} />
