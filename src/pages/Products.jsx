@@ -25,6 +25,7 @@ export default function Products() {
     const [page, setPage] = useState(1);
     const [search, setSearch] = useState(false)
     const [errorMessage, setErrorMessage] = useState("");
+    const [openFilter, setOpenFilter] = useState(false);
     setLoad(false)
 
     useEffect(() => {
@@ -64,7 +65,6 @@ export default function Products() {
             setErrorMessage("Inserisci un tipo di categoria esistente")
         }
 
-
         if (name === "limit" && (value < 5 || value > 80)) {
             setErrorMessage("Inserisci un impaginazione valida")
         }
@@ -72,10 +72,6 @@ export default function Products() {
         if (name === "search" && (value.length > 50 || typeof (value) !== "string")) {
             setErrorMessage("Inserisci un filtro di nome valida")
         }
-
-
-
-
 
         setFilter(prev => ({
             ...prev,
@@ -120,6 +116,8 @@ export default function Products() {
 
 
 
+
+
     return (
         <main className={styles.container}>
             <div className={styles.searchSection}>
@@ -133,89 +131,112 @@ export default function Products() {
             </div>
 
             {/* Sezione Filtri Radio */}
-            <div className={styles.filterSection}>
-                <div className={styles.filterGroup}>
-                    <h3>Tipo di pelle</h3>
-                    <label>
-                        <input type="radio" name="skinType" value="0" checked={filter.skinType === "0"} onChange={handleFilterChange} />
-                        Tutte
-                    </label>
-                    <label>
-                        <input type="radio" name="skinType" value="1" onChange={handleFilterChange} />
-                        Normale
-                    </label>
-                    <label>
-                        <input type="radio" name="skinType" value="2" onChange={handleFilterChange} />
-                        Secca
-                    </label>
-                    <label>
-                        <input type="radio" name="skinType" value="3" onChange={handleFilterChange} />
-                        Grassa
-                    </label>
-                    <label>
-                        <input type="radio" name="skinType" value="4" onChange={handleFilterChange} />
-                        Mista
-                    </label>
-                    <label>
-                        <input type="radio" name="skinType" value="5" onChange={handleFilterChange} />
-                        Sensibile
-                    </label>
-                </div>
-
-                <div className={styles.filterGroup}>
-                    <h3>Categoria</h3>
-                    <label>
-                        <input type="radio" name="category" value="0" checked={filter.category === "0"} onChange={handleFilterChange} />
-                        Tutte
-                    </label>
-                    <label>
-                        <input type="radio" name="category" value="1" onChange={handleFilterChange} />
-                        Detergenti
-                    </label>
-                    <label>
-                        <input type="radio" name="category" value="2" onChange={handleFilterChange} />
-                        Sieri
-                    </label>
-                    <label>
-                        <input type="radio" name="category" value="3" onChange={handleFilterChange} />
-                        Creme Idratanti
-                    </label>
-                    <label>
-                        <input type="radio" name="category" value="4" onChange={handleFilterChange} />
-                        Maschere
-                    </label>
-                    <label>
-                        <input type="radio" name="category" value="5" onChange={handleFilterChange} />
-                        Tonici
-                    </label>
-                </div>
-                <div className={styles.filterGroup_rangeInput}>
-                    <h3>Prezzo</h3>
-                    <div>
-                        <input name="minPrice" className={styles.minPrice} type="number" value={filter.minPrice} onChange={(event) => handleFilterChange(event)} />
-                        <input name="maxPrice" className={styles.minPrice} type="number" value={filter.maxPrice} onChange={(event) => handleFilterChange(event)} />
+            <div className={styles.openFilter} onClick={() => setOpenFilter((cur) => !cur)}>
+                <h2 className={styles.filterTitle}>Filtra</h2>
+                <i
+                    className={`bi ${openFilter ? "bi-chevron-up" : "bi-chevron-down"
+                        } ${styles.filterIcon}`}
+                />
+            </div>
+            {
+                openFilter &&
+                <div className={styles.filterSection}>
+                    <div className={styles.filterGroup}>
+                        <h3>Tipo di pelle</h3>
+                        <label>
+                            <input type="radio" name="skinType" value="0" checked={filter.skinType === "0"} onChange={handleFilterChange} />
+                            Tutte
+                        </label>
+                        <label>
+                            <input type="radio" name="skinType" value="1" onChange={handleFilterChange} />
+                            Normale
+                        </label>
+                        <label>
+                            <input type="radio" name="skinType" value="2" onChange={handleFilterChange} />
+                            Secca
+                        </label>
+                        <label>
+                            <input type="radio" name="skinType" value="3" onChange={handleFilterChange} />
+                            Grassa
+                        </label>
+                        <label>
+                            <input type="radio" name="skinType" value="4" onChange={handleFilterChange} />
+                            Mista
+                        </label>
+                        <label>
+                            <input type="radio" name="skinType" value="5" onChange={handleFilterChange} />
+                            Sensibile
+                        </label>
                     </div>
-                    <div className={styles.rangeInput}>
-                        <input type="range" name="minPrice" id="" min={10} max={filter.maxPrice - 1} value={filter.minPrice} onChange={(event) => handleFilterRange(event)} />
-                        <input type="range" name="maxPrice" id="" min={filter.minPrice + 1} max={999} value={filter.maxPrice} onChange={(event) => handleFilterRange(event)} />
+
+                    <div className={styles.filterGroup}>
+                        <h3>Categoria</h3>
+                        <label>
+                            <input type="radio" name="category" value="0" checked={filter.category === "0"} onChange={handleFilterChange} />
+                            Tutte
+                        </label>
+                        <label>
+                            <input type="radio" name="category" value="1" onChange={handleFilterChange} />
+                            Detergenti
+                        </label>
+                        <label>
+                            <input type="radio" name="category" value="2" onChange={handleFilterChange} />
+                            Sieri
+                        </label>
+                        <label>
+                            <input type="radio" name="category" value="3" onChange={handleFilterChange} />
+                            Creme Idratanti
+                        </label>
+                        <label>
+                            <input type="radio" name="category" value="4" onChange={handleFilterChange} />
+                            Maschere
+                        </label>
+                        <label>
+                            <input type="radio" name="category" value="5" onChange={handleFilterChange} />
+                            Tonici
+                        </label>
+                    </div>
+                    <div className={styles.filterGroup_rangeInput}>
+                        <h3>Prezzo</h3>
+                        <div>
+                            <input name="minPrice" className={styles.minPrice} type="number" value={filter.minPrice} onChange={(event) => handleFilterChange(event)} />
+                            <input name="maxPrice" className={styles.minPrice} type="number" value={filter.maxPrice} onChange={(event) => handleFilterChange(event)} />
+                        </div>
+                        <div className={styles.rangeInput}>
+                            <input type="range" name="minPrice" id="" min={10} max={999} value={filter.minPrice} onChange={(event) => handleFilterRange(event)} />
+                            <input type="range" name="maxPrice" id="" min={10} max={999} value={filter.maxPrice} onChange={(event) => handleFilterRange(event)} />
+                        </div>
+                    </div>
+                    <div className={styles.buttonFilter}>
+                        <button onClick={searchFilter}>CERCA</button>
                     </div>
                 </div>
-                <div className={styles.buttonFilter}>
-                    <button onClick={searchFilter}>CERCA</button>
+
+            }
+
+
+            {products.length === 0 ?
+                <div>
+                    Nessun prodotto trovato con questi filtri
                 </div>
-            </div>
+                :
+                <>
+                    <div className={styles.productGrid}>
 
-            <div className={styles.productGrid}>
+                        {products.map((product, index) => (
+                            <CardProduct key={index}
+                                product={product} />
+                        ))}
+                    </div>
+                    <div className={styles.pagination}>
+                        <button className={styles.navButton} disabled={page <= 1} onClick={() => setPage((cur) => cur - 1)}>Indietro</button>
+                        <button className={styles.navButton} onClick={() => setPage((cur) => cur + 1)}>Avanti</button>
+                    </div>
+                </>
 
-                {products.map((product, index) => (
-                    <CardProduct key={index}
-                        product={product} />
-                ))}
-            </div>
-            <div className={styles.pagination}>
-                <button className={styles.navButton} disabled={page <= 1} onClick={() => setPage((cur) => cur - 1)}>Indietro</button>
-                <button className={styles.navButton} onClick={() => setPage((cur) => cur + 1)}>Avanti</button>
-            </div>
+            }
+
+
         </main>
     )
 }
