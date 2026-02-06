@@ -7,6 +7,7 @@ import WishList from "./pages/WishList"
 import CartPage from "./pages/CartPage"
 import { CartContextProvider } from "./contexts/CartContext"
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import NotFound from "./pages/NotFound"
 
 
 
@@ -24,6 +25,7 @@ function App() {
               <Route path="/search" element={<Search />} />
               <Route path="/wishlist" element={<WishList />} />
               <Route path="/cart" element={<CartPage />} />
+              <Route path="*" element={<NotFound />} />
             </Route>
           </Routes>
         </BrowserRouter>
