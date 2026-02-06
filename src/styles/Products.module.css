@@ -53,7 +53,8 @@
 }
 
 .searchSection {
-    margin-bottom: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
 .searchInput {
@@ -62,6 +63,10 @@
     border: 1px solid #e0e0e0;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.filterGroup{
+    width: 200px;
 }
 
 .filterSection {
@@ -76,7 +81,7 @@
 .filterGroup h3 {
     font-size: 0.9rem;
     text-transform: uppercase;
-    color: #555;
+    color: #c4a468;
     margin-bottom: 1rem;
 }
 
@@ -90,7 +95,7 @@
 
 .filterGroup input[type="radio"] {
     margin-right: 10px;
-    accent-color: #4a90e2; /* Colore blu del mockup */
+    accent-color: #c4a468; /* Colore blu del mockup */
 }
 
 /* Container del gruppo Prezzo */
@@ -104,7 +109,7 @@
     font-size: 0.85rem;
     text-transform: uppercase;
     letter-spacing: 1px;
-    color: #8898aa;
+    color: #c4a468;
     margin-bottom: 1rem;
     font-weight: 700;
 }
@@ -124,7 +129,7 @@
     border-radius: 6px;
     text-align: center;
     font-size: 0.9rem;
-    color: #4a90e2;
+    color: #c4a468;
     font-weight: 600;
 }
 
@@ -152,7 +157,7 @@
     height: 18px;
     width: 18px;
     border-radius: 50%;
-    background: #4a90e2;
+    background: #c4a468;
     border: 2px solid #fff;
     box-shadow: 0 1px 3px rgba(0,0,0,0.3);
     cursor: pointer;
@@ -179,7 +184,7 @@
 }
 
 .buttonFilter button {
-    background-color: #4a90e2;
+    background-color: #c4a468;
     color: white;
     border: none;
     padding: 12px 30px;
@@ -192,11 +197,126 @@
 }
 
 .buttonFilter button:hover {
-    background-color: #357abd;
+    background-color: #6f4a05;
     transform: translateY(-2px);
     box-shadow: 0 6px 15px rgba(74, 144, 226, 0.3);
 }
 
 .buttonFilter button:active {
     transform: translateY(0);
+}
+
+.openFilter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 14px 18px;
+    border-bottom: 1px solid #e6e6e6;
+
+    cursor: pointer;
+    transition: background-color 0.25s ease;
+    margin-bottom: 1rem;
+}
+
+.openFilter:hover {
+    background-color: #fafafa;
+}
+
+.filterTitle {
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #1c1c1c;
+}
+
+.filterIcon {
+    font-size: 1.4rem;
+    color: #1c1c1c;
+    transition: transform 0.3s ease;
+}
+
+.active .filterIcon {
+    transform: rotate(180deg);
+}
+
+
+/* =========================
+   RESPONSIVE – TABLET
+   ========================= */
+@media (max-width: 1024px) {
+    .filterSection {
+        flex-wrap: wrap;
+        gap: 2rem;
+    }
+
+    .filterGroup,
+    .filterGroup_rangeInput {
+        width: 45%;
+        min-width: unset;
+    }
+
+    .buttonFilter {
+        width: 100%;
+        justify-content: flex-end;
+    }
+}
+
+/* =========================
+   RESPONSIVE – MOBILE
+   ========================= */
+@media (max-width: 768px) {
+
+    .filterSection {
+        flex-direction: column;
+        gap: 1.8rem;
+        padding: 1.2rem;
+        border-radius: 10px;
+    }
+
+    .filterGroup,
+    .filterGroup_rangeInput {
+        width: 100%;
+    }
+
+    .filterGroup label {
+        font-size: 1rem;
+        padding: 6px 0;
+    }
+
+    .filterGroup input[type="radio"] {
+        transform: scale(1.2);
+    }
+
+    .filterGroup_rangeInput > div:first-of-type {
+        gap: 12px;
+    }
+
+    .minPrice {
+        width: 100%;
+        font-size: 1rem;
+        padding: 10px;
+    }
+
+    .rangeInput {
+        height: 28px;
+    }
+
+    .rangeInput input[type="range"]::-webkit-slider-thumb {
+        height: 22px;
+        width: 22px;
+    }
+
+    .buttonFilter {
+        width: 100%;
+        padding-bottom: 0;
+    }
+
+    .buttonFilter button {
+        width: 100%;
+        padding: 14px;
+        font-size: 0.95rem;
+        letter-spacing: 1.5px;
+    }
 }
