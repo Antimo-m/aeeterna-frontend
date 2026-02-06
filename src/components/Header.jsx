@@ -56,7 +56,7 @@ export default function Header() {
           {/* Navigation Desktop */}
           <nav className={styles.desktopNav}>
             <NavLink to={"/"} className={styles.navLink}>Home</NavLink>
-            <NavLink to={"/search"} className={styles.navLink}>Prodotti</NavLink>
+            <NavLink to={"/Prodotti"} className={styles.navLink}>Prodotti</NavLink>
           </nav>
 
           {/* Right section Desktop */}

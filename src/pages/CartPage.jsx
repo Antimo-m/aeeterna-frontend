@@ -25,7 +25,7 @@ export default function Home() {
                                             <h2>{product.name}</h2>
                                             <span>
                                                 <h3>Quantità: {product.quantity}</h3>
-                                                <h3>Price: {product.price}</h3>
+                                                <h3>Price: {parseFloat(product.price).toFixed(2)}€</h3>
                                             </span>
                                         </div>
                                         <a onClick={() => removeProduct(index)}>RIMUOVI</a>
