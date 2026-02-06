@@ -7,6 +7,7 @@ import LoadWrapper from "../components/LoadWrapper";
 import { useLoad } from "../contexts/LoadContext";
 
 export default function DefaultLayout() {
+
     const { load } = useLoad();
     return (
         <>

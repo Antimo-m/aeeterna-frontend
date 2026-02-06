@@ -1,9 +1,14 @@
-import { Link,} from "react-router-dom";
+import { Link, } from "react-router-dom";
 import { useCart } from "../contexts/CartContext";
 import style from "../styles/CartPage.module.css"
 import { useLoad } from "../contexts/LoadContext";
 
+
 export default function Home() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    }); 
     const { cartList, removeProduct, calcTotal } = useCart();
     const { load } = useLoad();
     setLoad(false)

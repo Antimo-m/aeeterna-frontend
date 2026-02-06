@@ -12,7 +12,14 @@ import missionImg from "../assets/images/mission.png";
 import ingredientsImg from "../assets/images/ingredienti.png";
 import { useNavigate } from "react-router-dom";
 
+
+
+
 export default function Home() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
     const backEndUrl = import.meta.env.VITE_BACKEND_URL;
     const [products, setProducts] = useState([]);
     const [newProducts, setNewProducts] = useState([]);
@@ -25,7 +32,7 @@ export default function Home() {
     const navigate = useNavigate()
     /* Funzione per il click nel bottone scopri di più */
     const handleButtonClick = () => {
-        navigate('/prodotti'); 
+        navigate('/prodotti');
     };
 
 
@@ -56,7 +63,7 @@ export default function Home() {
                     <p className={styles.subtitle}>
                         Cura la tua pelle oggi per la bellezza del domani.
                     </p>
-                    <button className={styles.button} onClick={handleButtonClick}> 
+                    <button className={styles.button} onClick={handleButtonClick}>
                         SCOPRI DI PIÙ
                     </button>
                 </div>
@@ -74,10 +81,10 @@ export default function Home() {
                                 <img src={product.image} alt={product.name} />
                             </Link>
 
-                            <Link to={`/productdetails/${product.slug}`}  className={MainStyle.productName}>{product.name}</Link>
+                            <Link to={`/productdetails/${product.slug}`} className={MainStyle.productName}>{product.name}</Link>
                             <span className={MainStyle.price}>
                                 {parseFloat(product.price).toFixed(2)}€
-                                </span>
+                            </span>
 
                             <div className={MainStyle.buttonGroup}>
                                 <button onClick={() => addCart(product)} className={`addCartHover ${MainStyle.button}`}>AGGIUNGI AL CARRELLO</button>

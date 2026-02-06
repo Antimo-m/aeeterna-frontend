@@ -6,7 +6,12 @@ import { useCart } from "../contexts/CartContext";
 import { useLoad } from "../contexts/LoadContext";
 import { useWishList } from "../contexts/WishListContext";
 
+
 export default function ProductDetails() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
     const { addCart } = useCart();
     const { slug } = useParams();
     const backEndUrl = import.meta.env.VITE_BACKEND_URL;
