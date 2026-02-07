@@ -53,3 +53,27 @@ a {
     background-color: #725200;
 }
 
+
+.toast {
+    position: fixed;
+    top: 110px;
+    right: 20px;
+    background-color: #fff;
+    color: #333;
+    border: 2px solid #f5b500;
+    padding: 10px 20px;
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    font-size: 13px;
+    font-family: 'Roboto', sans-serif;
+    z-index: 9999;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}

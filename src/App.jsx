@@ -12,8 +12,7 @@ import NotFound from "./pages/NotFound"
 import { LoadContextProvider } from "./contexts/LoadContext"
 import { WishListContextProvider } from "./contexts/WishListContext"
 import {useState} from "react"
-
-
+import {MessageProvider} from "./contexts/MessageContext"
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -25,6 +24,7 @@ function App() {
 
   return (
     <>
+    <MessageProvider>
       <CartContextProvider>
         <WishListContextProvider>
           <LoadContextProvider>
@@ -44,6 +44,7 @@ function App() {
           </LoadContextProvider>
         </WishListContextProvider>
         </CartContextProvider>
+      </MessageProvider>
     </>
   )
 }
