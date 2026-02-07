@@ -8,7 +8,7 @@ import LoadWrapper from "../components/LoadWrapper"
 const backupFilter = {
     skinType: 0,
     category: 0,
-    search: "",
+    search: null,
     minPrice: 0,
     maxPrice: 999,
     limit: 10,
@@ -28,19 +28,21 @@ export default function Products() {
     const [openFilter, setOpenFilter] = useState(false);
     const [totalPage, setTotalPage] = useState(null)
     const [totalProduct, setTotalProduct] = useState(null)
-
-
+    const [filterOrderProduct, setFilterOrderProduct] = useState("a-z");
 
     function loadProducts() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
         setPageLoad(true);
         axios.get(`${backEndUrl}/api/product?category=${filter.category}&skinType=${filter.skinType}&limit=${filter.limit}&offset=${filter.offset}&minPrice=${filter.minPrice}&maxPrice=${filter.maxPrice}&search=${search}`)
             .then(resp => {
                 setProducts(resp.data.products);
                 setTotalPage(resp.data.totalPage)
                 setTotalProduct(resp.data.totalProduct)
-
+                orderProduct(resp.data.products, filterOrderProduct)
                 console.log(resp.data);
-
             })
             .catch(err => {
                 console.error(err);
@@ -50,23 +52,8 @@ export default function Products() {
     }
 
     useEffect(() => {
-        setPageLoad(true)
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-
-        axios.get(`${backEndUrl}/api/product?category=${filter.category}&skinType=${filter.skinType}&limit=${filter.limit}&offset=${filter.offset}&minPrice=${filter.minPrice}&maxPrice=${filter.maxPrice}&search=`).then((resp) => {
-            setProducts(resp.data.products)
-            setTotalPage(resp.data.totalPage)
-            setTotalProduct(resp.data.totalProduct)
-            console.log(resp.data);
-            setPageLoad(false)
-
-        }).catch((err) => {
-            console.error(err);
-        })
-    }, [filter.offset, filter.limit])
+        loadProducts();
+    }, [filter.offset, filter.limit, filterOrderProduct])
 
     useEffect(() => {
         setFilter({
@@ -127,6 +114,47 @@ export default function Products() {
 
             return prev;
         });
+    }
+
+    function orderProduct(array, filter) {
+        if (filter === "a-z") {
+            array.sort((a, b) => {
+                if (a.name < b.name) {
+                    return -1;
+                }
+                if (a.name > b.name) {
+                    return 1;
+                }
+                return 0;
+            });
+            setProducts(array)
+        }
+
+        if (filter === "prezzoMin") {
+            array.sort((a, b) => {
+                if(a.price < b.price){
+                    return -1
+                }
+                if(a.price > b.price){
+                    return 1
+                }
+                return 0
+            })
+            setProducts(array)
+        }
+
+        if (filter === "prezzoMax") {
+            array.sort((a, b) => {
+                if(a.price > b.price){
+                    return -1
+                }
+                if(a.price < b.price){
+                    return 1
+                }
+                return 0
+            })
+            setProducts(array);
+        }
     }
 
     return (
@@ -248,6 +276,15 @@ export default function Products() {
                     <>
                         <div className={styles.totalProduct}>
                             <h2>Prodotti trovati: {totalProduct}</h2>
+                            <div className="sectionOrder">
+                                <label className={styles.labelLimit} htmlFor="ordina">Ordina per: </label>
+                                <select className={styles.selectLimit} name="ordina" id="ordina" value={filterOrderProduct} onChange={(e) => setFilterOrderProduct(event.target.value)}>
+                                    <option value="a-z">Nome A-Z</option>
+                                    <option value="prezzoMin">Prezzo crescente</option>
+                                    <option value="prezzoMax">Prezzo decrescente</option>
+                                </select>
+                            </div>
+
                         </div>
                         <div className={styles.productGrid}>
                             {products.map((product, index) => (
@@ -257,7 +294,7 @@ export default function Products() {
                         </div>
                         <div className={styles.pagination}>
                             <div>
-                                <label className={styles.labelLimit} htmlFor="limit">Prodotti per pagina</label>
+                                <label className={styles.labelLimit} htmlFor="limit">Prodotti per pagina: </label>
                                 <select className={styles.selectLimit} name="limit" id="limit" value={filter.limit} onChange={(event) => { handleFilterChange(event), setPage(1) }}>
                                     <option value="5">5</option>
                                     <option value="10">10</option>
