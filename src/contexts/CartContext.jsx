@@ -40,6 +40,7 @@ function CartContextProvider({ children }) {
             );
         });
         setShowPreview(true);
+      
     }
 
     function removeProduct(indexDelete) {
