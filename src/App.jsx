@@ -6,12 +6,13 @@ import Products from "./pages/Products"
 import WishList from "./pages/WishList"
 import CartPage from "./pages/CartPage"
 import { CartContextProvider } from "./contexts/CartContext"
+import CartPreview from "./components/CartPreview"
 import WelcomePopup from "./components/WelcomePopup"
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import NotFound from "./pages/NotFound"
 import { WishListContextProvider } from "./contexts/WishListContext"
-import {useState} from "react"
-import {MessageProvider} from "./contexts/MessageContext"
+import { useState } from "react"
+import { MessageProvider } from "./contexts/MessageContext"
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -23,14 +24,16 @@ function App() {
 
   return (
     <>
-    <MessageProvider>
-      <CartContextProvider>
-        <WishListContextProvider>
+      <MessageProvider>
+        <CartContextProvider>
+
+          <WishListContextProvider>
             <BrowserRouter>
+              <CartPreview />
               <WelcomePopup />
               <Routes>
-                <Route element={<DefaultLayout searchTerm={searchTerm} onSearch={handleSearch}/>}>
-                  <Route path="/" element={<Home  searchTerm={searchTerm}/>} />
+                <Route element={<DefaultLayout searchTerm={searchTerm} onSearch={handleSearch} />}>
+                  <Route path="/" element={<Home searchTerm={searchTerm} />} />
                   <Route path="/productdetails/:slug" element={<ProductDetails />} />
                   <Route path="/prodotti" element={<Products />} />
                   <Route path="/wishlist" element={<WishList />} />
@@ -39,7 +42,7 @@ function App() {
                 </Route>
               </Routes>
             </BrowserRouter>
-        </WishListContextProvider>
+          </WishListContextProvider>
         </CartContextProvider>
       </MessageProvider>
     </>

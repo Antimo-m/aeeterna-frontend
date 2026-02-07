@@ -93,7 +93,7 @@ export default function Home({ searchTerm }) {
 
                             {filteredProducts.length > 0 && filteredProducts.map((product, index) => (
                                 <CardProduct key={index}
-                                        product={product} />
+                                    product={product} />
                             ))}
                         </div>
                     </section>
