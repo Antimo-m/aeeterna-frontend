@@ -35,7 +35,7 @@ export default function ProductDetails() {
             console.log(resp.data);
 
             axios.get(`${backEndUrl}/api/product?category=0&skinType=${resp.data.id_skin_type}&limit=80&offset=0&minPrice=0&maxPrice=9999`).then((respRelated) => {
-                setrelatedProducts(respRelated.data)
+                setrelatedProducts(respRelated.data.products)
                 console.log(respRelated.data);
                 setPageLoad(true)
 
