@@ -30,7 +30,7 @@ export default function CartPreview() {
                             <div className={styles.cartPreviewInfo}>
                                 <p>{product.name}</p>
                                 <p>Quantità: {product.quantity}</p>
-                                <p>€{product.price}</p>
+                                <p>€{product.price.toFixed(2)}</p>
                             </div>
                         </div>
                     ))
