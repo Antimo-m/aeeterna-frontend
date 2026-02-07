@@ -211,49 +211,8 @@
     transform: translateY(0);
 }
 
-/* RESPONSIVE */
-@media (max-width: 640px) {
+@media (max-width: 768px) {
     .cartPreview {
-        width: calc(100% - 40px);
-        right: 20px;
-        left: 20px;
-        max-width: 400px;
-        margin: 0 auto;
-    }
-
-    .cartPreviewHeader {
-        padding: 16px 20px;
-    }
-
-    .cartPreviewHeader h3 {
-        font-size: 18px;
-    }
-
-    .cartPreviewHeader button {
-        width: 32px;
-        height: 32px;
-        font-size: 18px;
-    }
-
-    .cartPreviewBody {
-        padding: 16px 20px;
-    }
-
-    .cartPreviewItem {
-        padding: 12px;
-    }
-
-    .cartPreviewItem img {
-        width: 60px;
-        height: 60px;
-    }
-
-    .cartPreviewFooter {
-        padding: 16px 20px;
-    }
-
-    .goToCartButton {
-        padding: 14px 24px;
-        font-size: 13px;
+        display: none !important;
     }
 }
