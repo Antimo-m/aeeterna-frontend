@@ -28,6 +28,7 @@ export default function Products() {
     const [errorMessage, setErrorMessage] = useState("");
     const [openFilter, setOpenFilter] = useState(false);
     setLoad(false)
+    const [totalPage, setTotalPage] = useState(null)
 
 
     function loadProducts() {
@@ -49,8 +50,9 @@ export default function Products() {
             top: 0,
             behavior: 'smooth'
         });
-        axios.get(`${backEndUrl}/api/product?category=${filter.category}&skinType=${filter.skinType}&limit=${filter.limit}&offset=${filter.offset}&minPrice=${filter.minPrice}&maxPrice=${filter.maxPrice}&search=${search}`).then((resp) => {
-            setProducts(resp.data)
+        axios.get(`${backEndUrl}/api/product?category=${filter.category}&skinType=${filter.skinType}&limit=${filter.limit}&offset=${filter.offset}&minPrice=${filter.minPrice}&maxPrice=${filter.maxPrice}&search=`).then((resp) => {
+            setProducts(resp.data.products)
+            setTotalPage(resp.data.totalPage)
             console.log(resp.data);
             setPageLoad(false)
 
@@ -68,7 +70,7 @@ export default function Products() {
     useEffect(() => {
         setFilter({
             ...filter,
-            offset: filter.limit * page
+            offset: filter.limit * (page -1)
         })
     }, [page])
 
@@ -253,7 +255,8 @@ export default function Products() {
                     </div>
                     <div className={styles.pagination}>
                         <button className={styles.navButton} disabled={page <= 1} onClick={() => setPage((cur) => cur - 1)}>Indietro</button>
-                        <button className={styles.navButton} onClick={() => setPage((cur) => cur + 1)}>Avanti</button>
+                        <span className={styles.spanButton}>Pagina {page} / {totalPage}</span>
+                        <button disabled={page === totalPage} className={styles.navButton} onClick={() => setPage((cur) => cur + 1)}>Avanti</button>
                     </div>
                 </>
 

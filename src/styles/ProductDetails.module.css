@@ -218,6 +218,10 @@
     cursor: pointer;
 }
 
+.spanButton {
+    padding-top: 20px;
+}
+
 @media (max-width: 900px) {
     .sectionProduct {
         grid-template-columns: 1fr;
