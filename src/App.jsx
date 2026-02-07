@@ -9,7 +9,6 @@ import { CartContextProvider } from "./contexts/CartContext"
 import WelcomePopup from "./components/WelcomePopup"
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import NotFound from "./pages/NotFound"
-import { LoadContextProvider } from "./contexts/LoadContext"
 import { WishListContextProvider } from "./contexts/WishListContext"
 import {useState} from "react"
 import {MessageProvider} from "./contexts/MessageContext"
@@ -27,7 +26,6 @@ function App() {
     <MessageProvider>
       <CartContextProvider>
         <WishListContextProvider>
-          <LoadContextProvider>
             <BrowserRouter>
               <WelcomePopup />
               <Routes>
@@ -41,7 +39,6 @@ function App() {
                 </Route>
               </Routes>
             </BrowserRouter>
-          </LoadContextProvider>
         </WishListContextProvider>
         </CartContextProvider>
       </MessageProvider>

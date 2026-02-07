@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react"
 import styles from "../styles/Products.module.css"
 import { useNavigate } from "react-router-dom"
-import { useLoad } from "../contexts/LoadContext"
 import axios from "axios"
 import CardProduct from "../components/CardProducts"
+import LoadWrapper from "../components/LoadWrapper"
 
 const backupFilter = {
     skinType: 0,
@@ -22,24 +22,29 @@ export default function Products() {
     const [products, setProducts] = useState([]);
     const [filter, setFilter] = useState(backupFilter)
     const [pageLoad, setPageLoad] = useState(false);
-    const { Load, setLoad } = useLoad();
     const [page, setPage] = useState(1);
     const [search, setSearch] = useState("")
     const [errorMessage, setErrorMessage] = useState("");
     const [openFilter, setOpenFilter] = useState(false);
-    setLoad(false)
     const [totalPage, setTotalPage] = useState(null)
+    const [totalProduct, setTotalProduct] = useState(null)
+
 
 
     function loadProducts() {
         setPageLoad(true);
         axios.get(`${backEndUrl}/api/product?category=${filter.category}&skinType=${filter.skinType}&limit=${filter.limit}&offset=${filter.offset}&minPrice=${filter.minPrice}&maxPrice=${filter.maxPrice}&search=${search}`)
             .then(resp => {
-                setProducts(resp.data);
-                setPageLoad(false);
+                setProducts(resp.data.products);
+                setTotalPage(resp.data.totalPage)
+                setTotalProduct(resp.data.totalProduct)
+
+                console.log(resp.data);
+
             })
             .catch(err => {
                 console.error(err);
+            }).finally(() => {
                 setPageLoad(false);
             });
     }
@@ -50,27 +55,23 @@ export default function Products() {
             top: 0,
             behavior: 'smooth'
         });
+
         axios.get(`${backEndUrl}/api/product?category=${filter.category}&skinType=${filter.skinType}&limit=${filter.limit}&offset=${filter.offset}&minPrice=${filter.minPrice}&maxPrice=${filter.maxPrice}&search=`).then((resp) => {
             setProducts(resp.data.products)
             setTotalPage(resp.data.totalPage)
+            setTotalProduct(resp.data.totalProduct)
             console.log(resp.data);
             setPageLoad(false)
 
         }).catch((err) => {
             console.error(err);
         })
-    }, [filter.offset])
-
-    function searchFilter() {
-        setPage(0)
-        // setSearch((cur) => !cur)
-        loadProducts()
-    }
+    }, [filter.offset, filter.limit])
 
     useEffect(() => {
         setFilter({
             ...filter,
-            offset: filter.limit * (page -1)
+            offset: filter.limit * (page - 1)
         })
     }, [page])
 
@@ -133,25 +134,25 @@ export default function Products() {
             <div className={styles.searchSection}>
                 <div className={styles.searchWrapper}>
                     <div className={styles.inputContainer}>
-                <input
-                    type="text"
-                    name="search"
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                        className={styles.searchInput} 
-                />
-                    {!search && <span className={styles.animatedPlaceholder}>Es. Crema Idratante</span>}
+                        <input
+                            type="text"
+                            name="search"
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
+                            className={styles.searchInput}
+                        />
+                        {!search && <span className={styles.animatedPlaceholder}>Es. Crema Idratante</span>}
                     </div>
-            <button
-                onClick={() => {
-                    setPage(0); // torna alla prima pagina quando cerchi
-                    loadProducts(); // richiama la funzione che carica i prodotti
-                    
-                }}
-                className={styles.searchButton}
-            >
-                CERCA
-            </button>
+                    <button
+                        onClick={() => {
+                            setPage(1); // torna alla prima pagina quando cerchi
+                            loadProducts(); // richiama la funzione che carica i prodotti
+
+                        }}
+                        className={styles.searchButton}
+                    >
+                        CERCA
+                    </button>
                 </div>
             </div>
 
@@ -232,37 +233,45 @@ export default function Products() {
                             <input type="range" name="maxPrice" id="" min={10} max={999} value={filter.maxPrice} onChange={(event) => handleFilterRange(event)} />
                         </div>
                     </div>
-                    <div className={styles.buttonFilter}>
-                        <button onClick={searchFilter}>CERCA</button>
-                    </div>
                 </div>
 
             }
 
-
-            {products.length === 0 ?
-                <div>
-                    Nessun prodotto trovato con questi filtri
-                </div>
+            {pageLoad ?
+                <LoadWrapper />
                 :
-                <>
-                    <div className={styles.productGrid}>
-
-                        {products.map((product, index) => (
-                            <CardProduct key={index}
-                                product={product} />
-                        ))}
+                products.length === 0 ?
+                    <div>
+                        Nessun prodotto trovato con questi filtri
                     </div>
-                    <div className={styles.pagination}>
-                        <button className={styles.navButton} disabled={page <= 1} onClick={() => setPage((cur) => cur - 1)}>Indietro</button>
-                        <span className={styles.spanButton}>Pagina {page} / {totalPage}</span>
-                        <button disabled={page === totalPage} className={styles.navButton} onClick={() => setPage((cur) => cur + 1)}>Avanti</button>
-                    </div>
-                </>
-
+                    :
+                    <>
+                        <div className={styles.totalProduct}>
+                            <h2>Prodotti trovati: {totalProduct}</h2>
+                        </div>
+                        <div className={styles.productGrid}>
+                            {products.map((product, index) => (
+                                <CardProduct key={index}
+                                    product={product} />
+                            ))}
+                        </div>
+                        <div className={styles.pagination}>
+                            <div>
+                                <label className={styles.labelLimit} htmlFor="limit">Prodotti per pagina</label>
+                                <select className={styles.selectLimit} name="limit" id="limit" value={filter.limit} onChange={(event) => { handleFilterChange(event), setPage(1) }}>
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="20">20</option>
+                                </select>
+                            </div>
+                            <div>
+                                <button className={styles.navButton} disabled={page <= 1} onClick={() => setPage((cur) => cur - 1)}>Indietro</button>
+                                <span className={styles.spanButton}>Pagina {page} / {totalPage}</span>
+                                <button disabled={page === totalPage} className={styles.navButton} onClick={() => setPage((cur) => cur + 1)}>Avanti</button>
+                            </div>
+                        </div>
+                    </>
             }
-
-
         </main>
     )
 }

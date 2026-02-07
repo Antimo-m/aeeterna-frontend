@@ -1,7 +1,6 @@
 import { useWishList } from "../contexts/WishListContext"
 import { useCart } from "../contexts/CartContext"
 import { Link } from "react-router-dom"
-import { useLoad } from "../contexts/LoadContext"
 import { useEffect } from "react";
 import style from "../styles/WishList.module.css"
 
@@ -15,8 +14,7 @@ export default function WishList() {
     }, [])
     const { wishList, removeWishList } = useWishList();
     const { addCart } = useCart();
-    const { setLoad } = useLoad();
-    setLoad(false)
+    
     return (
         <main className={style.main}>
 
