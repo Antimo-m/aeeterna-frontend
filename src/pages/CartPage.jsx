@@ -11,8 +11,10 @@ export default function Home() {
             behavior: 'smooth'
         });
     }, [])
-    const { cartList, addProduct, updateQuantity, removeProduct, calcTotal} = useCart();
-
+    const { cartList, addProduct, updateQuantity, removeProduct, calcTotal, showPreview, setShowPreview } = useCart();
+    if (setShowPreview) {
+        setShowPreview(false);
+    }
     return (
         <>
             <main className={style.main}>
@@ -31,7 +33,7 @@ export default function Home() {
                                         <Link to={`/productdetails/${product.slug}`} className={style.description}>
                                             <h2>{product.name}</h2>
                                         </Link>
-                                           {/*  <span className={style.quantityPrice}>
+                                        {/*  <span className={style.quantityPrice}>
                                                 <div className={style.quantityContainer}>
                                                 <span>quantita</span>
                                                     <button onClick={() =>  updateQuantity(index, product.quantity - 1)}>-</button>

@@ -29,7 +29,7 @@ a {
     box-shadow: 0 5px 6px rgba(0, 0, 0, 0.2);
 }
 
-.btninWish{
+.btninWish {
     background-color: #c8a85a;
     color: white;
     border: none;
@@ -76,4 +76,10 @@ a {
 .toast.show {
     opacity: 1;
     transform: translateY(0);
+}
+
+@media (min-width: 1000px) {
+    .toast {
+        display: none !important;
+    }
 }
