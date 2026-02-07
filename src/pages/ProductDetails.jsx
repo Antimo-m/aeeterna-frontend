@@ -6,6 +6,7 @@ import { useCart } from "../contexts/CartContext";
 import { useLoad } from "../contexts/LoadContext";
 import { useWishList } from "../contexts/WishListContext";
 import CardProduct from "../components/CardProducts";
+import NotFoundProduct from "../components/NotFoundProduct"
 
 
 export default function ProductDetails() {
@@ -18,7 +19,7 @@ export default function ProductDetails() {
     const { addCart } = useCart();
     const { slug } = useParams();
     const backEndUrl = import.meta.env.VITE_BACKEND_URL;
-    const [product, setProduct] = useState({})
+    const [product, setProduct] = useState(false)
     const [relatedProducts, setrelatedProducts] = useState([])
     const [indexImage, setIndexImage] = useState(0)
     const [pageLoad, setPageLoad] = useState(false);
@@ -48,6 +49,10 @@ export default function ProductDetails() {
             setPageLoad(true)
         })
     }, [])
+
+    if(!product) {
+        return <NotFoundProduct/>
+    }
 
     return (
         <>

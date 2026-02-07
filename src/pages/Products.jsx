@@ -18,15 +18,30 @@ const backupFilter = {
 
 export default function Products() {
     const backEndUrl = import.meta.env.VITE_BACKEND_URL;
+
     const [products, setProducts] = useState([]);
     const [filter, setFilter] = useState(backupFilter)
     const [pageLoad, setPageLoad] = useState(false);
     const { Load, setLoad } = useLoad();
     const [page, setPage] = useState(1);
-    const [search, setSearch] = useState(false)
+    const [search, setSearch] = useState("")
     const [errorMessage, setErrorMessage] = useState("");
     const [openFilter, setOpenFilter] = useState(false);
     setLoad(false)
+
+
+    function loadProducts() {
+        setPageLoad(true);
+        axios.get(`${backEndUrl}/api/product?category=${filter.category}&skinType=${filter.skinType}&limit=${filter.limit}&offset=${filter.offset}&minPrice=${filter.minPrice}&maxPrice=${filter.maxPrice}&search=${search}`)
+            .then(resp => {
+                setProducts(resp.data);
+                setPageLoad(false);
+            })
+            .catch(err => {
+                console.error(err);
+                setPageLoad(false);
+            });
+    }
 
     useEffect(() => {
         setPageLoad(true)
@@ -34,7 +49,7 @@ export default function Products() {
             top: 0,
             behavior: 'smooth'
         });
-        axios.get(`${backEndUrl}/api/product?category=${filter.category}&skinType=${filter.skinType}&limit=${filter.limit}&offset=${filter.offset}&minPrice=${filter.minPrice}&maxPrice=${filter.maxPrice}&search=`).then((resp) => {
+        axios.get(`${backEndUrl}/api/product?category=${filter.category}&skinType=${filter.skinType}&limit=${filter.limit}&offset=${filter.offset}&minPrice=${filter.minPrice}&maxPrice=${filter.maxPrice}&search=${search}`).then((resp) => {
             setProducts(resp.data)
             console.log(resp.data);
             setPageLoad(false)
@@ -42,11 +57,12 @@ export default function Products() {
         }).catch((err) => {
             console.error(err);
         })
-    }, [search, filter.offset])
+    }, [filter.offset])
 
     function searchFilter() {
-        setPage(1)
-        setSearch((cur) => !cur)
+        setPage(0)
+        // setSearch((cur) => !cur)
+        loadProducts()
     }
 
     useEffect(() => {
@@ -113,13 +129,28 @@ export default function Products() {
     return (
         <main className={styles.container}>
             <div className={styles.searchSection}>
+                <div className={styles.searchWrapper}>
+                    <div className={styles.inputContainer}>
                 <input
                     type="text"
-                    placeholder="CERCA PER NOME..."
                     name="search"
-                    onChange={handleFilterChange}
-                    className={styles.searchInput}
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                        className={styles.searchInput} 
                 />
+                    {!search && <span className={styles.animatedPlaceholder}>Es. Crema Idratante</span>}
+                    </div>
+            <button
+                onClick={() => {
+                    setPage(0); // torna alla prima pagina quando cerchi
+                    loadProducts(); // richiama la funzione che carica i prodotti
+                    
+                }}
+                className={styles.searchButton}
+            >
+                CERCA
+            </button>
+                </div>
             </div>
 
             {/* Sezione Filtri Radio */}
