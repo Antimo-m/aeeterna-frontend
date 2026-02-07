@@ -237,7 +237,7 @@
 /* Columns Section */
 .columnsSection {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 40px;
     flex: 0 0 45%;
     min-width: 0;
@@ -251,7 +251,7 @@
 
 .columnTitle {
     font-weight: 700;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     color: #000;
     margin: 0 0 15px 0;
     letter-spacing: 0.5px;
@@ -276,7 +276,7 @@
 }
 
 .columnList a:hover {
-    color: #000;
+    color: #BFA059;
 }
 
 /* Social Section */

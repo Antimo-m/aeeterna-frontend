@@ -97,23 +97,19 @@ export default function Footer() {
                 {/* Columns Section */}
                 <div className={styles.columnsSection}>
                     <div className={styles.column}>
-                        <h3 className={styles.columnTitle}>COLONNA FOOT 1</h3>
+                        <h3 className={styles.columnTitle}>LA NOSTRA AZIENDA</h3>
                         <ul className={styles.columnList}>
-                            <li><a href="#">Elemento lista</a></li>
+                            <li><a href="#">Chi siamo noi</a></li>
+                            <li><a href="#">Lavora per noi</a></li>
                         </ul>
                     </div>
 
                     <div className={styles.column}>
-                        <h3 className={styles.columnTitle}>COLONNA FOOT 2</h3>
+                        <h3 className={styles.columnTitle}>AETERNA SKIN SINONIMO DI BELLEZZA</h3>
                         <ul className={styles.columnList}>
-                            <li><a href="#">Elemento lista</a></li>
-                        </ul>
-                    </div>
-
-                    <div className={styles.column}>
-                        <h3 className={styles.columnTitle}>COLONNA FOOT 3</h3>
-                        <ul className={styles.columnList}>
-                            <li><a href="#">Elemento lista</a></li>
+                            <li><a href="#">Persone che hanno adorato i nostri prodotti</a></li>
+                            <li><a href="#">Contattaci</a></li>
+                            <li><a href="#">Condizioni d'uso</a></li>
                         </ul>
                     </div>
                 </div>
