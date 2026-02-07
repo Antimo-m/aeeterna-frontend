@@ -71,7 +71,7 @@ export default function Home() {
                                     {calcTotal(cartList) < 45 ?
                                         <>
                                             <h3>Totale</h3>
-                                            <h3>{calcTotal(cartList) + 4.99}€</h3>
+                                            <h3>{(calcTotal(cartList) + 4.99).toFixed(2)}€</h3>
                                         </>
 
                                         :
