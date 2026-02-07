@@ -5,9 +5,10 @@ const CartContext = createContext();
 
 function CartContextProvider({ children }) {
     const [cartList, setCartList] = useState([]);
+    const [showPreview, setShowPreview] = useState(false);
 
     function addCart(newProduct) {
-        
+
         if (cartList.find((product) => product.slug === newProduct.slug) === undefined) {
             let newOrder = {
                 ...newProduct,
@@ -15,7 +16,7 @@ function CartContextProvider({ children }) {
             };
             console.log(cartList);
             console.log(newOrder);
-            
+
             console.log([...cartList, newOrder]);
 
             setCartList([...cartList, newOrder]);
@@ -35,6 +36,7 @@ function CartContextProvider({ children }) {
 
             setCartList(copyArray)
         }
+        setShowPreview(true);
     }
 
     function removeProduct(indexDelete) {
@@ -67,6 +69,8 @@ function CartContextProvider({ children }) {
         removeProduct,
         calcTotal,
         resetCarrello,
+        showPreview,
+        setShowPreview,
     }
 
     return (

@@ -6,12 +6,13 @@ import Products from "./pages/Products"
 import WishList from "./pages/WishList"
 import CartPage from "./pages/CartPage"
 import { CartContextProvider } from "./contexts/CartContext"
+import CartPreview from "./components/CartPreview"
 import WelcomePopup from "./components/WelcomePopup"
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import NotFound from "./pages/NotFound"
 import { LoadContextProvider } from "./contexts/LoadContext"
 import { WishListContextProvider } from "./contexts/WishListContext"
-import {useState} from "react"
+import { useState } from "react"
 
 
 
@@ -26,13 +27,14 @@ function App() {
   return (
     <>
       <CartContextProvider>
+        <CartPreview />
         <WishListContextProvider>
           <LoadContextProvider>
             <BrowserRouter>
               <WelcomePopup />
               <Routes>
-                <Route element={<DefaultLayout searchTerm={searchTerm} onSearch={handleSearch}/>}>
-                  <Route path="/" element={<Home  searchTerm={searchTerm}/>} />
+                <Route element={<DefaultLayout searchTerm={searchTerm} onSearch={handleSearch} />}>
+                  <Route path="/" element={<Home searchTerm={searchTerm} />} />
                   <Route path="/productdetails/:slug" element={<ProductDetails />} />
                   <Route path="/prodotti" element={<Products />} />
                   <Route path="/wishlist" element={<WishList />} />
@@ -43,7 +45,7 @@ function App() {
             </BrowserRouter>
           </LoadContextProvider>
         </WishListContextProvider>
-        </CartContextProvider>
+      </CartContextProvider>
     </>
   )
 }

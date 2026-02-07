@@ -1,0 +1,64 @@
+.cartPreview {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 400px;
+    height: 100vh;
+    background-color: white;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+}
+
+.cartPreviewHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.cartPreviewHeader h3 {
+    margin: 0;
+    font-size: 18px;
+}
+
+.cartPreviewHeader button {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+}
+
+.cartPreviewBody {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+.cartPreviewItem {
+    display: flex;
+    gap: 15px;
+    padding: 15px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.cartPreviewItem img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.cartPreviewInfo {
+    flex: 1;
+}
+
+.cartPreviewInfo p {
+    margin: 5px 0;
+    font-size: 14px;
+}
