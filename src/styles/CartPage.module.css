@@ -1,222 +1,315 @@
+/* Container principale */
+.sectionCart {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 20px;
+    font-family: 'Montserrat', sans-serif;
+    color: #333;
+}
 
+/* Colonna Prodotti */
+.sectionProduct {
+    flex: 2;
+}
 
- /* Container principale */
- .sectionCart {
-     display: flex;
-     justify-content: space-between;
-     align-items: flex-start;
-     gap: 40px;
-     max-width: 1100px;
-     margin: 50px auto;
-     padding: 20px;
-     font-family: 'Inter', sans-serif;
-     color: #333;
- }
+/* Singola Card Prodotto */
+.card {
+    display: flex;
+    align-items: flex-start;
+    padding: 24px;
+    margin-bottom: 16px;
+    background: white;
+    border-radius: 16px;
+    gap: 20px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
 
- /* Colonna Prodotti */
- .sectionProduct {
-     flex: 2;
- }
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(200, 168, 90, 0.15);
+}
 
- /* Singola Card Prodotto */
- .card {
-     display: flex;
-     align-items: flex-start;
-     padding: 20px 0;
-     border-bottom: 1px solid #eee;
-     gap: 20px;
- }
+.card img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    background-color: #fdfcfb;
+    border-radius: 12px;
+    border: 2px solid rgba(200, 168, 90, 0.2);
+}
 
- .card img {
-     width: 100px;
-     height: 100px;
-     object-fit: cover;
-     background-color: #f9f9f9;
-     border-radius: 4px;
- }
+/* Contenuto della card */
+.bodyCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    gap: 12px;
+}
 
- /* Contenuto della card */
- .bodyCard {
-     display: flex;
-     flex-direction: column;
-     justify-content: space-between;
-     width: 100%;
-     gap: 10px;
- }
+/* Nome prodotto */
+.description h2 {
+    font-size: 1.1rem;
+    margin: 0;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #111;
+}
 
- /* Nome prodotto */
- .description h2 {
-     font-size: 1.1rem;
-     margin: 0;
-     font-weight: 600;
-     text-transform: uppercase;
- }
+/* Quantità e prezzo */
+.productDetails {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
 
- /* Quantità e prezzo */
- .productDetails {
-     display: flex;
-     flex-direction: column;
-     gap: 8px;
- }
+.quantityContainer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 
- .quantityContainer {
-     display: flex;
-     align-items: center;
-     gap: 8px;
- }
+.quantityContainer span {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #666;
+}
 
- .quantityContainer span {
-     font-size: 0.9rem;
-     font-weight: 500;
- }
+.quantityContainer button {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, #c8a85a 0%, #b89748 100%);
+    border: none;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(200, 168, 90, 0.2);
+}
 
- .quantityContainer button {
-     width: 28px;
-     height: 28px;
-     background-color: #c4a468;
-     border: none;
-     color: white;
-     font-weight: 700;
-     cursor: pointer;
-     border-radius: 4px;
-     transition: background 0.3s;
- }
+.quantityContainer button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(200, 168, 90, 0.3);
+}
 
- .quantityContainer button:hover {
-     background-color: #4a687a;
- }
+.quantityContainer button:active {
+    transform: translateY(0);
+}
 
- .quantityContainer input {
-     width: 50px;
-     text-align: center;
-     padding: 4px 6px;
-     border: 1px solid #ccc;
-     border-radius: 4px;
- }
+.quantityContainer input {
+    width: 50px;
+    text-align: center;
+    padding: 6px 8px;
+    border: 1px solid rgba(200, 168, 90, 0.3);
+    border-radius: 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    color: #333;
+}
 
- /* Prezzo prodotto */
- .price {
-     font-weight: 600;
-     font-size: 0.95rem;
-     color: #353535;
- }
+/* Prezzo prodotto */
+.price {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #c8a85a;
+}
 
- /* Bottone rimuovi */
- .removeButton {
-     background-color: transparent;
-     border: none;
-     color: #c44;
-     cursor: pointer;
-     font-size: 0.85rem;
-     text-decoration: underline;
-     padding: 0;
-     align-self: flex-start;
- }
+/* Bottone rimuovi */
+.removeButton {
+    background-color: transparent;
+    border: none;
+    color: #d44;
+    cursor: pointer;
+    font-size: 0.85rem;
+    text-decoration: underline;
+    padding: 0;
+    align-self: flex-start;
+    font-family: 'Montserrat', sans-serif;
+    transition: color 0.3s ease;
+}
 
- .removeButton:hover {
-     color: #900;
- }
+.removeButton:hover {
+    color: #a00;
+}
 
- /* Colonna Riepilogo (Sidebar) */
- .sectionSummary {
-     flex: 1;
-     background-color: #ffffff;
-     padding: 30px;
-     border: 1px solid #f0f0f0;
-     position: sticky;
-     top: 20px;
- }
+/* Colonna Riepilogo (Sidebar) */
+.sectionSummary {
+    flex: 1;
+    background: linear-gradient(135deg, #ffffff 0%, #fdfcfb 100%);
+    padding: 32px;
+    border-radius: 24px;
+    border: 1px solid rgba(200, 168, 90, 0.15);
+    position: sticky;
+    top: 20px;
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.1),
+        0 0 0 1px rgba(200, 168, 90, 0.1);
+    overflow: hidden;
+}
 
- .sectionSummary h2 {
-     font-size: 1.2rem;
-     margin-bottom: 25px;
-     letter-spacing: 1px;
-     border-bottom: 2px solid #333;
-     padding-bottom: 10px;
- }
+/* Elemento decorativo */
+.sectionSummary::before {
+    content: '';
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, rgba(200, 168, 90, 0.12) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+}
 
- .tableSummary .card {
-     display: flex;
-     justify-content: space-between;
-     border-bottom: 1px solid #f0f0f0;
-     padding: 15px 0;
- }
+.sectionSummary h2 {
+    font-size: 1.3rem;
+    margin-bottom: 24px;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    border-bottom: 2px solid rgba(200, 168, 90, 0.2);
+    padding-bottom: 12px;
+    background: linear-gradient(135deg, #c8a85a 0%, #b89748 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+    z-index: 1;
+}
 
- .tableSummary .card h3 {
-     font-size: 0.95rem;
-     font-weight: 400;
- }
+.tableSummary .card {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 0;
+    background: transparent;
+    box-shadow: none;
+    margin: 0;
+    border-radius: 0;
+}
 
- .tableSummary .card h3:nth-child(2) {
-     color: #353535;
-     margin-right: 10px;
-     font-size: 0.85rem;
- }
+.tableSummary .card:hover {
+    transform: none;
+    box-shadow: none;
+}
 
- .tableSummary .card:last-of-type h3 {
-     font-weight: 700;
-     font-size: 1.1rem;
- }
+.tableSummary .card h3 {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #555;
+    position: relative;
+    z-index: 1;
+}
 
- /* Bottone checkout */
- .checkOut {
-     width: 100%;
-     margin-top: 30px;
-     padding: 15px;
-     background-color: #c4a468;
-     color: white;
-     border: none;
-     font-weight: 600;
-     letter-spacing: 1.5px;
-     cursor: pointer;
-     transition: background 0.3s;
-     border-radius: 4px;
- }
+.tableSummary .card h3:nth-child(2) {
+    color: #333;
+    margin-right: 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+}
 
- .checkOut:hover {
-     background-color: #4a687a;
- }
+.tableSummary .card:last-of-type {
+    border-bottom: none;
+    padding-top: 20px;
+    margin-top: 8px;
+    border-top: 2px solid rgba(200, 168, 90, 0.2);
+}
 
- /* Prezzo vecchio */
- .oldPrice {
-     text-decoration: line-through;
-     color: #999;
-     margin-right: 8px;
- }
+.tableSummary .card:last-of-type h3 {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #111;
+}
 
- .shippingContainer {
-     display: flex;
-     align-items: center;
-     gap: 5px;
- }
+.tableSummary .card:last-of-type h3:nth-child(2) {
+    color: #c8a85a;
+    font-size: 1.2rem;
+}
 
- /* Responsive */
- @media (max-width: 768px) {
-     .sectionCart {
-         flex-direction: column;
-     }
+/* Bottone checkout */
+.checkOut {
+    width: 100%;
+    margin-top: 24px;
+    padding: 16px 32px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #fff;
+    background-color: #C4A962;
+    border: 2px solid #C4A962;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    z-index: 1;
+}
 
-     .sectionSummary {
-         width: 100%;
-         margin-top: 30px;
-     }
- }
+.checkOut:hover {
+    background-color: #000;
+    border-color: #000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
 
- /* Empty cart */
- .emptyCart {
-     display: flex;
-     flex-direction: column;
-     justify-content: center;
-     align-items: center;
-     gap: 20px;
- }
+.checkOut:active {
+    transform: translateY(0);
+}
 
- .emptyCart .checkOut {
-     width: auto;
-     text-decoration: none;
- }
+/* Prezzo vecchio */
+.oldPrice {
+    text-decoration: line-through;
+    color: #999;
+    margin-right: 8px;
+    font-size: 0.9rem;
+}
 
- .main {
-     padding: 30px 20px;
-     margin-top: 100px;
- }
+.shippingContainer {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .sectionCart {
+        flex-direction: column;
+    }
+
+    .sectionSummary {
+        width: 100%;
+        margin-top: 30px;
+        position: relative;
+        top: 0;
+    }
+}
+
+/* Empty cart */
+.emptyCart {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;
+    padding: 60px 20px;
+    background: linear-gradient(135deg, #ffffff 0%, #fdfcfb 100%);
+    border-radius: 24px;
+    border: 1px solid rgba(200, 168, 90, 0.15);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.emptyCart .checkOut {
+    width: auto;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.main {
+    padding: 30px 20px;
+    margin-top: 100px;
+}

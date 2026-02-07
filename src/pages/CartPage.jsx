@@ -72,7 +72,7 @@ export default function Home() {
                                                 <button onClick={() => updateQuantity(index, product.quantity + 1)}>+</button>
                                             </div>
 
-                                            <h3 className={style.price}>Price: {(product.price * product.quantity).toFixed(2)}€</h3>
+                                            <h3 className={style.price}>Prezzo: {(product.price * product.quantity).toFixed(2)}€</h3>
                                             <button className={style.removeButton} onClick={() => removeProduct(index)}>RIMUOVI</button>
                                         </div>
                                     </div>
