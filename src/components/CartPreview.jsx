@@ -1,12 +1,20 @@
 import { useCart } from "../contexts/CartContext";
 import styles from "../styles/CartPreview.module.css"
+import { useNavigate } from "react-router-dom";
+
 export default function CartPreview() {
     const { cartList, showPreview, setShowPreview } = useCart();
+    const navigate = useNavigate();
+
+    function handleGoToCart() {
+        setShowPreview(false);
+        navigate("/cart")
+    };
 
     if (!showPreview) return null;
 
     return (
-        <div className={styles.cartPreview}>
+        <div className={`${styles.cartPreview} ${showPreview ? styles.show : ''}`}>
             <div className={styles.cartPreviewHeader}>
                 <h3>Carrello ({cartList.length})</h3>
                 <button onClick={() => setShowPreview(false)}>✕</button>
@@ -28,6 +36,15 @@ export default function CartPreview() {
                     ))
                 )}
             </div>
+            <div className={styles.cartPreviewFooter}>
+                <button
+                    className={styles.goToCartButton}
+                    onClick={handleGoToCart}
+                >
+                    Vai al Carrello
+                </button>
+            </div>
         </div>
+
     );
 }

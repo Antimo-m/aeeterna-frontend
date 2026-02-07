@@ -27,10 +27,11 @@ function App() {
   return (
     <>
       <CartContextProvider>
-        <CartPreview />
+
         <WishListContextProvider>
           <LoadContextProvider>
             <BrowserRouter>
+              <CartPreview />
               <WelcomePopup />
               <Routes>
                 <Route element={<DefaultLayout searchTerm={searchTerm} onSearch={handleSearch} />}>

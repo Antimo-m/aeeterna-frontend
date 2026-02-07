@@ -16,7 +16,7 @@ import CardProduct from "../components/CardProducts";
 
 
 
-export default function Home({searchTerm}) {
+export default function Home({ searchTerm }) {
     useEffect(() => {
         window.scrollTo({
             top: 0,
@@ -43,10 +43,10 @@ export default function Home({searchTerm}) {
 
 
 
-   const filteredProducts = products.filter((product) =>
-  product && product.name && typeof product.name === 'string' && product.name.toLowerCase().includes(searchTerm.toLowerCase())
-);
- 
+    const filteredProducts = products.filter((product) =>
+        product && product.name && typeof product.name === 'string' && product.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
 
 
     useEffect(() => {
@@ -86,8 +86,8 @@ export default function Home({searchTerm}) {
                 <h2 className={MainStyle.sectionTitle}>Popolare e di Tendenza</h2>
                 <div className={MainStyle.productGrid}>
 
-                    {filteredProducts.length > 0 && filteredProducts.map((product) => (
-                        <div className={MainStyle.productCard}>
+                    {filteredProducts.length > 0 && filteredProducts.map((product, index) => (
+                        <div key={index} className={MainStyle.productCard}>
                             <Link to={`/productdetails/${product.slug}`} className={MainStyle.imageContainer}>
                                 <img src={product.image} alt={product.name} />
                             </Link>
@@ -136,7 +136,7 @@ export default function Home({searchTerm}) {
                     {newProducts.length > 0 &&
                         newProducts.map((product, index) => (
                             <CardProduct key={index}
-                        product={product} />
+                                product={product} />
                         ))}
                 </div>
             </section >
