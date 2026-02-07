@@ -17,15 +17,6 @@ import CardProduct from "../components/CardProducts";
 
 
 export default function Home({ searchTerm }) {
-    useEffect(() => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    }, [])
-
-
-    console.log(searchTerm)
     const backEndUrl = import.meta.env.VITE_BACKEND_URL;
     const [products, setProducts] = useState([]);
     const [newProducts, setNewProducts] = useState([]);
@@ -50,6 +41,10 @@ export default function Home({ searchTerm }) {
 
 
     useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
         setPageLoad(true)
         Promise.all([
             axios.get(`${backEndUrl}/api/product/bestseller`),
