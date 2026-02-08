@@ -13,6 +13,7 @@ import NotFound from "./pages/NotFound"
 import { WishListContextProvider } from "./contexts/WishListContext"
 import { useState } from "react"
 import { MessageProvider } from "./contexts/MessageContext"
+import Checkout from "./pages/Checkout"
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -32,6 +33,7 @@ function App() {
               <CartPreview />
               <WelcomePopup />
               <Routes>
+                <Route path="/checkout" element={<Checkout />} />
                 <Route element={<DefaultLayout searchTerm={searchTerm} onSearch={handleSearch} />}>
                   <Route path="/" element={<Home searchTerm={searchTerm} />} />
                   <Route path="/productdetails/:slug" element={<ProductDetails />} />
