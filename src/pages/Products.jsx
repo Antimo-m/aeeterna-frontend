@@ -13,6 +13,7 @@ const backupFilter = {
     maxPrice: 999,
     limit: 10,
     offset: 0,
+    order: "a-z"
 }
 
 
@@ -28,7 +29,6 @@ export default function Products() {
     const [openFilter, setOpenFilter] = useState(false);
     const [totalPage, setTotalPage] = useState(null)
     const [totalProduct, setTotalProduct] = useState(null)
-    const [filterOrderProduct, setFilterOrderProduct] = useState("a-z");
 
     function loadProducts() {
         window.scrollTo({
@@ -36,12 +36,11 @@ export default function Products() {
             behavior: 'smooth'
         });
         setPageLoad(true);
-        axios.get(`${backEndUrl}/api/product?category=${filter.category}&skinType=${filter.skinType}&limit=${filter.limit}&offset=${filter.offset}&minPrice=${filter.minPrice}&maxPrice=${filter.maxPrice}&search=${search}`)
+        axios.get(`${backEndUrl}/api/product?category=${filter.category}&skinType=${filter.skinType}&limit=${filter.limit}&offset=${filter.offset}&minPrice=${filter.minPrice}&maxPrice=${filter.maxPrice}&search=${search}&order=${filter.order}`)
             .then(resp => {
                 setProducts(resp.data.products);
                 setTotalPage(resp.data.totalPage)
                 setTotalProduct(resp.data.totalProduct)
-                orderProduct(resp.data.products, filterOrderProduct)
                 console.log(resp.data);
             })
             .catch(err => {
@@ -53,7 +52,7 @@ export default function Products() {
 
     useEffect(() => {
         loadProducts();
-    }, [filter.offset, filter.limit, filterOrderProduct])
+    }, [filter.offset, filter.limit, filter.order])
 
     useEffect(() => {
         setFilter({
@@ -64,6 +63,11 @@ export default function Products() {
 
     function handleFilterChange(event) {
         const { name, value } = event.target;
+
+        if(name === "order" && (value !== "a-z" || value !== "prezzoMin" || value !== "prezzoMax")){
+            setErrorMessage("Inserisci un tipo di ordinamento esistente")
+
+        }
 
         name != "search" && parseInt(value)
 
@@ -114,47 +118,6 @@ export default function Products() {
 
             return prev;
         });
-    }
-
-    function orderProduct(array, filter) {
-        if (filter === "a-z") {
-            array.sort((a, b) => {
-                if (a.name < b.name) {
-                    return -1;
-                }
-                if (a.name > b.name) {
-                    return 1;
-                }
-                return 0;
-            });
-            setProducts(array)
-        }
-
-        if (filter === "prezzoMin") {
-            array.sort((a, b) => {
-                if(a.price < b.price){
-                    return -1
-                }
-                if(a.price > b.price){
-                    return 1
-                }
-                return 0
-            })
-            setProducts(array)
-        }
-
-        if (filter === "prezzoMax") {
-            array.sort((a, b) => {
-                if(a.price > b.price){
-                    return -1
-                }
-                if(a.price < b.price){
-                    return 1
-                }
-                return 0
-            })
-            setProducts(array);
-        }
     }
 
     return (
@@ -278,7 +241,7 @@ export default function Products() {
                             <h2>Prodotti trovati: {totalProduct}</h2>
                             <div className="sectionOrder">
                                 <label className={styles.labelLimit} htmlFor="ordina">Ordina per: </label>
-                                <select className={styles.selectLimit} name="ordina" id="ordina" value={filterOrderProduct} onChange={(e) => setFilterOrderProduct(event.target.value)}>
+                                <select className={styles.selectLimit} name="order" id="ordina" value={filter.order} onChange={(e) => handleFilterChange(event) }>
                                     <option value="a-z">Nome A-Z</option>
                                     <option value="prezzoMin">Prezzo crescente</option>
                                     <option value="prezzoMax">Prezzo decrescente</option>
