@@ -12,12 +12,18 @@ export default function Home() {
             behavior: 'smooth'
         });
     }, [])
-    const { cartList, addProduct, updateQuantity, removeProduct, calcTotal} = useCart();
+
+    const { cartList, addProduct, updateQuantity, removeProduct, calcTotal, resetCarrello} = useCart(); {/* estratta funzione resetCarrello (nel context) all'interno dell'hook useCart*/}
 
 
     const { setLoad } = useLoad();
     setLoad(false)
 
+     
+    {/* proposta di modicare resetCarrello con resetCart, logica per gestire svuotamento della lista prodotti*/}
+    const handleEmptyCart = () => {  
+    resetCarrello();
+    };
     return (
         <>
             <main className={style.main}>
@@ -29,6 +35,12 @@ export default function Home() {
                     :
                     <section className={style.sectionCart}>
                         <div className={style.sectionProduct}>
+                            {/* Button che elimina con un solo click tutti i prodotti nel carrello */}
+                        <div className={style.sectionDeleteAllProducts}>
+                          <button onClick={handleEmptyCart} className={style.btnDeleteAll}>
+                            <span>Elimina tutti i prodotti <i className="bi bi-trash3"></i></span>
+                          </button>
+                        </div>
                             {cartList.map((product, index) => (
                                 <div key={product.slug} className={style.card}>
                                     <img src={product.image} alt="" />
@@ -76,11 +88,12 @@ export default function Home() {
                                             </div>
 
                                             <h3 className={style.price}>Price: {(product.price * product.quantity).toFixed(2)}€</h3>
-                                            <button className={style.removeButton} onClick={() => removeProduct(index)}>RIMUOVI</button>
+                                            <button className={style.removeButton} onClick={() => removeProduct(index)}>Rimuovi</button>
                                         </div>
                                     </div>
                                 </div>
                             ))}
+                            
                         </div>
                         <div className={style.sectionSummary}>
                             <h2>TOTALE ORDINE</h2>

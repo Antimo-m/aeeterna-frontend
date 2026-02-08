@@ -78,7 +78,7 @@ function CartContextProvider({ children }) {
         }
     };
 
-    function resetCarrello() {
+    function resetCarrello() { {/* proposta di modicare resetCarrello con resetCart*/}
         setCartList([]);
     }
 
@@ -106,9 +106,10 @@ function CartContextProvider({ children }) {
         addCart,
         removeProduct,
         calcTotal,
-        resetCarrello,
+        resetCarrello, 
         updateQuantity
     }
+       {/* proposta di modicare resetCarrello con resetCart*/}
 
     return (
         <CartContext.Provider value={cartValue}>

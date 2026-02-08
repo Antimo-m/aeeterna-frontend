@@ -13,6 +13,23 @@
      color: #333;
  }
 
+ /* Button che cancella tutti i prodotti */
+ .sectionDeleteAllProducts {
+    display: flex;
+    justify-content: flex-end; 
+    align-items: center;
+    margin-bottom: 20px;
+    width: 100%;
+}
+.btnDeleteAll {
+    background-color: white;
+    border: none;
+    color: #cc4444; 
+    cursor: pointer;
+    transition: transform 0.2s, color 0.2s;
+    padding: 0;
+}
+
  /* Colonna Prodotti */
  .sectionProduct {
      flex: 2;
@@ -108,7 +125,7 @@
      color: #c44;
      cursor: pointer;
      font-size: 0.85rem;
-     text-decoration: underline;
+     text-decoration:underline;
      padding: 0;
      align-self: flex-start;
  }
