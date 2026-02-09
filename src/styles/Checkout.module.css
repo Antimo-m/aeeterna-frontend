@@ -422,10 +422,9 @@
     text-transform: uppercase;
 }
 
-/* BASE */
 .errorMessage,
 .correctMessage {
-  width: 100%;
+  width: 80%;
   padding: 1rem 1.2rem;
   border-radius: 16px;
   font-size: 0.9rem;
@@ -436,24 +435,25 @@
   justify-content: space-between;
   gap: 0.6rem;
   animation: fadeIn 0.3s ease;
-  left: 0;
+  position: absolute;
+  left: 50%;
+  top: -40px;
+  z-index: 9999;
+  transform: translate(-50%, 0);
 }
 
-/* ERROR */
 .errorMessage {
   background-color: #fbeded;
   border: 1px solid rgba(200, 107, 107, 0.4);
   color: #8a3b3b;
 }
 
-/* SUCCESS */
 .correctMessage {
   background-color: #eef6f1;
   border: 1px solid rgba(111, 166, 139, 0.4);
   color: #2f6b52;
 }
 
-/* ANIMAZIONE */
 @keyframes fadeIn {
   from {
     opacity: 0;
