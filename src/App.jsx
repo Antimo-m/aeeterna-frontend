@@ -12,6 +12,8 @@ import NotFound from "./pages/NotFound"
 import { LoadContextProvider } from "./contexts/LoadContext"
 import { WishListContextProvider } from "./contexts/WishListContext"
 import {useState} from "react"
+import ScrollToTop from "./components/ScrollToTop"
+import Community from "./pages/Community"
 
 
 
@@ -30,6 +32,7 @@ function App() {
           <LoadContextProvider>
             <BrowserRouter>
               <WelcomePopup />
+              <ScrollToTop />
               <Routes>
                 <Route element={<DefaultLayout searchTerm={searchTerm} onSearch={handleSearch}/>}>
                   <Route path="/" element={<Home  searchTerm={searchTerm}/>} />
@@ -37,6 +40,7 @@ function App() {
                   <Route path="/prodotti" element={<Products />} />
                   <Route path="/wishlist" element={<WishList />} />
                   <Route path="/cart" element={<CartPage />} />
+                  <Route path="/community" element={<Community/> }/>
                   <Route path="*" element={<NotFound />} />
                 </Route>
               </Routes>

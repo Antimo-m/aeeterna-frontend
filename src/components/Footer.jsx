@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import styles from "../styles/Footer.module.css"
+import { Link } from "react-router-dom";
 
 
 export default function Footer() {
@@ -107,7 +108,7 @@ export default function Footer() {
                     <div className={styles.column}>
                         <h3 className={styles.columnTitle}>AETERNA SKIN SINONIMO DI BELLEZZA</h3>
                         <ul className={styles.columnList}>
-                            <li><a href="#">Persone che hanno adorato i nostri prodotti</a></li>
+                            <li><Link to="/community" >Persone che hanno adorato i nostri prodotti</Link></li>
                             <li><a href="#">Contattaci</a></li>
                             <li><a href="#">Condizioni d'uso</a></li>
                         </ul>
