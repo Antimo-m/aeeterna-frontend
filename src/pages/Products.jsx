@@ -50,7 +50,6 @@ export default function Products() {
     }, [filter])
 
     function loadProducts() {
-        console.log("load", filter);
         window.scrollTo({
             top: 0,
             behavior: 'smooth'
@@ -61,7 +60,6 @@ export default function Products() {
                 setProducts(resp.data.products);
                 setTotalPage(resp.data.totalPage)
                 setTotalProduct(resp.data.totalProduct)
-                console.log(resp.data);
             })
             .catch(err => {
                 console.error(err);
@@ -71,7 +69,6 @@ export default function Products() {
     }
 
     useEffect(() => {
-        console.log(filter.limit, page);
         
         setFilter({
             ...filter,

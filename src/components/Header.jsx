@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate, useNavigation } from "react-router-dom";
 import styles from "../styles/Header.module.css";
 import {useState, useEffect } from 'react';
 import { useCart } from "../contexts/CartContext"
@@ -7,8 +7,10 @@ import {useWishList} from "../contexts/WishListContext"
 
 export default function Header({ searchTerm,  onSearch }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigation = useNavigate();
   const { cartList } = useCart();
   const {wishList} = useWishList();
+  const [search, setSearch] =  useState("");
   let totalProductCart = 0;
   cartList.forEach((product) => {
     totalProductCart += 1 * product.quantity;
@@ -23,11 +25,6 @@ export default function Header({ searchTerm,  onSearch }) {
   const closeMenu = () => {
     setIsMenuOpen(false);
   };
-
-  const handleSearchChange = (e) => {
-    console.log(e.target.value)
-    onSearch(e.target.value);
-  }
 
   useEffect(() => {
     if (isMenuOpen) {
@@ -71,13 +68,13 @@ export default function Header({ searchTerm,  onSearch }) {
           <div className={styles.desktopActions}>
             {/* Search */}
             <div className={styles.searchBox}>
-              <i className={`bi bi-search ${styles.searchIcon}`}></i>
+              <i onClick={() => {navigation(`/prodotti?category=0&skinType=0&limit=10&offset=0&minPrice=0&maxPrice=9999&search=${search}&order=a-z`); setSearch("")}} className={`bi bi-search ${styles.searchIcon}`}></i>
               <input
                 type="text"
                 placeholder="Cerca..."
                 className={styles.searchInput}
-                value={searchTerm}
-                onChange={handleSearchChange}
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
               />
               
             </div>
@@ -129,13 +126,13 @@ export default function Header({ searchTerm,  onSearch }) {
         <div className={styles.mobileMenuContent}>
           {/* Search in mobile menu */}
           <div className={styles.mobileSearchBox}>
-            <i className={`bi bi-search ${styles.searchIcon}`}></i>
+            <i onClick={() => {navigation(`/prodotti?category=0&skinType=0&limit=10&offset=0&minPrice=0&maxPrice=9999&search=${search}&order=a-z`); setSearch("")}} className={`bi bi-search ${styles.searchIcon}`}></i>
             <input
               type="text"
               placeholder="Cerca..."
               className={styles.searchInput}
-              value={searchTerm}
-              onChange={handleSearchChange}
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
             />
           </div>
 
