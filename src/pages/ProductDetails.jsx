@@ -75,7 +75,7 @@ export default function ProductDetails() {
                                 <div className={style.sectionPrice}>
                                     <h3>{parseFloat(product.price).toFixed(2)}€</h3>
                                     <div>
-                                        <button className="addCartHover" onClick={() => addCart(product)}>Aggiungi al carrelo</button>
+                                        <button className="addCartHover" onClick={() => addCart(product)}>Aggiungi al Carrello</button>
                                         <button className={inWishList(product) ? "btninWish" : "btnWish"} onClick={() => { inWishList(product) ? removeWishList(product) : addWishList(product) }}>
                                             <i className="bi bi-heart"></i>
                                         </button>
