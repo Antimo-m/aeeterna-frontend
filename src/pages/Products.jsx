@@ -50,9 +50,23 @@ export default function Products() {
             });
     }
 
+    // useEffect(() => {
+    //     loadProducts();
+    // }, [filter.offset, filter.limit, filter.order])
+
     useEffect(() => {
         loadProducts();
-    }, [filter.offset, filter.limit, filter.order])
+    }, [ filter.category,filter.skinType,filter.limit,filter.offset,filter.order])
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setPage(1);
+            loadProducts();
+        }, 500); 
+
+        return () => clearTimeout(timer);
+    }, [filter.minPrice,filter.maxPrice, search]);
+
 
     useEffect(() => {
         setFilter({
@@ -64,6 +78,8 @@ export default function Products() {
     function handleFilterChange(event) {
         const { name, value } = event.target;
 
+
+        setPage(1)
         if(name === "order" && (value !== "a-z" || value !== "prezzoMin" || value !== "prezzoMax")){
             setErrorMessage("Inserisci un tipo di ordinamento esistente")
 
@@ -100,7 +116,9 @@ export default function Products() {
         if (name === "maxPrice" && (value < 1 || value > 999)) {
             setErrorMessage("Inserisci un prezzo massimo valido")
         }
+ 
 
+        setPage(1)
         setFilter(prev => {
             if (name === "minPrice") {
                 return {
@@ -134,7 +152,7 @@ export default function Products() {
                         />
                         {!search && <span className={styles.animatedPlaceholder}>Es. Crema Idratante</span>}
                     </div>
-                    <button
+                   {/*  <button
                         onClick={() => {
                             setPage(1); // torna alla prima pagina quando cerchi
                             loadProducts(); // richiama la funzione che carica i prodotti
@@ -143,7 +161,7 @@ export default function Products() {
                         className={styles.searchButton}
                     >
                         CERCA
-                    </button>
+                    </button> */}
                 </div>
             </div>
 
@@ -241,7 +259,7 @@ export default function Products() {
                             <h2>Prodotti trovati: {totalProduct}</h2>
                             <div className="sectionOrder">
                                 <label className={styles.labelLimit} htmlFor="ordina">Ordina per: </label>
-                                <select className={styles.selectLimit} name="order" id="ordina" value={filter.order} onChange={(e) => handleFilterChange(event) }>
+                                <select className={styles.selectLimit} name="order" id="ordina" value={filter.order} onChange={(event) => handleFilterChange(event) }>
                                     <option value="a-z">Nome A-Z</option>
                                     <option value="prezzoMin">Prezzo crescente</option>
                                     <option value="prezzoMax">Prezzo decrescente</option>
