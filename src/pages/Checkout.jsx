@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useCart } from "../contexts/CartContext";
 import style from "../styles/Checkout.module.css"
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 
 
@@ -32,6 +33,7 @@ export default function Checkout() {
     const { cartList, calcTotal } = useCart();
     const [dataForm, setDataForm] = useState(backupForm);
     const [checkeboxData, setCheckboxData] = useState(false)
+    const backEndUrl = import.meta.env.VITE_BACKEND_URL;
 
     const navigate = useNavigate()
 
@@ -184,21 +186,56 @@ export default function Checkout() {
             }
         })
 
-        setDataForm({
-            ...dataForm,
+        // setDataForm({
+        //     ...dataForm,
+        //     products: productsForm
+        // })
+
+        // console.log({
+        //     ...dataForm,
+        //     products: productsForm,
+        //     total_price: totalPrice
+        // });
+
+        // setErrorMessage({
+        //     type: "correct",
+        //     message: "Ordine inviato con successo"
+        // })
+
+        const orderData = {
+            name,
+            surname,
+            email,
+            phone,
+            city,
+            country,
+            street,
+            postal_code,
+            province,
+            billing_street: checkeboxData ? street : billing_street,
+            billing_city: checkeboxData ? city : billing_city,
+            billing_country: checkeboxData ? country : billing_country,
+            total_price: totalPrice,
+            shipping_price: shipping_price,
             products: productsForm
-        })
+        }
 
-        console.log({
-            ...dataForm,
-            products: productsForm,
-            total_price: totalPrice
-        });
 
-        setErrorMessage({
-            type: "correct",
-            message: "Ordine inviato con successo"
-        })
+        try {
+            const response = axios.post(`${backEndUrl}/api/neworder`, orderData);
+
+            console.log("✅ Ordine creato:", response.data);
+            setErrorMessage({
+                type: "correct",
+                message: "Ordine inviato con successo!"
+            });
+        } catch (error) {
+            console.error("❌ Errore:", error.response?.data || error.message);
+            setErrorMessage({
+                type: "error",
+                message: error.response?.data?.error || "Errore durante l'invio"
+            });
+        }
     }
 
     return (
@@ -215,27 +252,36 @@ export default function Checkout() {
                 }
 
                 <div className={style.sectionForm}>
-                    <form action="" className={style.shippingForm} onSubmit={(e) => submitForm(e)}>
-                        <div className={style.name_surname}>
-                            <h3 className={style.sectionTitle}>Dati di contatto </h3>
-                            <label htmlFor="">Nome*</label>
-                            <input placeholder="Mario..." type="text" name="name" value={dataForm.name} onChange={(e) => handleForm(e)} />
-                            <label htmlFor="">Cognome*</label>
-                            <input placeholder="Rossi..." type="text" name="surname" value={dataForm.surname} onChange={(e) => handleForm(e)} />
+                    <form className={style.shippingForm} onSubmit={(e) => submitForm(e)}>
+                        <div className={style.formSection}>
+                            <h3 className={style.sectionTitle}>Dati di contatto</h3>
+                            <div className={style.formGrid}>
+                                <div className={style.formGroup}>
+                                    <label htmlFor="name">Nome *</label>
+                                    <input id="name" placeholder="Mario" type="text" name="name" value={dataForm.name} onChange={(e) => handleForm(e)} />
+                                </div>
+                                <div className={style.formGroup}>
+                                    <label htmlFor="surname">Cognome *</label>
+                                    <input id="surname" placeholder="Rossi" type="text" name="surname" value={dataForm.surname} onChange={(e) => handleForm(e)} />
+                                </div>
+                            </div>
+                            <div className={style.formGrid}>
+                                <div className={style.formGroup}>
+                                    <label htmlFor="email">Email *</label>
+                                    <input id="email" placeholder="mario.rossi@email.com" type="email" name="email" value={dataForm.email} onChange={(e) => handleForm(e)} />
+                                </div>
+                                <div className={style.formGroup}>
+                                    <label htmlFor="phone">Telefono *</label>
+                                    <input id="phone" placeholder="+39 333 444 5555" type="tel" name="phone" value={dataForm.phone} onChange={(e) => handleForm(e)} />
+                                </div>
+                            </div>
                         </div>
-                        <div className="email">
-                            <label htmlFor="">Email*</label>
-                            <input placeholder="MarioRossi@gm..." type="text" name="email" value={dataForm.email} onChange={(e) => handleForm(e)} />
-                        </div>
-                        <div className={style.phone}>
-                            <label htmlFor="">Telefono*</label>
-                            <input placeholder="3334445555..." type="text" name="phone" value={dataForm.phone} onChange={(e) => handleForm(e)} />
-                        </div>
+
                         <div className={style.formSection}>
                             <h3 className={style.sectionTitle}>Indirizzo di Spedizione</h3>
 
                             <div className={style.formGroup}>
-                                <label htmlFor="street">Via*</label>
+                                <label htmlFor="street">Via *</label>
                                 <input
                                     id="street"
                                     type="text"
@@ -248,7 +294,7 @@ export default function Checkout() {
 
                             <div className={style.formGrid}>
                                 <div className={style.formGroup}>
-                                    <label htmlFor="city">Città*</label>
+                                    <label htmlFor="city">Città *</label>
                                     <input
                                         id="city"
                                         type="text"
@@ -259,7 +305,7 @@ export default function Checkout() {
                                     />
                                 </div>
                                 <div className={style.formGroup}>
-                                    <label htmlFor="province">Provincia*</label>
+                                    <label htmlFor="province">Provincia *</label>
                                     <input
                                         id="province"
                                         type="text"
@@ -273,7 +319,7 @@ export default function Checkout() {
 
                             <div className={style.formGrid}>
                                 <div className={style.formGroup}>
-                                    <label htmlFor="postal_code">Codice Postale*</label>
+                                    <label htmlFor="postal_code">Codice Postale *</label>
                                     <input
                                         id="postal_code"
                                         type="text"
@@ -284,7 +330,7 @@ export default function Checkout() {
                                     />
                                 </div>
                                 <div className={style.formGroup}>
-                                    <label htmlFor="country">Paese*</label>
+                                    <label htmlFor="country">Paese *</label>
                                     <input
                                         id="country"
                                         type="text"
@@ -296,28 +342,32 @@ export default function Checkout() {
                                 </div>
                             </div>
                         </div>
+
                         <div className={style.checkbox}>
-                            <label htmlFor="checkbox">Indirizzo di fatturazione coincide con quello di spedizione</label>
-                            <input type="checkbox" name="" id="checkbox" value={checkeboxData} onChange={(e) => handleCheckbox(e)} />
+                            <input type="checkbox" id="checkbox" checked={checkeboxData} onChange={(e) => handleCheckbox(e)} />
+                            <label htmlFor="checkbox">L'indirizzo di fatturazione coincide con quello di spedizione</label>
                         </div>
+
                         {!checkeboxData &&
-                            <div className={style.billingData}>
-                                <label htmlFor="">INDIRIZZO DI FATTURAZIONE</label>
-                                <div>
-                                    <label htmlFor="">Via*</label>
-                                    <input type="text" placeholder="Inserisci la via..." name="billing_street" value={dataForm.billing_street} onChange={(e) => handleForm(e)} />
+                            <div className={style.formSection}>
+                                <h3 className={style.sectionTitle}>Indirizzo di Fatturazione</h3>
+                                <div className={style.formGroup}>
+                                    <label htmlFor="billing_street">Via *</label>
+                                    <input id="billing_street" type="text" placeholder="Via Verdi, 456" name="billing_street" value={dataForm.billing_street} onChange={(e) => handleForm(e)} />
                                 </div>
-                                <div>
-                                    <label htmlFor="">Città*</label>
-                                    <input type="text" placeholder="Inserisci la città..." name="billing_city" value={dataForm.billing_city} onChange={(e) => handleForm(e)} />
-                                </div>
-                                <div>
-                                    <label htmlFor="">Paese*</label>
-                                    <input type="text" placeholder="Inserisci il paese..." name="billing_country" value={dataForm.billing_country} onChange={(e) => handleForm(e)} />
+                                <div className={style.formGrid}>
+                                    <div className={style.formGroup}>
+                                        <label htmlFor="billing_city">Città *</label>
+                                        <input id="billing_city" type="text" placeholder="Roma" name="billing_city" value={dataForm.billing_city} onChange={(e) => handleForm(e)} />
+                                    </div>
+                                    <div className={style.formGroup}>
+                                        <label htmlFor="billing_country">Paese *</label>
+                                        <input id="billing_country" type="text" placeholder="Italia" name="billing_country" value={dataForm.billing_country} onChange={(e) => handleForm(e)} />
+                                    </div>
                                 </div>
                             </div>
                         }
-                        <button type="submit" className={style.buttonSubmit}>CONFERMA</button>
+                        <button type="submit" className={style.buttonSubmit}>CONFERMA ORDINE</button>
                     </form>
                 </div>
 
@@ -326,7 +376,7 @@ export default function Checkout() {
                     <div className={style.sectionProduct}>
                         {cartList.map((product, index) => (
                             <div key={product.slug} className={style.card}>
-                                <img src={product.image} alt="" />
+                                <img src={product.image} alt={product.name} />
                                 <div className={style.bodyCard}>
                                     <h2>{product.name}</h2>
                                     <div className={style.productDetails}>
