@@ -49,7 +49,7 @@
 }
 
 .card:hover {
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
 
 .card img {
@@ -70,7 +70,8 @@
 
 .card h3 {
     font-size: 1.1rem;
-    color: #b1955b; /* Colore oro dal mockup */
+    color: #b1955b;
+    /* Colore oro dal mockup */
     font-weight: 600;
     margin-bottom: 15px;
 }
@@ -84,7 +85,8 @@
 
 .addCart {
     flex: 1;
-    background-color: #c4a468; /* Colore bottoni mockup [cite: 31, 33] */
+    background-color: #c4a468;
+    /* Colore bottoni mockup [cite: 31, 33] */
     color: white;
     border: none;
     padding: 10px;
@@ -146,4 +148,32 @@
 
 .goShop:hover {
     background-color: #555;
+}
+
+.totalProduct {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #eeeeee;
+    align-items: center;
+}
+
+.totalProduct h2 {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #6f6f6f;
+    margin: 0;
+    padding: 0 18px;
+}
+
+.btnDeleteAll {
+    background-color: white;
+    border: none;
+    font-family: 'Inter', sans-serif;
+    color: #cc4444; 
+    cursor: pointer;
+    transition: transform 0.2s, color 0.2s;
+    padding: 0;
 }

@@ -40,7 +40,7 @@ function CartContextProvider({ children }) {
             );
         });
         setShowPreview(true);
-      
+
     }
 
     function removeProduct(indexDelete) {
@@ -54,7 +54,7 @@ function CartContextProvider({ children }) {
         }
     };
 
-    function resetCarrello() { 
+    function resetCarrello() {
         setCartList([]);
     }
 
@@ -76,8 +76,41 @@ function CartContextProvider({ children }) {
         });
     }
 
-    function removeAllQuantity(indexDelete){
+    function inCart(slug) {
+        return cartList.find((product) => product.slug === slug) !== undefined;
+    }
+
+    function removeAllQuantity(indexDelete) {
         setCartList(cartList.toSpliced(indexDelete, 1));
+    }
+
+    function updateQuantityDetails(slug, newQuantity) {
+        if (newQuantity < 0) return;
+        let newArray = []
+        if (newQuantity === 0) {
+            newArray = cartList.filter((product) => product.slug !== slug)
+        } else {
+            newArray = cartList.map((product) => {
+                if (product.slug === slug) {
+                    return {
+                        ...product,
+                        quantity: newQuantity
+                    }
+                }
+                return product
+            })
+        }
+        setCartList(newArray)
+    }
+
+    function returnQuantity(slug) {
+        let quantity = 0;
+        cartList.forEach((product) => {
+            if (product.slug === slug) {
+                quantity = product.quantity;
+            }
+        })
+        return quantity
     }
 
     const cartValue = {
@@ -90,8 +123,11 @@ function CartContextProvider({ children }) {
         showPreview,
         setShowPreview,
         removeAllQuantity,
+        inCart,
+        updateQuantityDetails,
+        returnQuantity,
     }
-       {/* proposta di modicare resetCarrello con resetCart*/}
+    {/* proposta di modicare resetCarrello con resetCart*/ }
 
     return (
         <CartContext.Provider value={cartValue}>
