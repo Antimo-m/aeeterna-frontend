@@ -54,7 +54,7 @@ function CartContextProvider({ children }) {
         }
     };
 
-    function resetCarrello() {
+    function resetCarrello() { 
         setCartList([]);
     }
 
@@ -76,6 +76,9 @@ function CartContextProvider({ children }) {
         });
     }
 
+    function removeAllQuantity(indexDelete){
+        setCartList(cartList.toSpliced(indexDelete, 1));
+    }
 
     const cartValue = {
         cartList,
@@ -86,7 +89,9 @@ function CartContextProvider({ children }) {
         updateQuantity,
         showPreview,
         setShowPreview,
+        removeAllQuantity,
     }
+       {/* proposta di modicare resetCarrello con resetCart*/}
 
     return (
         <CartContext.Provider value={cartValue}>
