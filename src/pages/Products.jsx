@@ -247,7 +247,6 @@ export default function Products() {
                                     <option value="prezzoMax">Prezzo decrescente</option>
                                 </select>
                             </div>
-
                         </div>
                         <div className={styles.productGrid}>
                             {products.map((product, index) => (
