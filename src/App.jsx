@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom"
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 import DefaultLayout from "./layouts/DefaultLayouts"
 import Home from "./pages/Home"
 import ProductDetails from "./pages/ProductDetails"
@@ -36,7 +36,7 @@ function App() {
                 <Route element={<DefaultLayout searchTerm={searchTerm} onSearch={handleSearch} />}>
                   <Route path="/" element={<Home searchTerm={searchTerm} />} />
                   <Route path="/productdetails/:slug" element={<ProductDetails />} />
-                  <Route path="/prodotti" element={<Products />} />
+                  <Route path="/prodotti" element={ <Products /> } />
                   <Route path="/wishlist" element={<WishList />} />
                   <Route path="/cart" element={<CartPage />} />
                   <Route path="*" element={<NotFound />} />

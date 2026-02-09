@@ -65,7 +65,7 @@ export default function Header({ searchTerm,  onSearch }) {
           {/* Navigation Desktop */}
           <nav className={styles.desktopNav}>
             <NavLink to={"/"} className={styles.navLink}>Home</NavLink>
-            <NavLink to={"/prodotti"} className={styles.navLink}>Prodotti</NavLink>
+            <NavLink to={`/prodotti?category=0&skinType=0&limit=10&offset=0&minPrice=0&maxPrice=9999&search=&order=a-z`} className={styles.navLink}>Prodotti</NavLink>
           </nav>
 
           {/* Right section Desktop */}
@@ -143,7 +143,7 @@ export default function Header({ searchTerm,  onSearch }) {
           {/* Navigation links */}
           <nav className={styles.mobileNav}>
             <NavLink onClick={closeMenu} to={"/"} className={styles.navLink}>Home</NavLink>
-            <NavLink onClick={closeMenu} to={"/prodotti"} className={styles.navLink}>Prodotti</NavLink>
+            <NavLink onClick={closeMenu} to={`/prodotti?category=0&skinType=0&limit=10&offset=0&minPrice=0&maxPrice=9999&search=&order=a-z`} className={styles.navLink}>Prodotti</NavLink>
           </nav>
         </div>
       </div>
