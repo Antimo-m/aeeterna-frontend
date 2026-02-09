@@ -1,17 +1,16 @@
-/* Container principale */
-.sectionCart {
+.sectionCheckout {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     gap: 40px;
     max-width: 1200px;
-    margin: 50px auto;
+    margin: 0 auto;
     padding: 20px;
     font-family: 'Montserrat', sans-serif;
     color: #333;
+    position: relative;
 }
 
-/* Colonna Prodotti */
 .sectionProduct {
     flex: 2;
 }
@@ -29,28 +28,6 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
- /* Button che cancella tutti i prodotti */
- .sectionDeleteAllProducts {
-    display: flex;
-    justify-content: flex-end; 
-    align-items: center;
-    margin-bottom: 20px;
-    width: 100%;
-}
-.btnDeleteAll {
-    background-color: white;
-    border: none;
-    font-family: 'Inter', sans-serif;
-    color: #cc4444; 
-    cursor: pointer;
-    transition: transform 0.2s, color 0.2s;
-    padding: 0;
-}
-
- /* Colonna Prodotti */
- .sectionProduct {
-     flex: 2;
- }
 .card:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(200, 168, 90, 0.15);
@@ -143,25 +120,7 @@
     color: #c8a85a;
 }
 
-/* Bottone rimuovi */
-.removeButton {
-    background-color: transparent;
-    border: none;
-    color: #d44;
-    cursor: pointer;
-    font-size: 0.85rem;
-    text-decoration: underline;
-    padding: 0;
-    align-self: flex-start;
-    font-family: 'Montserrat', sans-serif;
-    transition: color 0.3s ease;
-}
 
-.removeButton:hover {
-    color: #a00;
-}
-
-/* Colonna Riepilogo (Sidebar) */
 .sectionSummary {
     flex: 1;
     background: linear-gradient(135deg, #ffffff 0%, #fdfcfb 100%);
@@ -191,7 +150,6 @@
 
 .sectionSummary h2 {
     font-size: 1.3rem;
-    margin-bottom: 24px;
     letter-spacing: 0.5px;
     font-weight: 600;
     border-bottom: 2px solid rgba(200, 168, 90, 0.2);
@@ -202,6 +160,7 @@
     background-clip: text;
     position: relative;
     z-index: 1;
+    text-transform: uppercase;
 }
 
 .tableSummary .card {
@@ -272,6 +231,12 @@
     z-index: 1;
 }
 
+.shippingContainer {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
 .checkOut:hover {
     background-color: #000;
     border-color: #000;
@@ -291,15 +256,8 @@
     font-size: 0.9rem;
 }
 
-.shippingContainer {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .sectionCart {
+@media (max-width: 1000px) {
+    .sectionCheckout {
         flex-direction: column;
     }
 
@@ -311,27 +269,198 @@
     }
 }
 
-/* Empty cart */
-.emptyCart {
+.sectionForm {
+    background-color: #f7f4ef;
+    padding: 3rem;
+    border-radius: 24px;
+    max-width: 620px;
+    margin: 0 auto;
+}
+
+.shippingForm {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    gap: 1.5rem;
+}
+
+/* ---------- LABEL ---------- */
+.shippingForm label {
+    font-size: 0.85rem;
+    letter-spacing: 0.04em;
+    color: #8a857c;
+    margin-bottom: 0.3rem;
+    text-transform: uppercase;
+}
+
+/* ---------- INPUT ---------- */
+.shippingForm input[type="text"],
+.shippingForm input[type="email"],
+.shippingForm input[type="tel"] {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    border-radius: 14px;
+    border: 1px solid #e6e0d6;
+    background-color: #fff;
+    font-size: 0.95rem;
+    color: #2f2f2f;
+    transition: all 0.25s ease;
+}
+
+.shippingForm input::placeholder {
+    color: #b7b2aa;
+}
+
+.shippingForm input:focus {
+    outline: none;
+    border-color: #c2a46d;
+    box-shadow: 0 0 0 2px rgba(194, 164, 109, 0.15);
+}
+
+.name_surname {
+    display: grid;
+    gap: 1rem;
+}
+
+.phone,
+.email {
+    display: flex;
+    flex-direction: column;
+}
+
+.indirizzo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.indirizzo input:first-child {
+    grid-column: 1 / -1;
+}
+
+.checkbox {
+    display: flex;
     align-items: center;
-    gap: 24px;
-    padding: 60px 20px;
-    background: linear-gradient(135deg, #ffffff 0%, #fdfcfb 100%);
-    border-radius: 24px;
-    border: 1px solid rgba(200, 168, 90, 0.15);
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    gap: 0.7rem;
+    font-size: 0.85rem;
+    color: #6f6a61;
 }
 
-.emptyCart .checkOut {
-    width: auto;
-    text-decoration: none;
-    display: inline-block;
+.checkbox input[type="checkbox"] {
+    accent-color: #c2a46d;
+    width: 16px;
+    height: 16px;
 }
 
-.main {
-    padding: 30px 20px;
-    margin-top: 100px;
+.billingData {
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 18px;
+    border: 1px solid #e6e0d6;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.billingData label {
+    font-weight: 500;
+    color: #2f2f2f;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+}
+
+.buttonSubmit {
+    margin-top: 2rem;
+    background-color: #c2a46d;
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    padding: 1rem;
+    font-size: 0.95rem;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.buttonSubmit:hover {
+    background-color: #b4955f;
+    transform: translateY(-1px);
+}
+
+.buttonSubmit:active {
+    transform: translateY(0);
+}
+
+@media (max-width: 688) {
+    .sectionForm {
+        padding: 2rem 1.5rem;
+    }
+
+    .name_surname,
+    .indirizzo {
+        grid-template-columns: 1fr;
+    }
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.title h1 {
+    font-size: 2.5rem;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    border-bottom: 2px solid rgba(200, 168, 90, 0.2);
+    padding-bottom: 12px;
+    background: linear-gradient(135deg, #c8a85a 0%, #b89748 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    position: relative;
+    z-index: 1;
+    text-transform: uppercase;
+}
+
+.errorMessage,
+.correctMessage {
+  width: 80%;
+  padding: 1rem 1.2rem;
+  border-radius: 16px;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  animation: fadeIn 0.3s ease;
+  position: absolute;
+  left: 50%;
+  top: -40px;
+  z-index: 9999;
+  transform: translate(-50%, 0);
+}
+
+.errorMessage {
+  background-color: #fbeded;
+  border: 1px solid rgba(200, 107, 107, 0.4);
+  color: #8a3b3b;
+}
+
+.correctMessage {
+  background-color: #eef6f1;
+  border: 1px solid rgba(111, 166, 139, 0.4);
+  color: #2f6b52;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

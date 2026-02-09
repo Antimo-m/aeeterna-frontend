@@ -65,7 +65,7 @@ export default function Header({ searchTerm,  onSearch }) {
           {/* Navigation Desktop */}
           <nav className={styles.desktopNav}>
             <NavLink to={"/"} className={styles.navLink}>Home</NavLink>
-            <NavLink to={"/Prodotti"} className={styles.navLink}>Prodotti</NavLink>
+            <NavLink to={"/prodotti"} className={styles.navLink}>Prodotti</NavLink>
           </nav>
 
           {/* Right section Desktop */}

@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import { NavLink, useParams } from "react-router-dom"
 import style from "../styles/ProductDetails.module.css"
 import { useCart } from "../contexts/CartContext";
-import { useLoad } from "../contexts/LoadContext";
 import { useWishList } from "../contexts/WishListContext";
 import CardProduct from "../components/CardProducts";
 import NotFoundProduct from "../components/NotFoundProduct"
+import LoadWrapper from "../components/LoadWrapper";
 
 
 export default function ProductDetails() {
@@ -23,13 +23,12 @@ export default function ProductDetails() {
     const [relatedProducts, setrelatedProducts] = useState([])
     const [indexImage, setIndexImage] = useState(0)
     const [pageLoad, setPageLoad] = useState(false);
-    const { Load, setLoad } = useLoad();
-    setLoad(false)
+
 
     const { wishList, inWishList, addWishList, removeWishList } = useWishList();
 
     useEffect(() => {
-        setPageLoad(false)
+        setPageLoad(true)
         axios.get(`${backEndUrl}/api/product/${slug}`).then((resp) => {
             setProduct(resp.data)
             console.log(resp.data);
@@ -37,11 +36,11 @@ export default function ProductDetails() {
             axios.get(`${backEndUrl}/api/product?category=0&skinType=${resp.data.id_skin_type}&limit=80&offset=0&minPrice=0&maxPrice=9999`).then((respRelated) => {
                 setrelatedProducts(respRelated.data.products)
                 console.log(respRelated.data);
-                setPageLoad(true)
 
             }).catch((err) => {
                 console.log(err);
             }).finally(() => {
+                setPageLoad(false)
             })
 
         }).catch((err) => {
@@ -57,7 +56,9 @@ export default function ProductDetails() {
     return (
         <>
             <main className={style.main}>
-                {pageLoad &&
+                {pageLoad ? 
+                <LoadWrapper /> 
+                :
                     <>
                         <section className={style.sectionProduct}>
                             <div className={style.name}>

@@ -4,11 +4,12 @@ import { createContext, useContext, useState, useEffect } from "react";
 const CartContext = createContext();
 
 function CartContextProvider({ children }) {
+
     const [cartList, setCartList] = useState(() => {
         const savedCart = localStorage.getItem("cart");
         return savedCart ? JSON.parse(savedCart) : [];
     });
-
+    const [showPreview, setShowPreview] = useState(false);
     useEffect(() => {
         localStorage.setItem("cart", JSON.stringify(cartList));
     }, [cartList]);
@@ -38,33 +39,8 @@ function CartContextProvider({ children }) {
                     : product
             );
         });
-       /*  if (cartList.find((product) => product.slug === newProduct.slug) === undefined) {
-            let newOrder = {
-                ...newProduct,
-                quantity: 1
-            };
-            console.log(cartList);
-            console.log(newOrder);
-            
-            console.log([...cartList, newOrder]);
-
-            setCartList([...cartList, newOrder]);
-        } else {
-            const copyArray = cartList.map((product) => {
-                if (product.slug === newProduct.slug) {
-                    const newQuantity = product.quantity + 1;
-                    return {
-                        ...product,
-                        quantity: newQuantity,
-                    }
-                } else {
-                    return product;
-                }
-            })
-            console.log(copyArray);
-
-            setCartList(copyArray)
-        } */
+        setShowPreview(true);
+      
     }
 
     function removeProduct(indexDelete) {
@@ -106,8 +82,10 @@ function CartContextProvider({ children }) {
         addCart,
         removeProduct,
         calcTotal,
-        resetCarrello, 
-        updateQuantity
+        resetCarrello,
+        updateQuantity,
+        showPreview,
+        setShowPreview,
     }
        {/* proposta di modicare resetCarrello con resetCart*/}
 
@@ -115,7 +93,7 @@ function CartContextProvider({ children }) {
         <CartContext.Provider value={cartValue}>
             {children}
         </CartContext.Provider>
-    )
+    );
 }
 
 function useCart() {
