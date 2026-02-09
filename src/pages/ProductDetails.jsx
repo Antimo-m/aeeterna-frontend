@@ -16,7 +16,7 @@ export default function ProductDetails() {
             behavior: 'smooth'
         });
     }, [])
-    const { addCart } = useCart();
+    const { addCart, inCart, updateQuantityDetails, returnQuantity } = useCart();
     const { slug } = useParams();
     const backEndUrl = import.meta.env.VITE_BACKEND_URL;
     const [product, setProduct] = useState(false)
@@ -26,6 +26,7 @@ export default function ProductDetails() {
 
 
     const { wishList, inWishList, addWishList, removeWishList } = useWishList();
+
 
     useEffect(() => {
         setPageLoad(true)
@@ -49,16 +50,16 @@ export default function ProductDetails() {
         })
     }, [])
 
-    if(!product) {
-        return <NotFoundProduct/>
+    if (!product) {
+        return <NotFoundProduct />
     }
 
     return (
         <>
             <main className={style.main}>
-                {pageLoad ? 
-                <LoadWrapper /> 
-                :
+                {pageLoad ?
+                    <LoadWrapper />
+                    :
                     <>
                         <section className={style.sectionProduct}>
                             <div className={style.name}>
@@ -75,7 +76,15 @@ export default function ProductDetails() {
                                 <div className={style.sectionPrice}>
                                     <h3>{parseFloat(product.price).toFixed(2)}€</h3>
                                     <div>
-                                        <button className="addCartHover" onClick={() => addCart(product)}>Aggiungi al Carrello</button>
+                                        {inCart(product.slug) ?
+                                            <div className={style.buttonQuantity}>
+                                                <button onClick={() => updateQuantityDetails(product.slug, returnQuantity(product.slug) - 1)}>-</button>
+                                                <span>{returnQuantity(product.slug)}</span>
+                                                <button onClick={() => updateQuantityDetails(product.slug, returnQuantity(product.slug) + 1)}>+</button>
+                                            </div>
+                                            :
+                                            <button className="addCartHover" onClick={() => addCart(product)}>Aggiungi al carrello</button>
+                                        }
                                         <button className={inWishList(product) ? "btninWish" : "btnWish"} onClick={() => { inWishList(product) ? removeWishList(product) : addWishList(product) }}>
                                             <i className="bi bi-heart"></i>
                                         </button>
