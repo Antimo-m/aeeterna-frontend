@@ -1,6 +1,11 @@
 import { useEffect, useState } from "react";
 import { useCart } from "../contexts/CartContext";
 import style from "../styles/Checkout.module.css"
+import { useNavigate } from "react-router-dom";
+
+
+
+
 const backupForm = {
     name: "",
     surname: "",
@@ -27,6 +32,24 @@ export default function Checkout() {
     const { cartList, calcTotal } = useCart();
     const [dataForm, setDataForm] = useState(backupForm);
     const [checkeboxData, setCheckboxData] = useState(false)
+
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (errorMessage.type !== "") {
+            const timer = setTimeout(() => {
+                setErrorMessage({ type: "", message: "" });
+
+
+                if (errorMessage.type === "correct") {
+                    navigate("/prodotti");
+                }
+            }, 3000);
+
+            return () => clearTimeout(timer);
+        }
+    }, [errorMessage, navigate]);
+
 
     function handleForm(event) {
         const { name, value } = event.target;
@@ -181,15 +204,15 @@ export default function Checkout() {
         <>
             <div className={style.title}>
                 <h1>CHECKOUT</h1>
-
             </div>
-            <section className={style.sectionCheckout}>
+             <section className={style.sectionCheckout}> 
                 {errorMessage.type !== "" &&
                     <div className={errorMessage.type === "error" ? style.errorMessage : style.correctMessage}>
                         {errorMessage.message}
                         <i onClick={() => setErrorMessage({ type: "", message: "" })} className="bi bi-x-lg"></i>
                     </div>
                 }
+            
                 <div className={style.sectionForm}>
                     <form action="" className={style.shippingForm} onSubmit={(e) => submitForm(e)}>
                         <div className={style.name_surname}>
@@ -286,7 +309,7 @@ export default function Checkout() {
                         </div>
                     </div>
                 </div>
-            </section>
+             </section> 
         </>
     )
 }
