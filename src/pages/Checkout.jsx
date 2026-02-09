@@ -82,7 +82,7 @@ export default function Checkout() {
     function submitForm(e) {
 
         e.preventDefault();
-        if (checkeboxData){
+        if (checkeboxData) {
             setDataForm({
                 ...dataForm,
                 billing_street: dataForm.street,
@@ -155,20 +155,20 @@ export default function Checkout() {
             });
             return
         }
-        
+
         let totalPrice = 0
         cartList.forEach(product => {
             totalPrice += product.price * product.quantity
-        }); 
+        });
 
         let shipping_price = 4.99;
-        if(totalPrice >= 45){
+        if (totalPrice >= 45) {
             shipping_price = null;
-        }else{
+        } else {
             totalPrice += shipping_price;
         }
         console.log(totalPrice);
-        
+
 
         setDataForm({
             ...dataForm,
@@ -176,7 +176,7 @@ export default function Checkout() {
             total_price: totalPrice
         })
 
-        const productsForm = cartList.map((product) =>{
+        const productsForm = cartList.map((product) => {
             return {
                 slug: product.slug,
                 quantity: product.quantity,
@@ -189,11 +189,12 @@ export default function Checkout() {
             products: productsForm
         })
 
-        console.log({...dataForm,
+        console.log({
+            ...dataForm,
             products: productsForm,
             total_price: totalPrice
         });
-    
+
         setErrorMessage({
             type: "correct",
             message: "Ordine inviato con successo"
@@ -205,37 +206,95 @@ export default function Checkout() {
             <div className={style.title}>
                 <h1>CHECKOUT</h1>
             </div>
-             <section className={style.sectionCheckout}> 
+            <section className={style.sectionCheckout}>
                 {errorMessage.type !== "" &&
                     <div className={errorMessage.type === "error" ? style.errorMessage : style.correctMessage}>
                         {errorMessage.message}
                         <i onClick={() => setErrorMessage({ type: "", message: "" })} className="bi bi-x-lg"></i>
                     </div>
                 }
-            
+
                 <div className={style.sectionForm}>
                     <form action="" className={style.shippingForm} onSubmit={(e) => submitForm(e)}>
                         <div className={style.name_surname}>
-                            <label htmlFor="">Nome</label>
+                            <h3 className={style.sectionTitle}>Dati di contatto </h3>
+                            <label htmlFor="">Nome*</label>
                             <input placeholder="Mario..." type="text" name="name" value={dataForm.name} onChange={(e) => handleForm(e)} />
-                            <label htmlFor="">Cognome</label>
+                            <label htmlFor="">Cognome*</label>
                             <input placeholder="Rossi..." type="text" name="surname" value={dataForm.surname} onChange={(e) => handleForm(e)} />
                         </div>
                         <div className="email">
-                            <label htmlFor="">Email</label>
+                            <label htmlFor="">Email*</label>
                             <input placeholder="MarioRossi@gm..." type="text" name="email" value={dataForm.email} onChange={(e) => handleForm(e)} />
                         </div>
                         <div className={style.phone}>
-                            <label htmlFor="">Telefono</label>
+                            <label htmlFor="">Telefono*</label>
                             <input placeholder="3334445555..." type="text" name="phone" value={dataForm.phone} onChange={(e) => handleForm(e)} />
                         </div>
-                        <div className="indirizzo">
-                            <label htmlFor="">Indirizzo</label>
-                            <input type="text" placeholder="Via..." name="street" value={dataForm.street} onChange={(e) => handleForm(e)} />
-                            <input type="text" placeholder="Citta..." name="city" value={dataForm.city} onChange={(e) => handleForm(e)} />
-                            <input type="text" placeholder="Provincia.." name="province" value={dataForm.province} onChange={(e) => handleForm(e)} />
-                            <input type="text" placeholder="Paese..." name="country" value={dataForm.country} onChange={(e) => handleForm(e)} />
-                            <input type="text" placeholder="Codice Postale..." name="postal_code" value={dataForm.postal_code} onChange={(e) => handleForm(e)} />
+                        <div className={style.formSection}>
+                            <h3 className={style.sectionTitle}>Indirizzo di Spedizione</h3>
+
+                            <div className={style.formGroup}>
+                                <label htmlFor="street">Via*</label>
+                                <input
+                                    id="street"
+                                    type="text"
+                                    placeholder="Via Roma, 123"
+                                    name="street"
+                                    value={dataForm.street}
+                                    onChange={(e) => handleForm(e)}
+                                />
+                            </div>
+
+                            <div className={style.formGrid}>
+                                <div className={style.formGroup}>
+                                    <label htmlFor="city">Città*</label>
+                                    <input
+                                        id="city"
+                                        type="text"
+                                        placeholder="Milano"
+                                        name="city"
+                                        value={dataForm.city}
+                                        onChange={(e) => handleForm(e)}
+                                    />
+                                </div>
+                                <div className={style.formGroup}>
+                                    <label htmlFor="province">Provincia*</label>
+                                    <input
+                                        id="province"
+                                        type="text"
+                                        placeholder="MI"
+                                        name="province"
+                                        value={dataForm.province}
+                                        onChange={(e) => handleForm(e)}
+                                    />
+                                </div>
+                            </div>
+
+                            <div className={style.formGrid}>
+                                <div className={style.formGroup}>
+                                    <label htmlFor="postal_code">Codice Postale*</label>
+                                    <input
+                                        id="postal_code"
+                                        type="text"
+                                        placeholder="20100"
+                                        name="postal_code"
+                                        value={dataForm.postal_code}
+                                        onChange={(e) => handleForm(e)}
+                                    />
+                                </div>
+                                <div className={style.formGroup}>
+                                    <label htmlFor="country">Paese*</label>
+                                    <input
+                                        id="country"
+                                        type="text"
+                                        placeholder="Italia"
+                                        name="country"
+                                        value={dataForm.country}
+                                        onChange={(e) => handleForm(e)}
+                                    />
+                                </div>
+                            </div>
                         </div>
                         <div className={style.checkbox}>
                             <label htmlFor="checkbox">Indirizzo di fatturazione coincide con quello di spedizione</label>
@@ -244,9 +303,18 @@ export default function Checkout() {
                         {!checkeboxData &&
                             <div className={style.billingData}>
                                 <label htmlFor="">INDIRIZZO DI FATTURAZIONE</label>
-                                <input type="text" placeholder="Via..." name="billing_street" value={dataForm.billing_street} onChange={(e) => handleForm(e)} />
-                                <input type="text" placeholder="Citta..." name="billing_city" value={dataForm.billing_city} onChange={(e) => handleForm(e)} />
-                                <input type="text" placeholder="Paese..." name="billing_country" value={dataForm.billing_country} onChange={(e) => handleForm(e)} />
+                                <div>
+                                    <label htmlFor="">Via*</label>
+                                    <input type="text" placeholder="Inserisci la via..." name="billing_street" value={dataForm.billing_street} onChange={(e) => handleForm(e)} />
+                                </div>
+                                <div>
+                                    <label htmlFor="">Città*</label>
+                                    <input type="text" placeholder="Inserisci la città..." name="billing_city" value={dataForm.billing_city} onChange={(e) => handleForm(e)} />
+                                </div>
+                                <div>
+                                    <label htmlFor="">Paese*</label>
+                                    <input type="text" placeholder="Inserisci il paese..." name="billing_country" value={dataForm.billing_country} onChange={(e) => handleForm(e)} />
+                                </div>
                             </div>
                         }
                         <button type="submit" className={style.buttonSubmit}>CONFERMA</button>
@@ -309,7 +377,7 @@ export default function Checkout() {
                         </div>
                     </div>
                 </div>
-             </section> 
+            </section>
         </>
     )
 }
