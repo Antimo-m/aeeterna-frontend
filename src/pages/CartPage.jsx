@@ -1,7 +1,6 @@
 import { Link, } from "react-router-dom";
 import { useCart } from "../contexts/CartContext";
 import style from "../styles/CartPage.module.css"
-import { useLoad } from "../contexts/LoadContext";
 import { useEffect } from "react";
 
 
@@ -12,12 +11,10 @@ export default function Home() {
             behavior: 'smooth'
         });
     }, [])
-    const { cartList, addProduct, updateQuantity, removeProduct, calcTotal} = useCart();
-
-
-    const { setLoad } = useLoad();
-    setLoad(false)
-
+    const { cartList, addProduct, updateQuantity, removeProduct, calcTotal, showPreview, setShowPreview } = useCart();
+    if (setShowPreview) {
+        setShowPreview(false);
+    }
     return (
         <>
             <main className={style.main}>
@@ -36,28 +33,6 @@ export default function Home() {
                                         <Link to={`/productdetails/${product.slug}`} className={style.description}>
                                             <h2>{product.name}</h2>
                                         </Link>
-                                           {/*  <span className={style.quantityPrice}>
-                                                <div className={style.quantityContainer}>
-                                                <span>quantita</span>
-                                                    <button onClick={() =>  updateQuantity(index, product.quantity - 1)}>-</button>
-                                                    
-                                                    <input
-                                                        type="number"
-                                                        value={product.quantity}
-                                                        min={1}
-                                                        onChange={(e) => {
-                                                            const value = parseInt(e.target.value);
-                                                            if (!isNaN(value)) updateQuantity(index, value);
-                                                        }}
-                                                        onClick={(e) => e.stopPropagation}
-                                                    />
-                                                    <button onClick={() => updateQuantity(index, product.quantity + 1)}>+</button>
-                                                </div>
-                                                <h3>Price: {(product.price * product.quantity).toFixed(2)}€</h3>
-                                            </span>
-                                        
-                                        <a onClick={() => removeProduct(index)}>RIMUOVI</a> */}
-
                                         <div className={style.productDetails}>
                                             <div className={style.quantityContainer}>
                                                 <span>Quantità:</span>
@@ -75,7 +50,7 @@ export default function Home() {
                                                 <button onClick={() => updateQuantity(index, product.quantity + 1)}>+</button>
                                             </div>
 
-                                            <h3 className={style.price}>Price: {(product.price * product.quantity).toFixed(2)}€</h3>
+                                            <h3 className={style.price}>Prezzo: {(product.price * product.quantity).toFixed(2)}€</h3>
                                             <button className={style.removeButton} onClick={() => removeProduct(index)}>RIMUOVI</button>
                                         </div>
                                     </div>
@@ -110,7 +85,7 @@ export default function Home() {
                                     {calcTotal(cartList) < 45 ?
                                         <>
                                             <h3>Totale</h3>
-                                            <h3>{calcTotal(cartList) + 4.99}€</h3>
+                                            <h3>{(calcTotal(cartList) + 4.99).toFixed(2)}€</h3>
                                         </>
 
                                         :
@@ -121,7 +96,7 @@ export default function Home() {
                                     }
                                 </div>
                             </div>
-                            <button className={style.checkOut}>CHECKOUT</button>
+                            <Link to={"/checkout"} className={style.checkOut}>CHECKOUT</Link>
                         </div>
                     </section>
                 }

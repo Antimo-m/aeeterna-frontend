@@ -1,7 +1,6 @@
 import { useWishList } from "../contexts/WishListContext"
 import { useCart } from "../contexts/CartContext"
 import { Link } from "react-router-dom"
-import { useLoad } from "../contexts/LoadContext"
 import { useEffect } from "react";
 import style from "../styles/WishList.module.css"
 
@@ -15,15 +14,14 @@ export default function WishList() {
     }, [])
     const { wishList, removeWishList } = useWishList();
     const { addCart } = useCart();
-    const { setLoad } = useLoad();
-    setLoad(false)
+    
     return (
         <main className={style.main}>
 
             {wishList.length === 0 ?
                 <div className={style.emptyWish}>
                     <h2>LA TUA WISHLIST È VUOTA</h2>
-                    <Link to={"/search"} className={style.goShop}>VAI ALLO SHOPPING</Link>
+                    <Link to={"/prodotti"} className={style.goShop}>VAI ALLO SHOPPING</Link>
                 </div>
                 :
                 <>
