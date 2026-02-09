@@ -31,12 +31,17 @@ function WishListContextProvider({ children }) {
         setWishList(newWishList);
     }
 
+    function resetWishList(){
+        setWishList([]);
+    }
+
     const wishListValue = {
         wishList,
         setWishList,
         inWishList,
         addWishList,
-        removeWishList
+        removeWishList,
+        resetWishList
     }
     return (
         <WishListContext.Provider value={wishListValue}>

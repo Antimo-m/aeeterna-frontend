@@ -12,9 +12,9 @@ export default function WishList() {
             behavior: 'smooth'
         });
     }, [])
-    const { wishList, removeWishList } = useWishList();
+    const { wishList, removeWishList, resetWishList } = useWishList();
     const { addCart } = useCart();
-    
+
     return (
         <main className={style.main}>
 
@@ -27,6 +27,12 @@ export default function WishList() {
                 <>
                     <h1>La tua Wishlist</h1>
                     <h3>I tuoi prodotti preferiti in un click</h3>
+                    <div className={style.totalProduct}>
+                        <h2>Prodotti nella wishlist: {wishList.length}</h2>
+                        <button onClick={resetWishList} className={style.btnDeleteAll}>
+                            <span>Svuota wishlist <i className="bi bi-trash3"></i></span>
+                        </button>
+                    </div>
                     <div className={style.container}>
                         {wishList.map((product, index) => (
                             <div key={index} className={style.card}>
