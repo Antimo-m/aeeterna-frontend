@@ -27,7 +27,6 @@ function App() {
     <>
       <MessageProvider>
         <CartContextProvider>
-
           <WishListContextProvider>
             <BrowserRouter>
               <CartPreview />
