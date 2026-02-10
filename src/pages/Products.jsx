@@ -4,6 +4,7 @@ import { useNavigate, useSearchParams } from "react-router-dom"
 import axios from "axios"
 import CardProduct from "../components/CardProducts"
 import LoadWrapper from "../components/LoadWrapper"
+import useDebounce from "../components/useDebounce"
 
 const backupFilter = {
     skinType: "0",
@@ -44,10 +45,18 @@ export default function Products() {
 
         return initial;
     })
+    const debouncedSearch = useDebounce(filter.search, 500);
+    const debouncedMinPrice = useDebounce(filter.minPrice, 500);
+    const debouncedMaxPrice = useDebounce(filter.maxPrice, 500);
+
 
     useEffect(() => {
         loadProducts();
-    }, [filter])
+    }, [filter.category,filter.skinType,filter.limit, filter.offset, filter.order, debouncedSearch, debouncedMinPrice,debouncedMaxPrice]);
+
+    useEffect(() => {
+        setPage(1);
+    }, [debouncedSearch, debouncedMinPrice, debouncedMaxPrice]);
 
     function loadProducts() {
         window.scrollTo({
@@ -55,7 +64,18 @@ export default function Products() {
             behavior: 'smooth'
         });
         setPageLoad(true);
-        axios.get(`${backEndUrl}/api/product?category=${filter.category}&skinType=${filter.skinType}&limit=${filter.limit}&offset=${filter.offset}&minPrice=${filter.minPrice}&maxPrice=${filter.maxPrice}&search=${filter.search}&order=${filter.order}`)
+        axios.get(`${backEndUrl}/api/product`, {
+            params: {
+                category: filter.category,
+                skinType: filter.skinType,
+                limit: filter.limit,
+                offset: filter.offset,
+                order: filter.order,
+                search: debouncedSearch,
+                minPrice: debouncedMinPrice,
+                maxPrice: debouncedMaxPrice
+            }
+        })
             .then(resp => {
                 setProducts(resp.data.products);
                 setTotalPage(resp.data.totalPage)
@@ -278,7 +298,7 @@ export default function Products() {
                             <h2>Prodotti trovati: {totalProduct}</h2>
                             <div className="sectionOrder">
                                 <label className={styles.labelLimit} htmlFor="ordina">Ordina per: </label>
-                                <select className={styles.selectLimit} name="order" id="ordina" value={filter.order} onChange={(e) => handleFilterChange(event)}>
+                                <select className={styles.selectLimit} name="order" id="ordina" value={filter.order} onChange={(event) => handleFilterChange(event)}>
                                     <option value="a-z">Nome A-Z</option>
                                     <option value="prezzoMin">Prezzo crescente</option>
                                     <option value="prezzoMax">Prezzo decrescente</option>
