@@ -91,7 +91,7 @@ export default function Products() {
     //     loadProducts();
     // }, [filter.offset, filter.limit, filter.order])
 
-    useEffect(() => {
+   /*  useEffect(() => { */
         
     //     setFilter({
     //         ...filter,
