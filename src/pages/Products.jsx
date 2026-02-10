@@ -1,18 +1,18 @@
 import { useState, useEffect } from "react"
 import styles from "../styles/Products.module.css"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useSearchParams } from "react-router-dom"
 import axios from "axios"
 import CardProduct from "../components/CardProducts"
 import LoadWrapper from "../components/LoadWrapper"
 
 const backupFilter = {
-    skinType: 0,
-    category: 0,
-    search: null,
-    minPrice: 0,
-    maxPrice: 999,
-    limit: 10,
-    offset: 0,
+    skinType: "0",
+    category: "0",
+    search: "",
+    minPrice: "0",
+    maxPrice: "999",
+    limit: "10",
+    offset: "0",
     order: "a-z"
 }
 
@@ -20,8 +20,11 @@ const backupFilter = {
 export default function Products() {
     const backEndUrl = import.meta.env.VITE_BACKEND_URL;
 
+
+    const [searchParams, setSearchParams] = useSearchParams();
+
+
     const [products, setProducts] = useState([]);
-    const [filter, setFilter] = useState(backupFilter)
     const [pageLoad, setPageLoad] = useState(false);
     const [page, setPage] = useState(1);
     const [search, setSearch] = useState("")
@@ -29,6 +32,22 @@ export default function Products() {
     const [openFilter, setOpenFilter] = useState(false);
     const [totalPage, setTotalPage] = useState(null)
     const [totalProduct, setTotalProduct] = useState(null)
+    const [filter, setFilter] = useState(() => {
+        const params = new URLSearchParams(window.location.search);
+        const initial = { ...backupFilter };
+
+        Object.keys(backupFilter).forEach(key => {
+            if (params.has(key)) {
+                initial[key] = params.get(key);
+            }
+        });
+
+        return initial;
+    })
+
+    useEffect(() => {
+        loadProducts();
+    }, [filter])
 
     function loadProducts() {
         window.scrollTo({
@@ -36,12 +55,11 @@ export default function Products() {
             behavior: 'smooth'
         });
         setPageLoad(true);
-        axios.get(`${backEndUrl}/api/product?category=${filter.category}&skinType=${filter.skinType}&limit=${filter.limit}&offset=${filter.offset}&minPrice=${filter.minPrice}&maxPrice=${filter.maxPrice}&search=${search}&order=${filter.order}`)
+        axios.get(`${backEndUrl}/api/product?category=${filter.category}&skinType=${filter.skinType}&limit=${filter.limit}&offset=${filter.offset}&minPrice=${filter.minPrice}&maxPrice=${filter.maxPrice}&search=${filter.search}&order=${filter.order}`)
             .then(resp => {
                 setProducts(resp.data.products);
                 setTotalPage(resp.data.totalPage)
                 setTotalProduct(resp.data.totalProduct)
-                console.log(resp.data);
             })
             .catch(err => {
                 console.error(err);
@@ -55,32 +73,22 @@ export default function Products() {
     // }, [filter.offset, filter.limit, filter.order])
 
     useEffect(() => {
-        loadProducts();
-    }, [ filter.category,filter.skinType,filter.limit,filter.offset,filter.order])
-
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setPage(1);
-            loadProducts();
-        }, 500); 
-
-        return () => clearTimeout(timer);
-    }, [filter.minPrice,filter.maxPrice, search]);
-
-
-    useEffect(() => {
+        
         setFilter({
             ...filter,
             offset: filter.limit * (page - 1)
         })
+        setSearchParams(prev => {
+            const params = new URLSearchParams(prev);
+            params.set("offset", filter.limit * (page - 1));
+            return params;
+        });
     }, [page])
 
     function handleFilterChange(event) {
         const { name, value } = event.target;
 
-
-        setPage(1)
-        if(name === "order" && (value !== "a-z" || value !== "prezzoMin" || value !== "prezzoMax")){
+        if (name === "order" && (value !== "a-z" || value !== "prezzoMin" || value !== "prezzoMax")) {
             setErrorMessage("Inserisci un tipo di ordinamento esistente")
 
         }
@@ -103,6 +111,12 @@ export default function Products() {
             ...prev,
             [name]: value,
         }));
+
+        setSearchParams(prev => {
+            const params = new URLSearchParams(prev);
+            params.set(name, value);
+            return params;
+        });
     }
 
     function handleFilterRange(event) {
@@ -133,8 +147,13 @@ export default function Products() {
                     maxPrice: Math.max(numericValue, prev.minPrice + gap),
                 };
             }
-
             return prev;
+        });
+
+        setSearchParams(prev => {
+            const params = new URLSearchParams(prev);
+            params.set(name, value);
+            return params;
         });
     }
 
@@ -146,11 +165,11 @@ export default function Products() {
                         <input
                             type="text"
                             name="search"
-                            value={search}
-                            onChange={(e) => setSearch(e.target.value)}
+                            value={filter.search}
+                            onChange={(e) => handleFilterChange(e)}
                             className={styles.searchInput}
                         />
-                        {!search && <span className={styles.animatedPlaceholder}>Es. Crema Idratante</span>}
+                        {!filter.search && <span className={styles.animatedPlaceholder}>Es. Crema Idratante</span>}
                     </div>
                    {/*  <button
                         onClick={() => {
@@ -183,23 +202,23 @@ export default function Products() {
                             Tutte
                         </label>
                         <label>
-                            <input type="radio" name="skinType" value="1" onChange={handleFilterChange} />
+                            <input type="radio" name="skinType" value="1" checked={filter.skinType === "1"} onChange={handleFilterChange} />
                             Normale
                         </label>
                         <label>
-                            <input type="radio" name="skinType" value="2" onChange={handleFilterChange} />
+                            <input type="radio" name="skinType" value="2" checked={filter.skinType === "2"} onChange={handleFilterChange} />
                             Secca
                         </label>
                         <label>
-                            <input type="radio" name="skinType" value="3" onChange={handleFilterChange} />
+                            <input type="radio" name="skinType" value="3" checked={filter.skinType === "3"} onChange={handleFilterChange} />
                             Grassa
                         </label>
                         <label>
-                            <input type="radio" name="skinType" value="4" onChange={handleFilterChange} />
+                            <input type="radio" name="skinType" value="4" checked={filter.skinType === "4"} onChange={handleFilterChange} />
                             Mista
                         </label>
                         <label>
-                            <input type="radio" name="skinType" value="5" onChange={handleFilterChange} />
+                            <input type="radio" name="skinType" value="5" checked={filter.skinType === "5"} onChange={handleFilterChange} />
                             Sensibile
                         </label>
                     </div>
@@ -211,23 +230,23 @@ export default function Products() {
                             Tutte
                         </label>
                         <label>
-                            <input type="radio" name="category" value="1" onChange={handleFilterChange} />
+                            <input type="radio" name="category" value="1"  checked={filter.category === "1"} onChange={handleFilterChange} />
                             Detergenti
                         </label>
                         <label>
-                            <input type="radio" name="category" value="2" onChange={handleFilterChange} />
+                            <input type="radio" name="category" value="2" checked={filter.category === "2"} onChange={handleFilterChange} />
                             Sieri
                         </label>
                         <label>
-                            <input type="radio" name="category" value="3" onChange={handleFilterChange} />
+                            <input type="radio" name="category" value="3" checked={filter.category === "3"} onChange={handleFilterChange} />
                             Creme Idratanti
                         </label>
                         <label>
-                            <input type="radio" name="category" value="4" onChange={handleFilterChange} />
+                            <input type="radio" name="category" value="4" checked={filter.category === "4"} onChange={handleFilterChange} />
                             Maschere
                         </label>
                         <label>
-                            <input type="radio" name="category" value="5" onChange={handleFilterChange} />
+                            <input type="radio" name="category" value="5" checked={filter.category === "5"} onChange={handleFilterChange} />
                             Tonici
                         </label>
                     </div>
@@ -259,7 +278,7 @@ export default function Products() {
                             <h2>Prodotti trovati: {totalProduct}</h2>
                             <div className="sectionOrder">
                                 <label className={styles.labelLimit} htmlFor="ordina">Ordina per: </label>
-                                <select className={styles.selectLimit} name="order" id="ordina" value={filter.order} onChange={(event) => handleFilterChange(event) }>
+                                <select className={styles.selectLimit} name="order" id="ordina" value={filter.order} onChange={(e) => handleFilterChange(event)}>
                                     <option value="a-z">Nome A-Z</option>
                                     <option value="prezzoMin">Prezzo crescente</option>
                                     <option value="prezzoMax">Prezzo decrescente</option>
