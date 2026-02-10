@@ -2,6 +2,11 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import styles from "../styles/WelcomePopup.module.css";
 
+function validateEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    return emailRegex.test(email.trim());
+}
+
 
 export default function WelcomePopup() {
     const backEndUrl = import.meta.env.VITE_BACKEND_URL;
@@ -26,37 +31,33 @@ export default function WelcomePopup() {
     }
 
     async function handleSubmit(event) {
-        setIsLoading(true)
         event.preventDefault();
         setMessage({ text: "", type: "" });
 
+        if (!validateEmail(email)) {
+            setMessage({ text: "Inserisci una email valida", type: "error" });
+            return;
+        }
+
+        setIsLoading(true);
+
         try {
-            const response = await axios.post(`${backEndUrl}/api/sendpopup`, {
-                email: email
-            });
+            await axios.post(`${backEndUrl}/api/sendpopup`, { email });
 
             setMessage({
                 text: "Grazie per esserti iscritto! Controlla la tua email.",
                 type: "success"
             });
 
-            // Salva che l'utente ha visto il popup
             localStorage.setItem('hasSeenWelcomePopup', 'true');
 
-            // Chiudi il popup dopo 2 secondi
-            setTimeout(() => {
-                setIsVisible(false);
-            }, 2000);
+            setTimeout(() => setIsVisible(false), 2000);
 
         } catch (error) {
             console.error("Errore iscrizione:", error);
-            const errorMessage = error.response?.data?.message ||
-                "Si è verificato un errore. Riprova più tardi.";
+            const errorMessage = error.response?.data?.message || "Si è verificato un errore. Riprova più tardi.";
 
-            setMessage({
-                text: errorMessage,
-                type: "error"
-            });
+            setMessage({ text: errorMessage, type: "error" });
         } finally {
             setIsLoading(false);
         }
