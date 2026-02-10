@@ -56,7 +56,7 @@ export default function Products() {
 
     useEffect(() => {
         setPage(1);
-    }, [debouncedSearch, debouncedMinPrice, debouncedMaxPrice]);
+    }, [filter.category, filter.skinType, debouncedSearch, debouncedMinPrice, debouncedMaxPrice]);
 
     function loadProducts() {
         window.scrollTo({
