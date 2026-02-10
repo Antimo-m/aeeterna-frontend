@@ -1,35 +1,41 @@
 .main {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    height: 80vh;
+    justify-content: center;
     text-align: center;
-    padding: 20px;
+    padding-top: 200px; 
+    padding-bottom: 150px;
+    min-height: 70vh; 
+    font-family: "Montserrat", sans-serif;
+    box-sizing: border-box;
 }
 
 .container {
-    max-width: 500px;
+    max-width: 600px;
 }
 
-h1 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
+.main h1 {
+    font-size: 80px; /* Leggermente più piccolo del 100px per far stare la frase */
+    font-weight: 300; 
+    color: #9FAD96; 
+    margin-bottom: 20px;
+    letter-spacing: 2px;
 }
 
-p {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
+.main p {
+    font-size: 18px;
+    color: #7a7a7a;
+    line-height: 1.6;
+    margin-bottom: 10px;
 }
 
-.goShop {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #0077cc;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
+/* Stile per il countdown */
+.counterText {
+    font-size: 14px;
+    color:  #9FAD96 !important;
+    margin-bottom: 30px;
+    font-weight: 500;
+    letter-spacing: 1px;
 }
 
-.goShop:hover {
-    background-color: #005fa3;
-}

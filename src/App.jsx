@@ -11,9 +11,13 @@ import WelcomePopup from "./components/WelcomePopup"
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import NotFound from "./pages/NotFound"
 import { WishListContextProvider } from "./contexts/WishListContext"
-import { useState } from "react"
 import { MessageProvider } from "./contexts/MessageContext"
 import Checkout from "./pages/Checkout"
+import {useState} from "react"
+import ScrollToTop from "./components/ScrollToTop"
+import Community from "./pages/Community"
+
+
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -31,6 +35,7 @@ function App() {
             <BrowserRouter>
               <CartPreview />
               <WelcomePopup />
+              <ScrollToTop />
               <Routes>
                 <Route path="/checkout" element={<Checkout />} />
                 <Route element={<DefaultLayout searchTerm={searchTerm} onSearch={handleSearch} />}>
@@ -39,6 +44,7 @@ function App() {
                   <Route path="/prodotti" element={ <Products /> } />
                   <Route path="/wishlist" element={<WishList />} />
                   <Route path="/cart" element={<CartPage />} />
+                  <Route path="/community" element={<Community/> }/>
                   <Route path="*" element={<NotFound />} />
                 </Route>
               </Routes>

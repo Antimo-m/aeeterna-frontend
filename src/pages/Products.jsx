@@ -13,7 +13,7 @@ const backupFilter = {
     minPrice: "0",
     maxPrice: "999",
     limit: "10",
-    offset: "0",
+    page: "1",
     order: "a-z"
 }
 
@@ -27,7 +27,6 @@ export default function Products() {
 
     const [products, setProducts] = useState([]);
     const [pageLoad, setPageLoad] = useState(false);
-    const [page, setPage] = useState(1);
     const [search, setSearch] = useState("")
     const [errorMessage, setErrorMessage] = useState("");
     const [openFilter, setOpenFilter] = useState(false);
@@ -94,16 +93,16 @@ export default function Products() {
 
     useEffect(() => {
         
-        setFilter({
-            ...filter,
-            offset: filter.limit * (page - 1)
-        })
-        setSearchParams(prev => {
-            const params = new URLSearchParams(prev);
-            params.set("offset", filter.limit * (page - 1));
-            return params;
-        });
-    }, [page])
+    //     setFilter({
+    //         ...filter,
+    //         page: 
+    //     })
+    //     setSearchParams(prev => {
+    //         const params = new URLSearchParams(prev);
+    //         params.set("offset", filter.limit * (page - 1));
+    //         return params;
+    //     });
+    // }, [page])
 
     function handleFilterChange(event) {
         const { name, value } = event.target;
@@ -321,9 +320,9 @@ export default function Products() {
                                 </select>
                             </div>
                             <div>
-                                <button className={styles.navButton} disabled={page <= 1} onClick={() => setPage((cur) => cur - 1)}>Indietro</button>
-                                <span className={styles.spanButton}>Pagina {page} / {totalPage}</span>
-                                <button disabled={page === totalPage} className={styles.navButton} onClick={() => setPage((cur) => cur + 1)}>Avanti</button>
+                                <button className={styles.navButton} disabled={filter.page <= 1} onClick={() => setFilter(prev => { return {...prev, page: parseInt(prev.page) - 1}})}>Indietro</button>
+                                <span className={styles.spanButton}>Pagina {filter.page} / {totalPage}</span>
+                                <button disabled={filter.page === totalPage} className={styles.navButton} onClick={() =>  setFilter(prev => { return {...prev, page: parseInt(prev.page) + 1}})}>Avanti</button>
                             </div>
                         </div>
                     </>
