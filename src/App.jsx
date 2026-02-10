@@ -13,11 +13,10 @@ import NotFound from "./pages/NotFound"
 import { WishListContextProvider } from "./contexts/WishListContext"
 import { MessageProvider } from "./contexts/MessageContext"
 import Checkout from "./pages/Checkout"
-import {useState} from "react"
+import { useState } from "react"
 import ScrollToTop from "./components/ScrollToTop"
 import Community from "./pages/Community"
-
-
+import OrderSummaryPage from "./pages/OrderSummaryPage"
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -37,14 +36,15 @@ function App() {
               <WelcomePopup />
               <ScrollToTop />
               <Routes>
-                <Route path="/checkout" element={<Checkout />} />
                 <Route element={<DefaultLayout searchTerm={searchTerm} onSearch={handleSearch} />}>
                   <Route path="/" element={<Home searchTerm={searchTerm} />} />
                   <Route path="/productdetails/:slug" element={<ProductDetails />} />
-                  <Route path="/prodotti" element={ <Products /> } />
+                  <Route path="/prodotti" element={<Products />} />
                   <Route path="/wishlist" element={<WishList />} />
+                  <Route path="/checkout" element={<Checkout />} />
                   <Route path="/cart" element={<CartPage />} />
-                  <Route path="/community" element={<Community/> }/>
+                  <Route path="/community" element={<Community />} />
+                  <Route path="/ordersummary" element={<OrderSummaryPage />} />
                   <Route path="*" element={<NotFound />} />
                 </Route>
               </Routes>
