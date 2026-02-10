@@ -14,6 +14,7 @@ import { WishListContextProvider } from "./contexts/WishListContext"
 import { useState } from "react"
 import { MessageProvider } from "./contexts/MessageContext"
 import Checkout from "./pages/Checkout"
+import OrderSummaryPage from "./pages/OrderSummaryPage"
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -36,9 +37,10 @@ function App() {
                 <Route element={<DefaultLayout searchTerm={searchTerm} onSearch={handleSearch} />}>
                   <Route path="/" element={<Home searchTerm={searchTerm} />} />
                   <Route path="/productdetails/:slug" element={<ProductDetails />} />
-                  <Route path="/prodotti" element={ <Products /> } />
+                  <Route path="/prodotti" element={<Products />} />
                   <Route path="/wishlist" element={<WishList />} />
                   <Route path="/cart" element={<CartPage />} />
+                  <Route path="/ordersummary" element={<OrderSummaryPage />} />
                   <Route path="*" element={<NotFound />} />
                 </Route>
               </Routes>

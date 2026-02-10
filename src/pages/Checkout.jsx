@@ -30,27 +30,27 @@ export default function Checkout() {
         type: "",
         message: ""
     })
-    const { cartList, calcTotal } = useCart();
+    const { cartList, calcTotal, resetCarrello } = useCart();
     const [dataForm, setDataForm] = useState(backupForm);
     const [checkeboxData, setCheckboxData] = useState(false)
     const backEndUrl = import.meta.env.VITE_BACKEND_URL;
 
     const navigate = useNavigate()
 
-    useEffect(() => {
-        if (errorMessage.type !== "") {
-            const timer = setTimeout(() => {
-                setErrorMessage({ type: "", message: "" });
+    // useEffect(() => {
+    //     if (errorMessage.type !== "") {
+    //         const timer = setTimeout(() => {
+    //             setErrorMessage({ type: "", message: "" });
 
 
-                if (errorMessage.type === "correct") {
-                    navigate("/prodotti");
-                }
-            }, 3000);
+    //             if (errorMessage.type === "correct") {
+    //                 navigate("/ordersummary");
+    //             }
+    //         }, 2000);
 
-            return () => clearTimeout(timer);
-        }
-    }, [errorMessage, navigate]);
+    //         return () => clearTimeout(timer);
+    //     }
+    // }, [errorMessage, navigate]);
 
 
     function handleForm(event) {
@@ -81,7 +81,7 @@ export default function Checkout() {
         }
     }
 
-    function submitForm(e) {
+    async function submitForm(e) {
 
         e.preventDefault();
         if (checkeboxData) {
@@ -186,22 +186,6 @@ export default function Checkout() {
             }
         })
 
-        // setDataForm({
-        //     ...dataForm,
-        //     products: productsForm
-        // })
-
-        // console.log({
-        //     ...dataForm,
-        //     products: productsForm,
-        //     total_price: totalPrice
-        // });
-
-        // setErrorMessage({
-        //     type: "correct",
-        //     message: "Ordine inviato con successo"
-        // })
-
         const orderData = {
             name,
             surname,
@@ -220,15 +204,45 @@ export default function Checkout() {
             products: productsForm
         }
 
-
         try {
-            const response = axios.post(`${backEndUrl}/api/neworder`, orderData);
+            const response = await axios.post(`${backEndUrl}/api/neworder`, orderData);
 
             console.log("✅ Ordine creato:", response.data);
+
+            // Salva i dati completi per il riepilogo
+            const completedOrder = {
+                orderId: `ORD-${Date.now()}-${Math.random().toString(36).substr(2, 9).toUpperCase()}`,
+                date: new Date().toISOString(),
+                name,
+                surname,
+                email,
+                phone,
+                street,
+                city,
+                province,
+                postal_code,
+                country,
+                items: cartList,
+                subtotal: calcTotal(cartList),
+                shipping: shipping_price || 0,
+                total: totalPrice
+            };
+
+            localStorage.setItem('lastOrder', JSON.stringify(completedOrder));
+
+            // Svuota il carrello
+            resetCarrello();
+
             setErrorMessage({
                 type: "correct",
                 message: "Ordine inviato con successo!"
             });
+
+            // Naviga dopo 2 secondi
+            setTimeout(() => {
+                navigate("/ordersummary");
+            }, 2000);
+
         } catch (error) {
             console.error("❌ Errore:", error.response?.data || error.message);
             setErrorMessage({
@@ -237,6 +251,9 @@ export default function Checkout() {
             });
         }
     }
+
+
+
 
     return (
         <>
