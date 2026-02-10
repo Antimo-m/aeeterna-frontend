@@ -68,6 +68,10 @@ export default function Products() {
             });
     }
 
+    // useEffect(() => {
+    //     loadProducts();
+    // }, [filter.offset, filter.limit, filter.order])
+
     useEffect(() => {
         
         setFilter({
@@ -126,7 +130,9 @@ export default function Products() {
         if (name === "maxPrice" && (value < 1 || value > 999)) {
             setErrorMessage("Inserisci un prezzo massimo valido")
         }
+ 
 
+        setPage(1)
         setFilter(prev => {
             if (name === "minPrice") {
                 return {
@@ -165,7 +171,7 @@ export default function Products() {
                         />
                         {!filter.search && <span className={styles.animatedPlaceholder}>Es. Crema Idratante</span>}
                     </div>
-                    <button
+                   {/*  <button
                         onClick={() => {
                             setPage(1); // torna alla prima pagina quando cerchi
                             loadProducts(); // richiama la funzione che carica i prodotti
@@ -174,7 +180,7 @@ export default function Products() {
                         className={styles.searchButton}
                     >
                         CERCA
-                    </button>
+                    </button> */}
                 </div>
             </div>
 
