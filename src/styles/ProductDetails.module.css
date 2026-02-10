@@ -98,6 +98,7 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
+
 .sectionPrice button:first-child:hover {
     background-color: #725200;
 }
@@ -300,13 +301,13 @@
 
 }
 
-.buttonQuantity{
+.buttonQuantity {
     display: flex;
     gap: 10px;
     align-items: center;
 }
 
-.buttonQuantity button{
+.buttonQuantity button {
     background: #c4a35a;
     color: #ffffff;
     border: none;
@@ -317,3 +318,4 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
+
