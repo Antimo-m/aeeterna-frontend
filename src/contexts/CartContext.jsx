@@ -39,7 +39,7 @@ function CartContextProvider({ children }) {
                     : product
             );
         });
-        setShowPreview(true);
+        // setShowPreview(true);
 
     }
 
