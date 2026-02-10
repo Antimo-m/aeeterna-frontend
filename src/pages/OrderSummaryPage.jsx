@@ -73,13 +73,13 @@ export default function OrderSummaryPage() {
                             </div>
                             <div className={style.row}>
                                 <h3>Spedizione</h3>
-                                {orderData.shipping === 0 ? (
+                                {orderData.shipping_price === 0 || orderData.shipping_price === null ? (
                                     <div className={style.shippingContainer}>
                                         <h3 className={style.oldPrice}>4.99€</h3>
                                         <h3>0.00€</h3>
                                     </div>
                                 ) : (
-                                    <h3>{orderData.shipping.toFixed(2)}€</h3>
+                                    <h3>{orderData.shipping_price.toFixed(2)}€</h3>
                                 )}
                             </div>
                             <div className={`${style.row} ${style.totalRow}`}>

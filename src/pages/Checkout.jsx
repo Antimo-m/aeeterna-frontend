@@ -213,6 +213,7 @@ export default function Checkout() {
                 top: 0,
                 behavior: 'smooth'
             });
+
             // Salva i dati completi per il riepilogo
             const completedOrder = {
                 name,
@@ -225,9 +226,9 @@ export default function Checkout() {
                 postal_code,
                 country,
                 items: cartList,
-                subtotal: calcTotal(cartList),
-                shipping: shipping_price || 0,
-                total: totalPrice
+                subtotal: parseFloat(calcTotal(cartList).toFixed(2)),
+                shipping_price: shipping_price === null ? 0 : parseFloat(shipping_price.toFixed(2)),
+                total: parseFloat(totalPrice.toFixed(2))
             };
 
             localStorage.setItem('lastOrder', JSON.stringify(completedOrder));
