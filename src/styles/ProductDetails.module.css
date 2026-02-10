@@ -46,11 +46,42 @@
     margin-top: 4px;
 }
 
+.leftArrow {
+    position: absolute;
+    height: 100%;
+    left: 0px;
+    display: flex;
+    align-items: center;
+    font-size: 3vw;
+    color: white;
+    border-top-right-radius: 100px;
+    border-bottom-right-radius: 100px;
+    z-index: 1;
+}
+
+.arrowHover:hover{
+    background-color: rgba(128, 128, 128, 0.2);
+}
+
+.rightArrow {
+    position: absolute;
+    height: 100%;
+    right: 0px;
+    display: flex;
+    align-items: center;
+    font-size: 3vw;
+    color: white;
+    border-top-left-radius: 100px;
+    border-bottom-left-radius: 100px;
+    z-index: 1;
+}
+
 
 .img {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 .img img {
@@ -318,4 +349,3 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
-

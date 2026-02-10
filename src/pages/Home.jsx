@@ -23,6 +23,21 @@ export default function Home({ searchTerm }) {
     const { addCart } = useCart();
     const [pageLoad, setPageLoad] = useState(false)
     const { wishList, addWishList, inWishList, removeWishList } = useWishList();
+    const [indexImage, setIndexImage] = useState(1);
+    const [slideDir, setSlideDir] = useState("slide-left")
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setSlideDir("slide-right")
+
+            setTimeout(() => {
+                setIndexImage(prev => (prev >= 3 ? 1 : prev + 1))
+                setSlideDir("slide-left")
+            }, 600)
+        }, 5000)
+
+        return () => clearInterval(interval)
+    }, [])
 
 
 
@@ -31,9 +46,6 @@ export default function Home({ searchTerm }) {
     const handleButtonClick = () => {
         navigate('/prodotti?category=0&skinType=0&limit=10&offset=0&minPrice=0&maxPrice=9999&search=&order=a-z');
     };
-
-
-
     const filteredProducts = products.filter((product) =>
         product && product.name && typeof product.name === 'string' && product.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
@@ -64,7 +76,11 @@ export default function Home({ searchTerm }) {
     return (
         <>
             {/*  Section HeroBunner */}
-            <section className={styles.heroContainer}>
+            <section
+                className={`${styles.heroContainer} ${styles[slideDir]}`}
+                style={{
+                    backgroundImage: `url("src/assets/images/heroBanner${indexImage}.png")`
+                }}>
                 <div className={styles.heroContent}>
                     <h1 className={styles.title}>Bellezza senza tempo</h1>
                     <p className={styles.subtitle}>
