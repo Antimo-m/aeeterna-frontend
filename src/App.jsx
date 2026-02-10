@@ -33,12 +33,12 @@ function App() {
               <CartPreview />
               <WelcomePopup />
               <Routes>
-                <Route path="/checkout" element={<Checkout />} />
                 <Route element={<DefaultLayout searchTerm={searchTerm} onSearch={handleSearch} />}>
                   <Route path="/" element={<Home searchTerm={searchTerm} />} />
                   <Route path="/productdetails/:slug" element={<ProductDetails />} />
                   <Route path="/prodotti" element={<Products />} />
                   <Route path="/wishlist" element={<WishList />} />
+                  <Route path="/checkout" element={<Checkout />} />
                   <Route path="/cart" element={<CartPage />} />
                   <Route path="/ordersummary" element={<OrderSummaryPage />} />
                   <Route path="*" element={<NotFound />} />

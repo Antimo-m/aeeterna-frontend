@@ -209,10 +209,12 @@ export default function Checkout() {
 
             console.log("✅ Ordine creato:", response.data);
 
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
             // Salva i dati completi per il riepilogo
             const completedOrder = {
-                orderId: `ORD-${Date.now()}-${Math.random().toString(36).substr(2, 9).toUpperCase()}`,
-                date: new Date().toISOString(),
                 name,
                 surname,
                 email,
@@ -238,10 +240,9 @@ export default function Checkout() {
                 message: "Ordine inviato con successo!"
             });
 
-            // Naviga dopo 2 secondi
             setTimeout(() => {
                 navigate("/ordersummary");
-            }, 2000);
+            }, 1000);
 
         } catch (error) {
             console.error("❌ Errore:", error.response?.data || error.message);
