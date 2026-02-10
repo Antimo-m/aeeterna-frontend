@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import styles from "../styles/Products.module.css"
-import { useNavigate, useSearchParams } from "react-router-dom"
+import {useSearchParams } from "react-router-dom"
 import axios from "axios"
 import CardProduct from "../components/CardProducts"
 import LoadWrapper from "../components/LoadWrapper"
@@ -54,7 +54,7 @@ export default function Products() {
     }, [filter.category,filter.skinType,filter.limit, filter.offset, filter.order, debouncedSearch, debouncedMinPrice,debouncedMaxPrice]);
 
     useEffect(() => {
-        setPage(1);
+        
     }, [filter.category, filter.skinType, debouncedSearch, debouncedMinPrice, debouncedMaxPrice]);
 
     function loadProducts() {
@@ -91,7 +91,7 @@ export default function Products() {
     //     loadProducts();
     // }, [filter.offset, filter.limit, filter.order])
 
-    useEffect(() => {
+  /*   useEffect(() => { */
         
     //     setFilter({
     //         ...filter,
@@ -129,6 +129,7 @@ export default function Products() {
         setFilter(prev => ({
             ...prev,
             [name]: value,
+            page : 1
         }));
 
         setSearchParams(prev => {
@@ -151,7 +152,8 @@ export default function Products() {
         }
  
 
-        setPage(1)
+       
+
         setFilter(prev => {
             if (name === "minPrice") {
                 return {
