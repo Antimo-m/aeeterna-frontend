@@ -4,6 +4,7 @@ import { useCart } from "../contexts/CartContext.jsx";
 import styles from "../styles/Quiz.module.css";
 import CardProducts from "../components/CardProducts.jsx";
 const InsideOutQuiz = () => {
+  const backEndUrl = import.meta.env.VITE_BACKEND_URL;
   const { addCart } = useCart();
 
   const [step, setStep] = useState(0);
@@ -23,7 +24,7 @@ const InsideOutQuiz = () => {
   const questions = [
     {
       text: "La tua pelle si è appena svegliata: chi c'è alla console dei comandi?",
-      image: "http://localhost:3000/image/prima-domanda.jpeg",
+      image: `${backEndUrl}/image/prima-domanda.jpeg`,
       options: [
         {
           label: "☀️ Gioia! Splendo più della Città delle Nuvole",
@@ -50,7 +51,7 @@ const InsideOutQuiz = () => {
     },
     {
       text: "Sei nel 'Pensiero Astratto' e devi scegliere il tuo superpotere:",
-      image: "http://localhost:3000/image/seconda-domanda.jpeg",
+      image: `${backEndUrl}/image/seconda-domanda.jpeg`,
       options: [
         { label: "✨ Luce infinita per un colorito da Oscar", type: "Gioia" },
         {
@@ -73,7 +74,7 @@ const InsideOutQuiz = () => {
     },
     {
       text: "Immagina la tua skincare routine come un 'Treno dei Pensieri':",
-      image: "http://localhost:3000/image/terza-domanda.jpeg",
+      image: `${backEndUrl}/image/terza-domanda.jpeg`,
       options: [
         {
           label: "🌈 Un viaggio veloce, radioso e senza intoppi",
@@ -107,19 +108,19 @@ const InsideOutQuiz = () => {
         {
           slug: "pure-cleansing-gel-100ml",
           name: "Pure Cleansing Gel 100ml",
-          image: "http://localhost:3000/image/milk-cleanser-150ml.jpg",
+          image: `${backEndUrl}/image/milk-cleanser-150ml.jpg`,
           price: 19.90,
         },
         {
           slug: "vitamin-c-brightening-serum-30ml",
           name: "Vitamin C Brightening Serum",
-          image: "http://localhost:3000/image/hyaluronic-acid-serum-30ml.jpg",
+          image: `${backEndUrl}/image/hyaluronic-acid-serum-30ml.jpg`,
           price: 29.90,
         },
         {
           slug: "daily-hydrating-cream-50ml",
           name: "Daily Hydrating Cream",
-          image: "http://localhost:3000/image/rich-nourishing-cream-50ml.jpg",
+          image: `${backEndUrl}/image/rich-nourishing-cream-50ml.jpg`,
           price: 32.90,
         },
       ],
@@ -131,19 +132,19 @@ const InsideOutQuiz = () => {
         {
           slug: "milk-cleanser-150ml",
           name: "Milk Cleanser 150ml",
-          image: "http://localhost:3000/image/milk-cleanser-150ml.jpg",
+          image: `${backEndUrl}/image/milk-cleanser-150ml.jpg`,
           price: 19.90,
         },
         {
           slug: "hyaluronic-acid-serum-30ml",
           name: "Hyaluronic Acid Serum",
-          image: "http://localhost:3000/image/hyaluronic-acid-serum-30ml.jpg",
+          image: `${backEndUrl}/image/hyaluronic-acid-serum-30ml.jpg`,
           price: 29.90,
         },
         {
           slug: "rich-nourishing-cream-50ml",
           name: "Rich Nourishing Cream",
-          image: "http://localhost:3000/image/rich-nourishing-cream-50ml.jpg",
+          image: `${backEndUrl}/image/rich-nourishing-cream-50ml.jpg`,
           price: 32.90,
         },
       ],
@@ -155,21 +156,21 @@ const InsideOutQuiz = () => {
         {
           slug: "charcoal-gel-cleanser-120ml",
           name: "Charcoal Gel Cleanser",
-          image: "http://localhost:3000/image/charcoal-gel-cleanser-120ml.jpg",
+          image: `${backEndUrl}/image/charcoal-gel-cleanser-120ml.jpg`,
           price: 20.90,
         },
         {
           slug: "niacinamide-pore-refining-serum-30ml",
           name: "Niacinamide Pore Refining Serum",
           image:
-            "http://localhost:3000/image/niacinamide-pore-refining-serum-30ml.jpg",
+            `${backEndUrl}/image/niacinamide-pore-refining-serum-30ml.jpg`,
           price: 27.90,
         },
         {
           slug: "oil-free-mattifying-cream-50ml",
           name: "Oil-Free Mattifying Cream",
           image:
-            "http://localhost:3000/image/oil-free-mattifying-cream-50ml.jpg",
+            `${backEndUrl}/image/oil-free-mattifying-cream-50ml.jpg`,
           price: 24.90,
         },
       ],
@@ -182,20 +183,19 @@ const InsideOutQuiz = () => {
           slug: "balancing-witch-hazel-toner-150ml",
           name: "Balancing Witch Hazel Toner",
           image:
-            "http://localhost:3000/image/balancing-witch-hazel-toner-150ml.jpg",
+            `${backEndUrl}/image/balancing-witch-hazel-toner-150ml.jpg`,
           price: 18.90,
         },
         {
           slug: "exfoliating-glycolic-toner-120ml",
           name: "Exfoliating Glycolic Toner",
-          image:
-            "http://localhost:3000/image/exfoliating-glycolic-toner-120ml.jpg",
+          image: `${backEndUrl}/image/exfoliating-glycolic-toner-120ml.jpg`,
           price: 22.90,
         },
         {
           slug: "gel-moisturizer-50ml",
           name: "Gel Moisturizer",
-          image: "http://localhost:3000/image/gel-moisturizer-50ml.jpg",
+          image: `${backEndUrl}/image/gel-moisturizer-50ml.jpg`,
           price: 23.90,
         },
       ],
@@ -207,33 +207,32 @@ const InsideOutQuiz = () => {
         {
           slug: "sensitive-cream-cleanser-100ml",
           name: "Sensitive Cream Cleanser",
-          image:
-            "http://localhost:3000/image/sensitive-cream-cleanser-100ml.jpg",
+          image: `${backEndUrl}/image/sensitive-cream-cleanser-100ml.jpg`,
           price: 23.90,
         },
         {
           slug: "soothing-centella-serum-30ml",
           name: "Soothing Centella Serum",
-          image: "http://localhost:3000/image/soothing-centella-serum-30ml.jpg",
+          image: `${backEndUrl}/image/soothing-centella-serum-30ml.jpg`,
           price: 28.90,
         },
         {
           slug: "sensitive-barrier-cream-50ml",
           name: "Sensitive Barrier Cream",
-          image: "http://localhost:3000/image/sensitive-barrier-cream-50ml.jpg",
+          image: `${backEndUrl}/image/sensitive-barrier-cream-50ml.jpg`,
           price: 29.90,
         },
       ],
     },
   };
 
- // Sostituisci la vecchia funzione addToCart con questa:
+  // Sostituisci la vecchia funzione addToCart con questa:
   const handleAddToCart = (product) => {
     // Il tuo addCart nel context accetta il prodotto
     // e gestisce già il parsing del prezzo (se lo hai corretto in numero)
     // e la quantità.
     addCart(product);
-    
+
     // Opzionale: un piccolo feedback o apri la preview
     console.log("Prodotto aggiunto:", product.name);
   };
@@ -335,7 +334,7 @@ const InsideOutQuiz = () => {
             {finalResult.products &&
               finalResult.products.map((p, i) => (
                 <CardProducts key={i}
-                  product={p}/>
+                  product={p} />
                 // <div key={i} className={styles.productCard}>
                 //   {/* Rendiamo l'immagine cliccabile per il dettaglio */}
                 //   <Link
