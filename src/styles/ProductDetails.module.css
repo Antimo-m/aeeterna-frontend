@@ -82,13 +82,39 @@
     justify-content: center;
     align-items: center;
     position: relative;
+    width: 100%;
 }
 
 .img img {
     max-height: 420px;
     object-fit: contain;
     filter: drop-shadow(0 25px 35px rgba(0, 0, 0, 0.25));
+    width: auto;
 }
+
+.figureGroup{
+    position: relative;
+    min-width: 325px;
+    display: flex;
+    justify-content: center;
+}
+
+.figureGroup span {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2.5rem;
+    color: #9fad96; 
+    cursor: pointer;
+    z-index: 2;
+    user-select: none;
+}
+
+.arrowHover:hover {
+    color: #d4b46a;
+    transition: color 0.3s ease;
+}
+
 
 
 .description {
@@ -278,6 +304,11 @@
 
     .img img {
         max-height: 320px;
+    }
+
+    .figureGroup span {
+        font-size: 2rem;
+        border-radius: 0;
     }
 
     .description {

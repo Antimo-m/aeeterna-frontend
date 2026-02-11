@@ -54,9 +54,9 @@ export default function ProductDetails() {
         return <NotFoundProduct />
     }
 
-    function updateImageIndex(newQuantity){
-        if(newQuantity < 0)return;
-        if(newQuantity > product.images.length - 1)return
+    function updateImageIndex(newQuantity) {
+        if (newQuantity < 0) return;
+        if (newQuantity > product.images.length - 1) return
         setIndexImage(newQuantity)
     }
 
@@ -76,9 +76,11 @@ export default function ProductDetails() {
                                 </span>
                             </div>
                             <div className={style.img}>
-                                <span onClick={() => updateImageIndex( indexImage - 1)} className={`${style.leftArrow} ${style.arrowHover}`}><i className="bi bi-arrow-left-short"></i></span>
-                                <img src={product.images[indexImage].path} alt="" />
-                                <span onClick={() => updateImageIndex( indexImage + 1)} className={`${style.rightArrow} ${style.arrowHover}`}><i className="bi bi-arrow-right-short"></i></span>
+                                <div className={style.figureGroup}>
+                                    <span onClick={() => updateImageIndex(indexImage - 1)} className={`${style.leftArrow} ${style.arrowHover}`}><i className="bi bi-arrow-left-short"></i></span>
+                                    <img src={product.images[indexImage].path} alt="" />
+                                    <span onClick={() => updateImageIndex(indexImage + 1)} className={`${style.rightArrow} ${style.arrowHover}`}><i className="bi bi-arrow-right-short"></i></span>
+                                </div>
                             </div>
                             <div className={style.description}>
                                 <div className={style.sectionPrice}>
