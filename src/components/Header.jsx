@@ -66,6 +66,7 @@ export default function Header({ searchTerm,  onSearch }) {
           <nav className={styles.desktopNav}>
             <NavLink to={"/"} className={styles.navLink}>Home</NavLink>
             <NavLink to={"/prodotti"} className={styles.navLink}>Prodotti</NavLink>
+            <NavLink to={"/quiz"} className={styles.navLink}>Quiz</NavLink>
           </nav>
 
           {/* Right section Desktop */}
@@ -144,6 +145,7 @@ export default function Header({ searchTerm,  onSearch }) {
           <nav className={styles.mobileNav}>
             <NavLink onClick={closeMenu} to={"/"} className={styles.navLink}>Home</NavLink>
             <NavLink onClick={closeMenu} to={"/prodotti"} className={styles.navLink}>Prodotti</NavLink>
+            <NavLink onClick={closeMenu} to={"/quiz"} className={styles.navLink}>Quiz</NavLink>
           </nav>
         </div>
       </div>
