@@ -18,6 +18,9 @@ import ScrollToTop from "./components/ScrollToTop"
 import Community from "./pages/Community"
 import OrderSummaryPage from "./pages/OrderSummaryPage"
 import SendContacts from "./pages/SendContacts"
+import Founders from "./pages/Founders"
+
+
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -47,6 +50,7 @@ function App() {
                   <Route path="/community" element={<Community />} />
                   <Route path="/ordersummary" element={<OrderSummaryPage />} />
                   <Route path="/sendcontacts" element={<SendContacts />} />
+                  <Route path="/founders" element={<Founders/>} />
                   <Route path="*" element={<NotFound />} />
                 </Route>
               </Routes>
