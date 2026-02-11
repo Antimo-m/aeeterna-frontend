@@ -17,6 +17,7 @@ import { useState } from "react"
 import ScrollToTop from "./components/ScrollToTop"
 import Community from "./pages/Community"
 import OrderSummaryPage from "./pages/OrderSummaryPage"
+import SendContacts from "./pages/SendContacts"
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -45,6 +46,7 @@ function App() {
                   <Route path="/cart" element={<CartPage />} />
                   <Route path="/community" element={<Community />} />
                   <Route path="/ordersummary" element={<OrderSummaryPage />} />
+                  <Route path="/sendcontacts" element={<SendContacts />} />
                   <Route path="*" element={<NotFound />} />
                 </Route>
               </Routes>
