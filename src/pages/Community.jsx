@@ -2,7 +2,7 @@ import styles from "../styles/Community.module.css";
 
 
 export default function Community() {
-    const card = [
+    const cards = [
         {
             id: 1,
             name: "Dixie D'Amelio",
@@ -42,7 +42,7 @@ export default function Community() {
         {
             id: 7,
             name: "Patrick Bateman",
-            message: "Patrick bateman ama i nostri prodotti, si anche lui che è una persona cosi cauta e calma che ama il pianeta e la natura, lui che è anche chiamato il ghandi di wallstreet.",
+            message: "Patrick bateman facoltoso imprenditore di wallstreet,  ",
             image: "/image/patrick.jpg"
         },
         {
@@ -54,7 +54,7 @@ export default function Community() {
         {
             id: 9,
             name: "Donald 'THE ORANGE' Trump",
-            message: "L'attuale presidente Americano non ha mai usato i nostri prodotti, ma volevamo mostrarvi come è stata ridotta la sua pelle dai prodotti della concorenza, per questo scegliete sempre prodottti originali aeterna skin.",
+            message: "L'attuale presidente Americano non ha mai usato i nostri prodotti, ma volevamo mostrarvi come è stata ridotta la sua pelle dai prodotti della concorrenza, per questo scegliete sempre prodotti originali Aeterna Skin.",
             image: "/image/trump.jpg"
         }
     ]
@@ -65,7 +65,7 @@ export default function Community() {
                 Scopri le storie di chi ha scelto Aeterna skin e ha vissuto la propria avventura di bellezza.
             </p>
             <div className={styles.grid}>
-                {card.map((card) => (
+                {cards.map((card) => (
                     <div key={card.id} className={styles.card}>
                         <div className={styles.imageWrapper}>
                             <img src={card.image} alt={card.name} className={styles.image} />

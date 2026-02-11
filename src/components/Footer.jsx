@@ -100,7 +100,7 @@ export default function Footer() {
                     <div className={styles.column}>
                         <h3 className={styles.columnTitle}>LA NOSTRA AZIENDA</h3>
                         <ul className={styles.columnList}>
-                            <li><a href="#">Chi siamo noi</a></li>
+                            <li><Link to="/founders">Chi siamo noi</Link></li>
                             <li><a href="#">Lavora per noi</a></li>
                         </ul>
                     </div>
