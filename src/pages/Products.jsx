@@ -66,7 +66,7 @@ export default function Products() {
                 category: filter.category,
                 skinType: filter.skinType,
                 limit: filter.limit,
-                offset: (parseInt(filter.page) - 1) * parseInt(filter.limit),
+                page: filter.page,
                 order: filter.order,
                 search: debouncedSearch,
                 minPrice: debouncedMinPrice,
@@ -84,23 +84,6 @@ export default function Products() {
                 setPageLoad(false);
             });
     }
-
-    // useEffect(() => {
-    //     loadProducts();
-    // }, [filter.offset, filter.limit, filter.order])
-
-  /*   useEffect(() => { */
-        
-    //     setFilter({
-    //         ...filter,
-    //         page: 
-    //     })
-    //     setSearchParams(prev => {
-    //         const params = new URLSearchParams(prev);
-    //         params.set("offset", filter.limit * (page - 1));
-    //         return params;
-    //     });
-    // }, [page])
 
     function handleFilterChange(event) {
         const { name, value } = event.target;
