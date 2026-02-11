@@ -19,8 +19,7 @@ import Community from "./pages/Community"
 import OrderSummaryPage from "./pages/OrderSummaryPage"
 import SendContacts from "./pages/SendContacts"
 import Founders from "./pages/Founders"
-
-
+import InsideOutQuiz from "./pages/QuizPage"
 
 function App() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -44,6 +43,7 @@ function App() {
                   <Route path="/" element={<Home searchTerm={searchTerm} />} />
                   <Route path="/productdetails/:slug" element={<ProductDetails />} />
                   <Route path="/prodotti" element={<Products />} />
+                  <Route path="/quiz" element={<InsideOutQuiz/>}/>
                   <Route path="/wishlist" element={<WishList />} />
                   <Route path="/checkout" element={<Checkout />} />
                   <Route path="/cart" element={<CartPage />} />
