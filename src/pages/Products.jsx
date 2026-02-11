@@ -51,11 +51,9 @@ export default function Products() {
 
     useEffect(() => {
         loadProducts();
-    }, [filter.category,filter.skinType,filter.limit, filter.offset, filter.order, debouncedSearch, debouncedMinPrice,debouncedMaxPrice]);
+    }, [filter.category,filter.skinType,filter.limit,filter.page,filter.order, debouncedSearch, debouncedMinPrice,debouncedMaxPrice]);
 
-    useEffect(() => {
-        
-    }, [filter.category, filter.skinType, debouncedSearch, debouncedMinPrice, debouncedMaxPrice]);
+  
 
     function loadProducts() {
         window.scrollTo({
@@ -68,7 +66,7 @@ export default function Products() {
                 category: filter.category,
                 skinType: filter.skinType,
                 limit: filter.limit,
-                offset: filter.offset,
+                offset: (parseInt(filter.page) - 1) * parseInt(filter.limit),
                 order: filter.order,
                 search: debouncedSearch,
                 minPrice: debouncedMinPrice,
