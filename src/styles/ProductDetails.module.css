@@ -59,10 +59,6 @@
     z-index: 1;
 }
 
-.arrowHover:hover{
-    background-color: rgba(128, 128, 128, 0.2);
-}
-
 .rightArrow {
     position: absolute;
     height: 100%;
