@@ -63,7 +63,10 @@ export default function Header({ searchTerm, onSearch }) {
           <nav className={styles.desktopNav}>
             <NavLink to={`/prodotti?category=0&skinType=0&limit=10&offset=0&minPrice=0&maxPrice=9999&search=&order=a-z`} className={styles.navLink}>Prodotti</NavLink>
             <NavLink to={`/sendcontacts`} className={styles.navLink}>Contattaci</NavLink>
-          </nav>
+            <NavLink to={`/founders`} className={styles.navLink}>Chi siamo</NavLink>
+            </nav>
+
+          
 
           {/* Right section Desktop */}
           <div className={styles.desktopActions}>
