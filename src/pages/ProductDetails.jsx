@@ -22,7 +22,8 @@ export default function ProductDetails() {
     const [product, setProduct] = useState(false)
     const [relatedProducts, setrelatedProducts] = useState([])
     const [indexImage, setIndexImage] = useState(0)
-    const [pageLoad, setPageLoad] = useState(false);
+    const [pageLoad, setPageLoad] = useState(true);
+    const [err, setErr] = useState(false)
 
 
     const { wishList, inWishList, addWishList, removeWishList } = useWishList();
@@ -45,14 +46,13 @@ export default function ProductDetails() {
             })
 
         }).catch((err) => {
-            console.log(err);
-            setPageLoad(true)
+            if(err.response.data.error === "NOT FOUND"){
+                setErr(true)
+                setPageLoad(false)
+            }
         })
     }, [])
 
-    if (!product) {
-        return <NotFoundProduct />
-    }
 
     function updateImageIndex(newQuantity) {
         if (newQuantity < 0) return;
@@ -63,9 +63,11 @@ export default function ProductDetails() {
     return (
         <>
             <main className={style.main}>
+                {err && <NotFoundProduct /> }
                 {pageLoad ?
                     <LoadWrapper />
-                    :
+                    : 
+                    !err && 
                     <>
                         <section className={style.sectionProduct}>
                             <div className={style.name}>
