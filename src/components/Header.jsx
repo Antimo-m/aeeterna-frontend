@@ -61,19 +61,19 @@ export default function Header({ searchTerm, onSearch }) {
 
           {/* Navigation Desktop */}
           <nav className={styles.desktopNav}>
-            <NavLink to={`/prodotti?category=0&skinType=0&limit=10&offset=0&minPrice=0&maxPrice=9999&search=&order=a-z`} className={styles.navLink}>Prodotti</NavLink>
+            <NavLink to={`/prodotti?category=0&skinType=0&limit=10&page=0&minPrice=0&maxPrice=9999&search=&order=a-z`} className={styles.navLink}>Prodotti</NavLink>
             <NavLink to={`/sendcontacts`} className={styles.navLink}>Contattaci</NavLink>
             <NavLink to={"/quiz"} className={styles.navLink}>Quiz</NavLink>
             <NavLink to={`/founders`} className={styles.navLink}>Chi siamo</NavLink>
-            </nav>
+          </nav>
 
-          
+
 
           {/* Right section Desktop */}
           <div className={styles.desktopActions}>
             {/* Search */}
             <div className={styles.searchBox}>
-              <i onClick={() => { navigation(`/prodotti?category=0&skinType=0&limit=10&offset=0&minPrice=0&maxPrice=9999&search=${search}&order=a-z`); setSearch("") }} className={`bi bi-search ${styles.searchIcon}`}></i>
+              <i onClick={() => { navigation(`/prodotti?category=0&skinType=0&limit=10&page=0&minPrice=0&maxPrice=9999&search=${search}&order=a-z`); setSearch("") }} className={`bi bi-search ${styles.searchIcon}`}></i>
               <input
                 type="text"
                 placeholder="Cerca..."
@@ -146,7 +146,7 @@ export default function Header({ searchTerm, onSearch }) {
             <NavLink onClick={closeMenu} to={`/prodotti?category=0&skinType=0&limit=10&page=1&minPrice=0&maxPrice=9999&search=&order=a-z`} className={styles.navLink}>Prodotti</NavLink>
             <NavLink to={`/sendcontacts`} className={styles.navLink}>Contattaci</NavLink>
             <NavLink onClick={closeMenu} to={"/quiz"} className={styles.navLink}>Quiz</NavLink>
-             <NavLink to={`/founders`} className={styles.navLink}>Chi siamo</NavLink>
+            <NavLink to={`/founders`} className={styles.navLink}>Chi siamo</NavLink>
           </nav>
         </div>
       </div>
