@@ -49,13 +49,20 @@ export default function Products() {
     const debouncedMaxPrice = useDebounce(filter.maxPrice, 500);
 
 
+   
     useEffect(() => {
         loadProducts();
-    }, [filter.category,filter.skinType,filter.limit, filter.offset, filter.order, debouncedSearch, debouncedMinPrice,debouncedMaxPrice]);
+    }, [
+        filter.category,
+        filter.skinType,
+        filter.limit,
+        filter.page,
+        filter.order,
+        debouncedSearch,
+        debouncedMinPrice,
+        debouncedMaxPrice
+    ]);
 
-    useEffect(() => {
-        setPage(1);
-    }, [filter.category, filter.skinType, debouncedSearch, debouncedMinPrice, debouncedMaxPrice]);
 
     function loadProducts() {
         window.scrollTo({
@@ -67,8 +74,8 @@ export default function Products() {
             params: {
                 category: filter.category,
                 skinType: filter.skinType,
-                limit: filter.limit,
-                offset: filter.offset,
+                offset: (parseInt(filter.page) - 1) * parseInt(filter.limit),
+                limit: parseInt(filter.limit),
                 order: filter.order,
                 search: debouncedSearch,
                 minPrice: debouncedMinPrice,
@@ -151,7 +158,7 @@ export default function Products() {
         }
  
 
-        setPage(1)
+    
         setFilter(prev => {
             if (name === "minPrice") {
                 return {
