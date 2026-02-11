@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import styles from "../styles/Products.module.css"
-import {useSearchParams } from "react-router-dom"
+import { useSearchParams } from "react-router-dom"
 import axios from "axios"
 import CardProduct from "../components/CardProducts"
 import LoadWrapper from "../components/LoadWrapper"
@@ -51,9 +51,9 @@ export default function Products() {
 
     useEffect(() => {
         loadProducts();
-    }, [filter.category,filter.skinType,filter.limit,filter.page,filter.order, debouncedSearch, debouncedMinPrice,debouncedMaxPrice]);
+    }, [filter.category, filter.skinType, filter.limit, filter.page, filter.order, debouncedSearch, debouncedMinPrice, debouncedMaxPrice]);
 
-  
+
 
     function loadProducts() {
         window.scrollTo({
@@ -77,6 +77,15 @@ export default function Products() {
                 setProducts(resp.data.products);
                 setTotalPage(resp.data.totalPage)
                 setTotalProduct(resp.data.totalProduct)
+                if (parseInt(resp.data.totalPage) < parseInt(filter.page)) {
+                    setFilter(prev => ({
+                        ...prev,
+                        page: 1
+                    })
+                    )
+                    setPageParams("page", 1)
+
+                }
             })
             .catch(err => {
                 console.error(err);
@@ -110,7 +119,6 @@ export default function Products() {
         setFilter(prev => ({
             ...prev,
             [name]: value,
-            page : 1
         }));
 
         setSearchParams(prev => {
@@ -131,9 +139,9 @@ export default function Products() {
         if (name === "maxPrice" && (value < 1 || value > 999)) {
             setErrorMessage("Inserisci un prezzo massimo valido")
         }
- 
 
-       
+
+
 
         setFilter(prev => {
             if (name === "minPrice") {
@@ -159,6 +167,14 @@ export default function Products() {
         });
     }
 
+    function setPageParams(name, value) {
+        setSearchParams(prev => {
+            const params = new URLSearchParams(prev);
+            params.set(name, value);
+            return params;
+        });
+    }
+
     return (
         <main className={styles.container}>
             <div className={styles.searchSection}>
@@ -173,7 +189,7 @@ export default function Products() {
                         />
                         {!filter.search && <span className={styles.animatedPlaceholder}>Es. Crema Idratante</span>}
                     </div>
-                   {/*  <button
+                    {/*  <button
                         onClick={() => {
                             setPage(1); // torna alla prima pagina quando cerchi
                             loadProducts(); // richiama la funzione che carica i prodotti
@@ -232,7 +248,7 @@ export default function Products() {
                             Tutte
                         </label>
                         <label>
-                            <input type="radio" name="category" value="1"  checked={filter.category === "1"} onChange={handleFilterChange} />
+                            <input type="radio" name="category" value="1" checked={filter.category === "1"} onChange={handleFilterChange} />
                             Detergenti
                         </label>
                         <label>
@@ -296,16 +312,16 @@ export default function Products() {
                         <div className={styles.pagination}>
                             <div>
                                 <label className={styles.labelLimit} htmlFor="limit">Prodotti per pagina: </label>
-                                <select className={styles.selectLimit} name="limit" id="limit" value={filter.limit} onChange={(event) => { handleFilterChange(event), setPage(1) }}>
+                                <select className={styles.selectLimit} name="limit" id="limit" value={filter.limit} onChange={(event) => { handleFilterChange(event) }}>
                                     <option value="5">5</option>
                                     <option value="10">10</option>
                                     <option value="20">20</option>
                                 </select>
                             </div>
                             <div>
-                                <button className={styles.navButton} disabled={filter.page <= 1} onClick={() => setFilter(prev => { return {...prev, page: parseInt(prev.page) - 1}})}>Indietro</button>
+                                <button disabled={parseInt(filter.page) <= 1} className={styles.navButton} onClick={() => { setPageParams("page", parseInt(filter.page) - 1); setFilter(prev => { return { ...prev, page: parseInt(prev.page) - 1 } }) }}>Indietro</button>
                                 <span className={styles.spanButton}>Pagina {filter.page} / {totalPage}</span>
-                                <button disabled={filter.page === totalPage} className={styles.navButton} onClick={() =>  setFilter(prev => { return {...prev, page: parseInt(prev.page) + 1}})}>Avanti</button>
+                                <button disabled={parseInt(filter.page) === totalPage} className={styles.navButton} onClick={() => { setPageParams("page", parseInt(filter.page) + 1); setFilter(prev => { return { ...prev, page: parseInt(prev.page) + 1 } }) }}>Avanti</button>
                             </div>
                         </div>
                     </>
