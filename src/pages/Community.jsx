@@ -42,7 +42,7 @@ export default function Community() {
         {
             id: 7,
             name: "Patrick Bateman",
-            message: "Patrick Bateman, facoltoso imprenditore di Wall Street.",
+            message: "La skincare che uccide le imperfezioni, Patrick Bateman, investitore di wallstreet di giorno , maniaco della perfezione di notte con  la nostra linea di creme notturne .",
             image: "/image/patrick.jpg"
         },
         {
