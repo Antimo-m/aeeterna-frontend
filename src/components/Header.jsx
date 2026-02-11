@@ -64,7 +64,10 @@ export default function Header({ searchTerm, onSearch }) {
             <NavLink to={`/prodotti?category=0&skinType=0&limit=10&offset=0&minPrice=0&maxPrice=9999&search=&order=a-z`} className={styles.navLink}>Prodotti</NavLink>
             <NavLink to={`/sendcontacts`} className={styles.navLink}>Contattaci</NavLink>
             <NavLink to={"/quiz"} className={styles.navLink}>Quiz</NavLink>
-          </nav>
+            <NavLink to={`/founders`} className={styles.navLink}>Chi siamo</NavLink>
+            </nav>
+
+          
 
           {/* Right section Desktop */}
           <div className={styles.desktopActions}>
@@ -143,6 +146,7 @@ export default function Header({ searchTerm, onSearch }) {
             <NavLink onClick={closeMenu} to={`/prodotti?category=0&skinType=0&limit=10&page=1&minPrice=0&maxPrice=9999&search=&order=a-z`} className={styles.navLink}>Prodotti</NavLink>
             <NavLink to={`/sendcontacts`} className={styles.navLink}>Contattaci</NavLink>
             <NavLink onClick={closeMenu} to={"/quiz"} className={styles.navLink}>Quiz</NavLink>
+             <NavLink to={`/founders`} className={styles.navLink}>Chi siamo</NavLink>
           </nav>
         </div>
       </div>
