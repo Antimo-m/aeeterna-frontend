@@ -37,22 +37,6 @@ export default function Checkout() {
 
     const navigate = useNavigate()
 
-    // useEffect(() => {
-    //     if (errorMessage.type !== "") {
-    //         const timer = setTimeout(() => {
-    //             setErrorMessage({ type: "", message: "" });
-
-
-    //             if (errorMessage.type === "correct") {
-    //                 navigate("/ordersummary");
-    //             }
-    //         }, 2000);
-
-    //         return () => clearTimeout(timer);
-    //     }
-    // }, [errorMessage, navigate]);
-
-
     function handleForm(event) {
         const { name, value } = event.target;
 
@@ -260,6 +244,13 @@ export default function Checkout() {
     return (
         <>
             <div className={style.title}>
+                <button
+                    onClick={() => navigate(-1)}
+                    className={style.backButton}
+                    type="button"
+                >
+                    <i className="bi bi-arrow-left"></i>
+                </button>
                 <h1>CHECKOUT</h1>
             </div>
             <section className={style.sectionCheckout}>
