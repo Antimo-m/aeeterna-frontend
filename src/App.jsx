@@ -16,6 +16,7 @@ import Checkout from "./pages/Checkout"
 import {useState} from "react"
 import ScrollToTop from "./components/ScrollToTop"
 import Community from "./pages/Community"
+import Founders from "./pages/Founders"
 
 
 
@@ -45,6 +46,7 @@ function App() {
                   <Route path="/wishlist" element={<WishList />} />
                   <Route path="/cart" element={<CartPage />} />
                   <Route path="/community" element={<Community/> }/>
+                  <Route path="/founders" element={<Founders/>} />
                   <Route path="*" element={<NotFound />} />
                 </Route>
               </Routes>
