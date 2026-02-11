@@ -13,7 +13,7 @@ export default function CardProduct({ product }) {
 
     const HandleAddToCart = () => {
         addCart(product)
-        showMessage(`${product.name} è ora nel tuo carello`)
+        showMessage(`${product.name} è ora nel tuo carrello`)
     }
     return (
         <>
@@ -35,7 +35,7 @@ export default function CardProduct({ product }) {
                             <button className="addCartHover" onClick={() => updateQuantityDetails(product.slug, returnQuantity(product.slug) + 1)}>+</button>
                         </div>
                         :
-                        <button className={`addCartHover ${MainStyle.buttonCart}`} onClick={() => addCart(product)}>Aggiungi al carrello</button>
+                        <button className={`addCartHover ${MainStyle.buttonCart}`} onClick={HandleAddToCart}>Aggiungi al carrello</button>
                     }
                     <button className={inWishList(product) ? "btninWish" : "btnWish"} onClick={() => { inWishList(product) ? removeWishList(product) : addWishList(product) }}>
                         <i className="bi bi-heart"></i>
