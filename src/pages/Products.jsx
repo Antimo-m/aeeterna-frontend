@@ -49,6 +49,7 @@ export default function Products() {
     const debouncedMaxPrice = useDebounce(filter.maxPrice, 500);
 
 
+   
     useEffect(() => {
         loadProducts();
     }, [filter.category, filter.skinType, filter.limit, filter.page, filter.order, debouncedSearch, debouncedMinPrice, debouncedMaxPrice]);
