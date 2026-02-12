@@ -54,7 +54,7 @@ export default function Products() {
     }, [filter.category, filter.skinType, filter.limit, filter.page, filter.order, debouncedSearch, debouncedMinPrice, debouncedMaxPrice]);
 
     function isFilterOpen(){
-        if(filter.skinType !== "0" || filter.category !== "0" ||filter.minPrice !== "0" || filter.maxPrice !== "9999" ){
+        if(filter.skinType !== "0" || filter.category !== "0" ||filter.minPrice !== "0" || filter.maxPrice !== "999" ){
             return true
         }
         return false
