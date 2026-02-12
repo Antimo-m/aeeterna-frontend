@@ -48,6 +48,9 @@ export default function Products() {
     const debouncedMinPrice = useDebounce(filter.minPrice, 500);
     const debouncedMaxPrice = useDebounce(filter.maxPrice, 500);
 
+   
+
+
 
    
     useEffect(() => {
