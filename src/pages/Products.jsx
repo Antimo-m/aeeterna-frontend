@@ -97,10 +97,8 @@ export default function Products() {
     function handleFilterChange(event) {
         const { name, value } = event.target;
 
-        if (name === "order" && (value !== "a-z" || value !== "prezzoMin" || value !== "prezzoMax")) {
-            setErrorMessage("Inserisci un tipo di ordinamento esistente")
-
-        }
+        if ( name === "order" && value !== "a-z" && value !== "prezzoMin" && value !== "prezzoMax"
+        )
 
         name != "search" && parseInt(value)
 
