@@ -8,6 +8,7 @@ export default function Footer() {
     const backEndUrl = import.meta.env.VITE_BACKEND_URL;
     const [isLoading, setIsLoading] = useState(false);
     const [email, setEmail] = useState("");
+    const [checkMail, setCheckMail] = useState(false)
     const [message, setMessage] = useState({ text: "", type: "" });
 
 
@@ -28,6 +29,9 @@ export default function Footer() {
             setTimeout(() => {
                 setMessage({ text: "", type: "" });
             }, 5000)
+
+            setEmail("");
+            setCheckMail(false)
         }
         catch (error) {
             console.error("Errore iscrizione:", error);
@@ -74,6 +78,8 @@ export default function Footer() {
                             <input
                                 type="checkbox"
                                 id="privacy"
+                                checked={checkMail}
+                                onChange={(e) => setCheckMail(e.target.checked)}
                                 className={styles.checkbox}
                                 required
                             />

@@ -13,6 +13,7 @@ export default function WelcomePopup() {
     const [isVisible, setIsVisible] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [email, setEmail] = useState("");
+    const [checkMail, setCheckMail] = useState(false)
     const [message, setMessage] = useState({ text: "", type: "" });
 
     useEffect(() => {
@@ -102,6 +103,22 @@ export default function WelcomePopup() {
                             <button type="submit" className={styles.submitButton} disabled={isLoading}>
                                 {isLoading ? "INVIO..." : "ISCRIVITI"}
                             </button>
+                        </div>
+                        <div className={styles.checkboxContainer}>
+                            <input
+                                type="checkbox"
+                                id="privacy"
+                                className={styles.checkbox}
+                                checked={checkMail}
+                                onChange={(e) => setCheckMail(e.target.checked)}
+                                required
+                            />
+                            <label htmlFor="privacy" className={styles.checkboxLabel}>
+                                Avendo letto e compreso l'informativa sulla privacy,
+                                presto il mio consenso per il trattamento dei dati da parte di Aeterna Skin.
+                                <br />
+                                <a href="#" className={styles.privacyLink}>Info sulla privacy</a>
+                            </label>
                         </div>
                         {message.text && (
                             <div className={`${styles.message} ${styles[message.type]}`}>
