@@ -110,7 +110,7 @@
     margin-bottom: 12px;
     background-color: #ffffff;
     border: 1px solid #dcdcdc;
-    border-radius: 4px;
+    border-radius: 12px;
     font-size: 1rem;
     cursor: pointer;
     text-align: left;
@@ -166,7 +166,7 @@
 }
 
 .backButton {
-    background-color: #9FAD96;
+    background-color:#C4A962;
     color: #ffffff;
     border: none;
     border-radius: 12px;
