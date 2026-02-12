@@ -435,11 +435,7 @@
     justify-content: space-between;
     gap: 0.6rem;
     animation: fadeIn 0.3s ease;
-    position: absolute;
-    left: 50%;
-    top: -40px;
-    z-index: 9999;
-    transform: translate(-50%, 0);
+    margin: 0 auto;
 }
 
 .errorMessage {
@@ -460,7 +456,7 @@
     align-items: center;
     margin-top: 50px;
     position: relative;
-    padding: 0 70px;
+    padding: 50px 70px;
     /* Spazio per il bottone */
 }
 
@@ -527,6 +523,10 @@
 }
 
 @media (max-width: 480px) {
+    .card{
+        flex-direction: column;
+    }
+
     .title {
         margin-top: 60px;
         padding: 0 50px;

@@ -13,7 +13,7 @@ export default function WishList() {
         });
     }, [])
     const { wishList, removeWishList, resetWishList } = useWishList();
-    const { addCart } = useCart();
+    const { addCart, inCart, updateQuantityDetails, returnQuantity } = useCart();
 
     return (
         <main className={style.main}>
@@ -43,7 +43,15 @@ export default function WishList() {
                                     <h3>{parseFloat(product.price).toFixed(2)}€</h3>
                                 </Link>
                                 <div className={style.divButton}>
-                                    <button onClick={() => addCart(product)} className={`addCartHover ${style.addCart}`}>AGGIUNGI AL CARRELLO</button>
+                                    {inCart(product.slug) ?
+                                        <div className={style.buttonQuantity}>
+                                            <button className="addCartHover" onClick={() => updateQuantityDetails(product.slug, returnQuantity(product.slug) - 1)}>-</button>
+                                            <span>{returnQuantity(product.slug)}</span>
+                                            <button className="addCartHover" onClick={() => updateQuantityDetails(product.slug, returnQuantity(product.slug) + 1)}>+</button>
+                                        </div>
+                                        :
+                                        <button onClick={() => addCart(product)} className={`addCartHover ${style.addCart}`}>AGGIUNGI AL CARRELLO</button>
+                                    }
                                     <button onClick={() => removeWishList(product)} className={style.removeWishList}>
                                         <i className="bi bi-x-lg"></i>
                                     </button>
