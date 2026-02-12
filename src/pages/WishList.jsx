@@ -21,7 +21,7 @@ export default function WishList() {
             {wishList.length === 0 ?
                 <div className={style.emptyWish}>
                     <h2>LA TUA WISHLIST È VUOTA</h2>
-                    <Link to={"/prodotti"} className={style.goShop}>VAI ALLO SHOPPING</Link>
+                    <Link to={"/prodotti?category=0&skinType=0&limit=10&page=1&minPrice=0&maxPrice=9999&search=&order=a-z"} className={style.goShop}>VAI ALLO SHOPPING</Link>
                 </div>
                 :
                 <>

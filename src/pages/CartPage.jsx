@@ -31,7 +31,7 @@ export default function Home() {
                     :
                     <>
                         <div className={style.totalProduct}>
-                            <Link to={"/prodotti"} className={style.checkOut}>TORNA AI PRODOTTI</Link>
+                            <Link to={"/prodotti?category=0&skinType=0&limit=10&page=1&minPrice=0&maxPrice=9999&search=&order=a-z"} className={style.checkOut}>TORNA AI PRODOTTI</Link>
                             <h2>Prodotti nel carrello: {totalProduct}</h2>
                             <button onClick={resetCarrello} className={style.btnDeleteAll}>
                                 <span>Svuota carrello <i className="bi bi-trash3"></i></span>
