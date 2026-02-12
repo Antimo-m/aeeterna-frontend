@@ -9,7 +9,8 @@ body {
   background-color: #fff;
   color: #111;
   font-size: 1.2rem;     
-  font-weight: 400;      
+  font-weight: 400; 
+  font-family: "montserrat, sans-serif";    
 }
 
 .section {

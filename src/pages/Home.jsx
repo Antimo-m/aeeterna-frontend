@@ -130,7 +130,7 @@ export default function Home({ searchTerm }) {
                     {/* NUOVI PRODOTTI  */}
                     <section className={MainStyle.section}>
                         <h2 className={MainStyle.sectionTitle}>
-                            Nuovi prodotti che Amerai
+                            I nostri Prodotti
                         </h2>
 
                         <div className={MainStyle.productGrid}>
