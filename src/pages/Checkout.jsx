@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {useState } from "react";
 import { useCart } from "../contexts/CartContext";
 import style from "../styles/Checkout.module.css"
 import { useNavigate } from "react-router-dom";
@@ -66,7 +66,6 @@ export default function Checkout() {
     }
 
     async function submitForm(e) {
-
         e.preventDefault();
         if (checkeboxData) {
             setDataForm({
@@ -227,7 +226,7 @@ export default function Checkout() {
 
             setTimeout(() => {
                 navigate("/ordersummary");
-            }, 1000);
+            }, 2000);
 
         } catch (error) {
             console.error("❌ Errore:", error.response?.data || error.message);
