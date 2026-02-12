@@ -22,7 +22,8 @@ export default function ProductDetails() {
     const [product, setProduct] = useState(false)
     const [relatedProducts, setrelatedProducts] = useState([])
     const [indexImage, setIndexImage] = useState(0)
-    const [pageLoad, setPageLoad] = useState(false);
+    const [pageLoad, setPageLoad] = useState(true);
+    const [err, setErr] = useState(false)
 
 
     const { wishList, inWishList, addWishList, removeWishList } = useWishList();
@@ -45,21 +46,28 @@ export default function ProductDetails() {
             })
 
         }).catch((err) => {
-            console.log(err);
-            setPageLoad(true)
+            if(err.response.data.error === "NOT FOUND"){
+                setErr(true)
+                setPageLoad(false)
+            }
         })
     }, [])
 
-    if (!product) {
-        return <NotFoundProduct />
+
+    function updateImageIndex(newQuantity) {
+        if (newQuantity < 0) return;
+        if (newQuantity > product.images.length - 1) return
+        setIndexImage(newQuantity)
     }
 
     return (
         <>
             <main className={style.main}>
+                {err && <NotFoundProduct /> }
                 {pageLoad ?
                     <LoadWrapper />
-                    :
+                    : 
+                    !err && 
                     <>
                         <section className={style.sectionProduct}>
                             <div className={style.name}>
@@ -70,7 +78,11 @@ export default function ProductDetails() {
                                 </span>
                             </div>
                             <div className={style.img}>
-                                <img src={product.images[indexImage].path} alt="" />
+                                <div className={style.figureGroup}>
+                                    <span onClick={() => updateImageIndex(indexImage - 1)} className={`${style.leftArrow} ${style.arrowHover}`}><i className="bi bi-arrow-left-short"></i></span>
+                                    <img src={product.images[indexImage].path} alt="" />
+                                    <span onClick={() => updateImageIndex(indexImage + 1)} className={`${style.rightArrow} ${style.arrowHover}`}><i className="bi bi-arrow-right-short"></i></span>
+                                </div>
                             </div>
                             <div className={style.description}>
                                 <div className={style.sectionPrice}>

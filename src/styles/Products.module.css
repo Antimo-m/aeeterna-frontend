@@ -25,7 +25,6 @@
 
 
 
-
 /* Sostituisci 'button' con '.navButton' o simile */
 .navButton {
     padding: 10px 25px;
@@ -381,14 +380,16 @@
 
 .animatedPlaceholder {
     animation: movePlaceholder 2s infinite alternate;
+    padding-top: 8px; 
 }
 
 .searchInput {
     width: 100%;
     padding: 12px 15px;
     border: 1px solid #ccc;
-    border-radius: 8px;
+    border-radius: 15px;
     font-size: 1rem;
+    margin-top: 10px ;
 }
 
 

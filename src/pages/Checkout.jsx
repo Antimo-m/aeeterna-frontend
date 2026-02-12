@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {useState } from "react";
 import { useCart } from "../contexts/CartContext";
 import style from "../styles/Checkout.module.css"
 import { useNavigate } from "react-router-dom";
@@ -30,28 +30,12 @@ export default function Checkout() {
         type: "",
         message: ""
     })
-    const { cartList, calcTotal } = useCart();
+    const { cartList, calcTotal, resetCarrello } = useCart();
     const [dataForm, setDataForm] = useState(backupForm);
     const [checkeboxData, setCheckboxData] = useState(false)
     const backEndUrl = import.meta.env.VITE_BACKEND_URL;
 
     const navigate = useNavigate()
-
-    useEffect(() => {
-        if (errorMessage.type !== "") {
-            const timer = setTimeout(() => {
-                setErrorMessage({ type: "", message: "" });
-
-
-                if (errorMessage.type === "correct") {
-                    navigate("/prodotti");
-                }
-            }, 3000);
-
-            return () => clearTimeout(timer);
-        }
-    }, [errorMessage, navigate]);
-
 
     function handleForm(event) {
         const { name, value } = event.target;
@@ -81,8 +65,7 @@ export default function Checkout() {
         }
     }
 
-    function submitForm(e) {
-
+    async function submitForm(e) {
         e.preventDefault();
         if (checkeboxData) {
             setDataForm({
@@ -186,22 +169,6 @@ export default function Checkout() {
             }
         })
 
-        // setDataForm({
-        //     ...dataForm,
-        //     products: productsForm
-        // })
-
-        // console.log({
-        //     ...dataForm,
-        //     products: productsForm,
-        //     total_price: totalPrice
-        // });
-
-        // setErrorMessage({
-        //     type: "correct",
-        //     message: "Ordine inviato con successo"
-        // })
-
         const orderData = {
             name,
             surname,
@@ -220,15 +187,47 @@ export default function Checkout() {
             products: productsForm
         }
 
-
         try {
-            const response = axios.post(`${backEndUrl}/api/neworder`, orderData);
+            const response = await axios.post(`${backEndUrl}/api/neworder`, orderData);
 
             console.log("✅ Ordine creato:", response.data);
+
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+
+            // Salva i dati completi per il riepilogo
+            const completedOrder = {
+                name,
+                surname,
+                email,
+                phone,
+                street,
+                city,
+                province,
+                postal_code,
+                country,
+                items: cartList,
+                subtotal: parseFloat(calcTotal(cartList).toFixed(2)),
+                shipping_price: shipping_price === null ? 0 : parseFloat(shipping_price.toFixed(2)),
+                total: parseFloat(totalPrice.toFixed(2))
+            };
+
+            localStorage.setItem('lastOrder', JSON.stringify(completedOrder));
+
+            // Svuota il carrello
+            resetCarrello();
+
             setErrorMessage({
                 type: "correct",
                 message: "Ordine inviato con successo!"
             });
+
+            setTimeout(() => {
+                navigate("/ordersummary");
+            }, 2000);
+
         } catch (error) {
             console.error("❌ Errore:", error.response?.data || error.message);
             setErrorMessage({
@@ -238,9 +237,19 @@ export default function Checkout() {
         }
     }
 
+
+
+
     return (
         <>
             <div className={style.title}>
+                <button
+                    onClick={() => navigate(-1)}
+                    className={style.backButton}
+                    type="button"
+                >
+                    <i className="bi bi-arrow-left"></i>
+                </button>
                 <h1>CHECKOUT</h1>
             </div>
             <section className={style.sectionCheckout}>

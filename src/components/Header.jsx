@@ -1,22 +1,22 @@
 import { Link, NavLink, useNavigate, useNavigation } from "react-router-dom";
 import styles from "../styles/Header.module.css";
-import {useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useCart } from "../contexts/CartContext"
-import {useWishList} from "../contexts/WishListContext"
+import { useWishList } from "../contexts/WishListContext"
 
 
-export default function Header({ searchTerm,  onSearch }) {
+export default function Header({ searchTerm, onSearch }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigation = useNavigate();
-  const { cartList } = useCart();
-  const {wishList} = useWishList();
-  const [search, setSearch] =  useState("");
+  const { cartList, showPreview, setShowPreview } = useCart();
+  const { wishList } = useWishList();
+  const [search, setSearch] = useState("");
   let totalProductCart = 0;
   cartList.forEach((product) => {
     totalProductCart += 1 * product.quantity;
   })
 
-  
+
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -61,14 +61,19 @@ export default function Header({ searchTerm,  onSearch }) {
 
           {/* Navigation Desktop */}
           <nav className={styles.desktopNav}>
-            <NavLink to={`/prodotti?category=0&skinType=0&limit=10&offset=0&minPrice=0&maxPrice=9999&search=&order=a-z`} className={styles.navLink}>Prodotti</NavLink>
+            <NavLink to={`/prodotti?category=0&skinType=0&limit=10&page=1&minPrice=0&maxPrice=9999&search=&order=a-z`} className={styles.navLink}>Prodotti</NavLink>
+            <NavLink to={`/sendcontacts`} className={styles.navLink}>Contattaci</NavLink>
+            <NavLink to={"/quiz"} className={styles.navLink}>Quiz</NavLink>
+            <NavLink to={`/founders`} className={styles.navLink}>Chi siamo</NavLink>
           </nav>
+
+
 
           {/* Right section Desktop */}
           <div className={styles.desktopActions}>
             {/* Search */}
             <div className={styles.searchBox}>
-              <i onClick={() => {navigation(`/prodotti?category=0&skinType=0&limit=10&offset=0&minPrice=0&maxPrice=9999&search=${search}&order=a-z`); setSearch("")}} className={`bi bi-search ${styles.searchIcon}`}></i>
+              <i onClick={() => { navigation(`/prodotti?category=0&skinType=0&limit=10&page=1&minPrice=0&maxPrice=9999&search=${search}&order=a-z`); setSearch("") }} className={`bi bi-search ${styles.searchIcon}`}></i>
               <input
                 type="text"
                 placeholder="Cerca..."
@@ -76,9 +81,9 @@ export default function Header({ searchTerm,  onSearch }) {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
-              
+
             </div>
-             
+
             {/* Icons */}
             <Link to={"/wishlist"} className={styles.iconButton} aria-label="Wishlist">
               <i className="bi bi-heart"></i>
@@ -86,7 +91,7 @@ export default function Header({ searchTerm,  onSearch }) {
                 <span>{wishList.length}</span>
               }
             </Link>
-            <Link to={"/cart"} className={styles.iconButton} aria-label="Carrello">
+            <Link onClick={() => setShowPreview(!showPreview)} className={styles.iconButton} aria-label="Carrello">
               <i className="bi bi-cart"></i>
               {cartList.length > 0 &&
                 <span>{totalProductCart}</span>
@@ -102,7 +107,7 @@ export default function Header({ searchTerm,  onSearch }) {
                 <span>{wishList.length}</span>
               }
             </Link>
-            <Link to={"/cart"} className={styles.iconButton} aria-label="Carrello">
+            <Link onClick={() => setShowPreview(!showPreview)} className={styles.iconButton} aria-label="Carrello">
               <i className="bi bi-cart"></i>
               {cartList.length > 0 &&
                 <span>{totalProductCart}</span>
@@ -126,7 +131,7 @@ export default function Header({ searchTerm,  onSearch }) {
         <div className={styles.mobileMenuContent}>
           {/* Search in mobile menu */}
           <div className={styles.mobileSearchBox}>
-            <i onClick={() => {navigation(`/prodotti?category=0&skinType=0&limit=10&page=1&minPrice=0&maxPrice=9999&search=${search}&order=a-z`); setSearch("")}} className={`bi bi-search ${styles.searchIcon}`}></i>
+            <i onClick={() => { navigation(`/prodotti?category=0&skinType=0&limit=10&page=1&minPrice=0&maxPrice=9999&search=${search}&order=a-z`); setSearch("") }} className={`bi bi-search ${styles.searchIcon}`}></i>
             <input
               type="text"
               placeholder="Cerca..."
@@ -138,8 +143,10 @@ export default function Header({ searchTerm,  onSearch }) {
 
           {/* Navigation links */}
           <nav className={styles.mobileNav}>
-            <NavLink onClick={closeMenu} to={"/"} className={styles.navLink}>Home</NavLink>
             <NavLink onClick={closeMenu} to={`/prodotti?category=0&skinType=0&limit=10&page=1&minPrice=0&maxPrice=9999&search=&order=a-z`} className={styles.navLink}>Prodotti</NavLink>
+            <NavLink to={`/sendcontacts`} className={styles.navLink}>Contattaci</NavLink>
+            <NavLink onClick={closeMenu} to={"/quiz"} className={styles.navLink}>Quiz</NavLink>
+            <NavLink to={`/founders`} className={styles.navLink}>Chi siamo</NavLink>
           </nav>
         </div>
       </div>

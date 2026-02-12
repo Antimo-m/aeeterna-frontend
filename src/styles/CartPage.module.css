@@ -14,11 +14,57 @@
 .totalProduct {
     display: flex;
     justify-content: space-between;
-    padding-bottom: 12px;
-    border-bottom: 1px solid #eeeeee;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    background: linear-gradient(135deg, #ffffff 0%, #fdfcfb 100%);
+    border-radius: 16px;
+    border: 1px solid rgba(200, 168, 90, 0.15);
     align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    gap: 20px;
 }
 
+.totalProduct h2 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    color: #666;
+    margin: 0;
+    flex: 1;
+    text-align: center;
+}
+
+/* Link Torna ai Prodotti */
+.totalProduct .checkOut {
+    padding: 12px 24px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #fff;
+    background: linear-gradient(135deg, #c8a85a 0%, #b89748 100%);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 2px 6px rgba(200, 168, 90, 0.2);
+    white-space: nowrap;
+}
+
+.totalProduct .checkOut:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(200, 168, 90, 0.3);
+}
+
+.totalProduct .checkOut:active {
+    transform: translateY(0);
+}
 
 /* Colonna Prodotti */
 .sectionProduct {
@@ -38,28 +84,42 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
- /* Button che cancella tutti i prodotti */
- .sectionDeleteAllProducts {
-    display: flex;
-    justify-content: flex-end; 
-    align-items: center;
-    margin-bottom: 20px;
-    width: 100%;
-}
+/* Button che cancella tutti i prodotti */
 .btnDeleteAll {
-    background-color: white;
-    border: none;
-    font-family: 'Inter', sans-serif;
-    color: #cc4444; 
+    background-color: transparent;
+    border: 1px solid rgba(220, 68, 68, 0.3);
+    font-family: 'Montserrat', sans-serif;
+    color: #cc4444;
     cursor: pointer;
-    transition: transform 0.2s, color 0.2s;
-    padding: 0;
+    transition: all 0.3s ease;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
 }
 
- /* Colonna Prodotti */
- .sectionProduct {
-     flex: 2;
- }
+.btnDeleteAll:hover {
+    background-color: #cc4444;
+    color: white;
+    border-color: #cc4444;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 6px rgba(220, 68, 68, 0.3);
+}
+
+.btnDeleteAll:active {
+    transform: translateY(0);
+}
+
+.btnDeleteAll i {
+    font-size: 0.85rem;
+}
+
 .card:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(200, 168, 90, 0.15);
@@ -72,6 +132,7 @@
     background-color: #fdfcfb;
     border-radius: 12px;
     border: 2px solid rgba(200, 168, 90, 0.2);
+    flex-shrink: 0;
 }
 
 /* Contenuto della card */
@@ -91,13 +152,16 @@
     text-transform: uppercase;
     letter-spacing: 0.5px;
     color: #111;
+    line-height: 1.3;
 }
 
 /* Quantità e prezzo */
 .productDetails {
     display: flex;
-    flex-direction: column;
-    gap: 12px;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
 }
 
 .quantityContainer {
@@ -110,6 +174,13 @@
     font-size: 0.9rem;
     font-weight: 500;
     color: #666;
+    white-space: nowrap;
+}
+
+.buttonQuantity {
+    display: flex;
+    gap: 10px;
+    align-items: center;
 }
 
 .quantityContainer button {
@@ -123,6 +194,7 @@
     border-radius: 8px;
     transition: all 0.3s ease;
     box-shadow: 0 2px 6px rgba(200, 168, 90, 0.2);
+    flex-shrink: 0;
 }
 
 .quantityContainer button:hover {
@@ -150,6 +222,7 @@
     font-weight: 600;
     font-size: 1rem;
     color: #c8a85a;
+    white-space: nowrap;
 }
 
 /* Bottone rimuovi */
@@ -279,13 +352,7 @@
     z-index: 1;
 }
 
-.buttonQuantity{
-    display: flex;
-    gap: 10px;
-    align-items: center;
-}
-
-.divCheckout{
+.divCheckout {
     display: flex;
     justify-content: center;
 }
@@ -315,10 +382,40 @@
     gap: 5px;
 }
 
-/* Responsive */
+/* Responsive Tablet */
+@media (max-width: 1024px) {
+    .card {
+        padding: 20px;
+        gap: 16px;
+    }
+
+    .card img {
+        width: 90px;
+        height: 90px;
+    }
+
+    .productDetails {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .quantityContainer {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .price {
+        align-self: flex-end;
+        font-size: 1.1rem;
+    }
+}
+
+/* Responsive Mobile */
 @media (max-width: 768px) {
     .sectionCart {
         flex-direction: column;
+        padding: 15px;
     }
 
     .sectionSummary {
@@ -326,6 +423,125 @@
         margin-top: 30px;
         position: relative;
         top: 0;
+    }
+
+    .totalProduct {
+        flex-direction: column;
+        gap: 12px;
+        padding: 16px;
+    }
+
+    .totalProduct h2 {
+        order: -1;
+        font-size: 0.85rem;
+    }
+
+    .totalProduct .checkOut,
+    .btnDeleteAll {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .card {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        gap: 16px;
+    }
+
+    .card img {
+        width: 120px;
+        height: 120px;
+    }
+
+    .bodyCard {
+        width: 100%;
+        align-items: center;
+        text-align: center;
+    }
+
+    .description h2 {
+        font-size: 1rem;
+    }
+
+    .productDetails {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+    }
+
+    .quantityContainer {
+        width: 100%;
+        max-width: 280px;
+        justify-content: center;
+        background: #fdfcfb;
+        padding: 12px;
+        border-radius: 12px;
+    }
+
+    .quantityContainer span {
+        font-size: 0.85rem;
+    }
+
+    .buttonQuantity {
+        gap: 12px;
+    }
+
+    .quantityContainer button {
+        width: 36px;
+        height: 36px;
+        font-size: 1.1rem;
+    }
+
+    .quantityContainer input {
+        width: 60px;
+        font-size: 1rem;
+        padding: 8px;
+    }
+
+    .price {
+        font-size: 1.2rem;
+        align-self: center;
+    }
+
+    .removeButton {
+        margin-top: 8px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Responsive molto piccolo */
+@media (max-width: 480px) {
+    .card {
+        padding: 16px;
+    }
+
+    .card img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .description h2 {
+        font-size: 0.95rem;
+    }
+
+    .quantityContainer {
+        max-width: 240px;
+        padding: 10px;
+    }
+
+    .quantityContainer button {
+        width: 32px;
+        height: 32px;
+    }
+
+    .quantityContainer input {
+        width: 50px;
+    }
+
+    .price {
+        font-size: 1.1rem;
     }
 }
 
@@ -354,12 +570,9 @@
     margin-top: 100px;
 }
 
-.totalProduct h2 {
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #6f6f6f;
-    margin: 0;
-    padding: 0 18px;
+@media (max-width: 768px) {
+    .main {
+        padding: 20px 15px;
+        margin-top: 80px;
+    }
 }
