@@ -53,7 +53,12 @@ export default function Products() {
         loadProducts();
     }, [filter.category, filter.skinType, filter.limit, filter.page, filter.order, debouncedSearch, debouncedMinPrice, debouncedMaxPrice]);
 
-
+    function isFilterOpen(){
+        if(filter.skinType !== "0" || filter.category !== "0" ||filter.minPrice !== "0" || filter.maxPrice !== "999" ){
+            return true
+        }
+        return false
+    }
 
     function loadProducts() {
         window.scrollTo({
@@ -84,8 +89,8 @@ export default function Products() {
                     })
                     )
                     setPageParams("page", 1)
-
                 }
+                setOpenFilter(isFilterOpen());
             })
             .catch(err => {
                 console.error(err);
@@ -187,16 +192,6 @@ export default function Products() {
                         />
                         {!filter.search && <span className={styles.animatedPlaceholder}>Es. Crema Idratante</span>}
                     </div>
-                    {/*  <button
-                        onClick={() => {
-                            setPage(1); // torna alla prima pagina quando cerchi
-                            loadProducts(); // richiama la funzione che carica i prodotti
-
-                        }}
-                        className={styles.searchButton}
-                    >
-                        CERCA
-                    </button> */}
                 </div>
             </div>
 

@@ -416,6 +416,7 @@
     .sectionCart {
         flex-direction: column;
         padding: 15px;
+        align-items: center;
     }
 
     .sectionSummary {
@@ -508,6 +509,7 @@
     .removeButton {
         margin-top: 8px;
         font-size: 0.9rem;
+        align-self: center;
     }
 }
 
