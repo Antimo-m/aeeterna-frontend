@@ -9,7 +9,7 @@ export default function OrderSummaryPage() {
     useEffect(() => {
         const data = localStorage.getItem('lastOrder');
         if (!data) {
-            navigate('/prodotti');
+            navigate('/prodotti?category=0&skinType=0&limit=10&page=1&minPrice=0&maxPrice=999&search=&order=a-z');
             return;
         }
         setOrderData(JSON.parse(data));
@@ -91,7 +91,7 @@ export default function OrderSummaryPage() {
                         <div className={style.actionButtons}>
                             <button
                                 className={style.btnPrimary}
-                                onClick={() => navigate('/prodotti')}
+                                onClick={() => navigate('/prodotti?category=0&skinType=0&limit=10&page=1&minPrice=0&maxPrice=999&search=&order=a-z')}
                             >
                                 Continua gli Acquisti
                             </button>

@@ -54,7 +54,7 @@ export default function Products() {
     }, [filter.category, filter.skinType, filter.limit, filter.page, filter.order, debouncedSearch, debouncedMinPrice, debouncedMaxPrice]);
 
     function isFilterOpen(){
-        if(filter.skinType !== "0" || filter.category !== "0" ||filter.minPrice !== "0" || filter.maxPrice !== "999" ){
+        if(filter.skinType !== "0" || filter.category !== "0" ||filter.minPrice !== "0" || filter.maxPrice !== "9999" ){
             return true
         }
         return false
@@ -141,6 +141,14 @@ export default function Products() {
         }
         if (name === "maxPrice" && (value < 1 || value > 999)) {
             setErrorMessage("Inserisci un prezzo massimo valido")
+        }
+
+        if(name === "minPrice" && value > parseInt(filter.maxPrice) - 10){
+            return
+        }
+
+        if(name === "maxPrice" && value < parseInt(filter.minPrice) + 10){
+            return
         }
 
 

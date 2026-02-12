@@ -44,7 +44,7 @@ export default function Home({ searchTerm }) {
     const navigate = useNavigate()
     /* Funzione per il click nel bottone scopri di più */
     const handleButtonClick = () => {
-        navigate('/prodotti?category=0&skinType=0&limit=10&offset=0&minPrice=0&maxPrice=9999&search=&order=a-z');
+        navigate('/prodotti?category=0&skinType=0&limit=10&offset=0&minPrice=0&maxPrice=999&search=&order=a-z');
     };
     const filteredProducts = products.filter((product) =>
         product && product.name && typeof product.name === 'string' && product.name.toLowerCase().includes(searchTerm.toLowerCase())

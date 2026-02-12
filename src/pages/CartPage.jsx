@@ -26,12 +26,12 @@ export default function Home() {
                 {cartList.length === 0 ?
                     <div className={style.emptyCart}>
                         <h1>IL TUO CARRELLO È VUOTO</h1>
-                        <Link to={"/prodotti"} className={style.checkOut}>VAI ALLO SHOPPING</Link>
+                        <Link to={"/prodotti?category=0&skinType=0&limit=10&page=1&minPrice=0&maxPrice=999&search=&order=a-z"} className={style.checkOut}>VAI ALLO SHOPPING</Link>
                     </div>
                     :
                     <>
                         <div className={style.totalProduct}>
-                            <Link to={"/prodotti?category=0&skinType=0&limit=10&page=1&minPrice=0&maxPrice=9999&search=&order=a-z"} className={style.checkOut}>TORNA AI PRODOTTI</Link>
+                            <Link to={"/prodotti?category=0&skinType=0&limit=10&page=1&minPrice=0&maxPrice=999&search=&order=a-z"} className={style.checkOut}>TORNA AI PRODOTTI</Link>
                             <h2>Prodotti nel carrello: {totalProduct}</h2>
                             <button onClick={resetCarrello} className={style.btnDeleteAll}>
                                 <span>Svuota carrello <i className="bi bi-trash3"></i></span>
