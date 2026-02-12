@@ -1,4 +1,4 @@
-import {Link} from "react-router-dom"
+
 import style from "../styles/NotFoundProduct.module.css"
 import { useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
@@ -25,13 +25,13 @@ function NotFoundProduct() {
 
     return (
 
-        <main className={style.main}>
+        <section className={style.main}>
             <div className={style.container}>
                 <h1>Ops! Prodotto non trovato 😕</h1>
                 <p>Il prodotto che stai cercando non esiste o è stato rimosso.</p>
                 <p className={style.counterText}>Verrai reindirizzato in {counter} secondi</p>
             </div>
-        </main>
+        </section>
     )
 }
 
