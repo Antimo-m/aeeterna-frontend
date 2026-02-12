@@ -196,74 +196,6 @@ body {
   margin-bottom: 20px;
 }
 
-/* RESPONSIVE */
-@media (max-width: 1024px) {
-  .section {
-    padding: 40px 40px;
-  }
-
-  .productCard {
-    min-width: 220px;
-  }
-
-  .mission,
-  .ingredients {
-    flex-direction: column;
-    padding: 60px 40px;
-  }
-}
-
-@media (max-width: 768px) {
-  .section {
-    padding: 30px 20px;
-  }
-
-  .sectionTitle {
-    font-size: 24px;
-    margin-bottom: 30px;
-  }
-
-  .productCard {
-    min-width: 200px;
-  }
-
-  .productGrid {
-    gap: 20px;
-  }
-
-  .mission,
-  .ingredients {
-    padding: 40px 20px;
-  }
-
-  .missionText h2,
-  .ingredientsText h2 {
-    font-size: 28px;
-  }
-}
-
-@media (max-width: 480px) {
-
-
-  .productCard {
-    min-width: 140px;
-  }
-
-  .productName {
-    font-size: 12px;
-  }
-
-  .button {
-    padding: 8px 14px;
-    font-size: 11px;
-  }
-
-  .btnWish {
-    padding: 8px 10px;
-  }
-
-}
-
 .buttonQuantity{
     display: flex;
     gap: 10px;
@@ -292,4 +224,98 @@ body {
     cursor: pointer;
     text-transform: uppercase;
     letter-spacing: 0.5px;
+}
+
+@media screen and (max-width: 1024px) {
+
+
+  /* SEZIONI */
+  .section {
+    padding: 60px 40px;
+  }
+
+  .productGrid {
+    gap: 25px;
+  }
+
+  /* MISSION & INGREDIENTI */
+  .mission,
+  .ingredients {
+    flex-direction: column;
+    text-align: center;
+    padding: 60px 40px;
+  }
+
+  .missionImage img,
+  .ingredientsImage img {
+    max-width: 450px;
+    width: 100%;
+  }
+
+  .missionText,
+  .ingredientsText {
+    max-width: 600px;
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+
+  /* SEZIONI */
+  .section {
+    padding: 50px 20px;
+  }
+
+  .sectionTitle {
+    font-size: 22px;
+    margin-bottom: 25px;
+  }
+
+  .productGrid {
+    gap: 20px;
+  }
+
+  /* MISSION & INGREDIENTI */
+  .mission,
+  .ingredients {
+    padding: 50px 20px;
+    gap: 30px;
+  }
+
+  .missionText h2,
+  .ingredientsText h2 {
+    font-size: 24px;
+  }
+
+  .missionText p,
+  .ingredientsText p {
+    font-size: 15px;
+  }
+}
+
+
+
+
+@media screen and (max-width: 480px) {
+
+  /* PRODUCT CARD */
+  .productGrid {
+    gap: 15px;
+  }
+
+  .productCard {
+    min-width: 150px;
+  }
+
+  .productName {
+    font-size: 13px;
+  }
+
+  /* BOTTONI */
+  .buttonCart,
+  .buttonQuantity button {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
 }
