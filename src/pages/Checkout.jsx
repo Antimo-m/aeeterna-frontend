@@ -153,7 +153,6 @@ export default function Checkout() {
         } else {
             totalPrice += shipping_price;
         }
-        console.log(totalPrice);
 
 
         setDataForm({
@@ -162,11 +161,14 @@ export default function Checkout() {
             total_price: totalPrice
         })
 
+        console.log(cartList);
+
         const productsForm = cartList.map((product) => {
             return {
                 slug: product.slug,
                 quantity: product.quantity,
-                price_at_purchase: product.price
+                price_at_purchase: product.price,
+                image: product.image
             }
         })
 
@@ -253,14 +255,13 @@ export default function Checkout() {
                 </button>
                 <h1>CHECKOUT</h1>
             </div>
-            <section className={style.sectionCheckout}>
-                {errorMessage.type !== "" &&
+            {errorMessage.type !== "" &&
                     <div className={errorMessage.type === "error" ? style.errorMessage : style.correctMessage}>
                         {errorMessage.message}
                         <i onClick={() => setErrorMessage({ type: "", message: "" })} className="bi bi-x-lg"></i>
                     </div>
                 }
-
+            <section className={style.sectionCheckout}>
                 <div className={style.sectionForm}>
                     <form className={style.shippingForm} onSubmit={(e) => submitForm(e)}>
                         <div className={style.formSection}>
