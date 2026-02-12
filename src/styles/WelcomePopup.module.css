@@ -433,3 +433,59 @@ form {
         font-size: 26px;
     }
 }
+
+/* Aggiungi questi stili al file WelcomePopup.module.css */
+
+.checkboxContainer {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin-bottom: 16px;
+}
+
+.checkbox {
+    min-width: 18px;
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    cursor: pointer;
+    accent-color: #c8a85a;
+    flex-shrink: 0;
+}
+
+.checkboxLabel {
+    font-size: 0.7rem;
+    color: #666;
+    line-height: 1.5;
+    cursor: pointer;
+    word-break: break-word;
+}
+
+.privacyLink {
+    color: #c8a85a;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+.privacyLink:hover {
+    color: #b89748;
+}
+
+/* RESPONSIVE per checkbox */
+@media (max-width: 640px) {
+    .checkboxLabel {
+        font-size: 0.65rem;
+    }
+
+    .checkbox {
+        min-width: 16px;
+        width: 16px;
+        height: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .checkboxLabel {
+        font-size: 0.6rem;
+    }
+}
