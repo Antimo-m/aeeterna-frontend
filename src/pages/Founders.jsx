@@ -42,7 +42,7 @@ export default function Founders() {
     return (
         <>
             <main >
-                <h1 className={styles.title}>La Rubrica</h1>
+                <h1 className={styles.title}>Il Team di Fondatori</h1>
                 <div className={styles.grid}>
                     {
                         founders.map((founder) => (
